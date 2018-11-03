@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  fx.api.authentication:
+    image: ${DOCKER_REGISTRY}fxapiauthentication
+    build:
+      context: .
+      dockerfile: fx.api.Authentication/Dockerfile

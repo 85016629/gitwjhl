@@ -1,15 +1,14 @@
-﻿
-
-namespace fx.Domain.core
+﻿namespace fx.Infra.Data.SqlServer
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using fx.Domain.core;
     using Newtonsoft.Json;
 
     public class EventStore : IEventStore<DomainEvent>
     {
-        private readonly EventDBContext dBContext = new EventDBContext("MembershipContext");
+        private readonly EventDbContext dBContext = new EventDbContext("MembershipContext");
         /// <summary>
         /// 根据聚合Id查询所有事件
         /// </summary>

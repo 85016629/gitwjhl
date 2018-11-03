@@ -1,14 +1,17 @@
-﻿namespace fx.Domain.Customer
+﻿using fx.Domain.Customer;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace fx.Infra.Data.SqlServer
 {
-    using AutoMapper;
-    using System;
-    using System.Threading.Tasks;
-    public class CustomerStorage : ICustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         protected readonly CustomerDbContext dbContext = new CustomerDbContext();
         public Customer FindById(int id)
         {
-            var entityDto =  dbContext.Find<CustomerDto>(id);
+            var entityDto = dbContext.Find<CustomerDto>(id);
             return Mapper.Map<Customer>(entityDto);
         }
 
@@ -20,7 +23,7 @@
 
         public int SaveChange(Customer entity)
         {
-            var e =  Mapper.Map<CustomerDto>(entity);
+            var e = Mapper.Map<CustomerDto>(entity);
             dbContext.Add(e);
             return dbContext.SaveChanges();
         }
@@ -42,4 +45,3 @@
         }
     }
 }
-

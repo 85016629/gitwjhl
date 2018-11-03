@@ -1,6 +1,4 @@
-﻿
-
-namespace fx.Domain.Customer
+﻿namespace fx.Domain.Customer
 {
     using Microsoft.EntityFrameworkCore;
     public class CustomerDbContext : DbContext

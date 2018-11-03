@@ -1,4 +1,5 @@
-﻿using fx.Domain.Customer;
+﻿using AutoMapper;
+using fx.Domain.Customer;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -8,7 +8,7 @@
 
     public class EventStore : IEventStore<DomainEvent>
     {
-        private readonly EventDbContext dBContext = new EventDbContext("MembershipContext");
+        private readonly EventDbContext dBContext = new EventDbContext();
         /// <summary>
         /// 根据聚合Id查询所有事件
         /// </summary>

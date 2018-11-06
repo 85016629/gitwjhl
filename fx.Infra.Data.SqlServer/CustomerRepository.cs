@@ -22,6 +22,17 @@ namespace fx.Infra.Data.SqlServer
             return Mapper.Map<Task<Customer>>(entityDto);
         }
 
+        public Customer QueryByIdAndPwd(string userLoginId, string passwd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Customer> QueryCustomerByIdAndPwd(string userLoginId, string passwd)
+        {
+            var entityDto = dbContext.FindAsync<CustomerDto>(userLoginId, passwd);
+            return Mapper.Map<Task<Customer>>(entityDto);
+        }
+
         public int SaveChange(Customer entity)
         {
             var e = Mapper.Map<CustomerDto>(entity);

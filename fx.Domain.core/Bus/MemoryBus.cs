@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.core
 {
-    public class Bus : IBus
+    public class MemoryBus : IMemoryBus
     {
 
         private readonly Dictionary<Type, Type> dicCommandHandlers;
         private readonly Dictionary<Type, Type> dicEventHandlers;
         private readonly IEventStore<DomainEvent> eventStore;
 
-        public Bus()
+        public MemoryBus()
         {
             dicCommandHandlers = new Dictionary<Type, Type>();
             dicEventHandlers = new Dictionary<Type, Type>();

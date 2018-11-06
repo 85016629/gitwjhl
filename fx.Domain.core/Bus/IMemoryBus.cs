@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.core
 {
-    public interface IBus
+    public interface IMemoryBus
     {
         void RegisterCommandHandler<TCommand, TCommandHandler>();
         void RegisterEventHandler<TEvent, TEventHandler>();

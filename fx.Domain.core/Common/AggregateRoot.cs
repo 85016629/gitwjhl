@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.core
 {
-    public abstract class AggregateRoot<TAggregateRootId> : IAggregateRoot
+    public abstract class AggregateRoot<TKey> : IAggregateRoot
     {
         private IList<DomainEvent> _occurredEvents;
         private Queue<DomainEvent> _uncommittedEvents;
-        public TAggregateRootId Id { get; set; }
+        public TKey Id { get; set; }
         public IList<DomainEvent> OccurredEvents { get => _occurredEvents; set { _occurredEvents = value; } }
         /// <summary>
         /// 事件队列

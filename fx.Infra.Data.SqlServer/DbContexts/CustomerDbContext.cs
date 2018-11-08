@@ -1,9 +1,11 @@
-﻿namespace fx.Domain.Customer
+﻿namespace fx.Infra.Data.SqlServer
 {
+    using fx.Domain.Customer;
     using Microsoft.EntityFrameworkCore;
+    
     public class CustomerDbContext : DbContext
     {
-        public DbSet<CustomerDto> Customers { get; }
+        public DbSet<Customer> Customers { get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

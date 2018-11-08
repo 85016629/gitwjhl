@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using fx.Domain.Customer;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,12 @@ namespace fx.Infra.Data.SqlServer
     public class CustomerRepository : ICustomerRepository
     {
         protected readonly CustomerDbContext dbContext = new CustomerDbContext();
+
+        public void Add(Customer entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public Customer FindById(int id)
         {
             var entityDto = dbContext.Find<CustomerDto>(id);
@@ -24,36 +31,25 @@ namespace fx.Infra.Data.SqlServer
 
         public Customer QueryByIdAndPwd(string userLoginId, string passwd)
         {
-            throw new NotImplementedException();
+            var entityDto = dbContext.FindAsync<CustomerDto>(userLoginId, passwd);
+            return Mapper.Map<Customer>(entityDto);
         }
 
         public Task<Customer> QueryCustomerByIdAndPwd(string userLoginId, string passwd)
         {
-            var entityDto = dbContext.FindAsync<CustomerDto>(userLoginId, passwd);
-            return Mapper.Map<Task<Customer>>(entityDto);
-        }
-
-        public int SaveChange(Customer entity)
-        {
-            var e = Mapper.Map<CustomerDto>(entity);
-            dbContext.Add(e);
-            return dbContext.SaveChanges();
-        }
-
-        public Task<int> SaveChangeAsync(Customer entity)
-        {
-            dbContext.Add(entity);
-            return dbContext.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public int Update(Customer entity)
         {
-            throw new NotImplementedException();
+            dbContext.Entry(entity).State = EntityState.Modified;
+            return dbContext.SaveChanges();
         }
 
         public Task<int> UpdateAsync(Customer entity)
         {
-            throw new NotImplementedException();
+            dbContext.Entry(entity).State = EntityState.Modified;
+            return dbContext.SaveChangesAsync();
         }
     }
 }

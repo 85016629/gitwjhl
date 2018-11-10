@@ -10,7 +10,7 @@ namespace fx.Domain.core
     {
         Task Add(T entity);
         int Update(T entity);
-        Task<int> UpdateAsync(T entity);
+        Task<TKey> UpdateAsync(T entity);
         T FindById(TKey id);
         Task<T> FindByIdAsync(TKey id);
         Task Delete(TKey id);

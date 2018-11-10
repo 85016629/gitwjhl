@@ -16,31 +16,24 @@ namespace fx.Domain.Customer
             _storage = repository;
         }
 
-        public void Handle(RegisterCustomerCommand command)
-        {
-            var customer = new Customer
-            {
-                LoginId = command.LoginId,
-                IDNumber = command.IDNumber,
-                Name = command.Name,
-                RegisterTime = DateTime.Now,
-                QQ = command.QQ,
-                Remarks = command.Remarks
-            };
-
-            _storage.Add(customer);
-        }
-
 
         public async Task HandleAsync(UpdateLastLoginTimeCommand command)
         {
             var user = _storage.FindById(command.UserLoginId);
-
+            user.UpdateLastLoginTime();
+            await _storage.UpdateAsync(user);
         }
 
-        public Task HandleAsync(RegisterCustomerCommand command)
+        public async Task HandleAsync(RegisterCustomerCommand command)
         {
-            throw new NotImplementedException();
+            var customer = new Customer
+            {
+                LoginId = command.LoginId,
+                Name = command.Name,
+                RegisterTime = DateTime.Now,
+                QQ = command.QQ
+            };
+           await _storage.Add(customer);
         }
     }
 }

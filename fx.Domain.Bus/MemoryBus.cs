@@ -31,7 +31,7 @@ namespace fx.Domain.Bus
                 dicCommandHandlers.Add(typeof(TCommand), typeof(TCommandHandler));
         }
 
-        public void SendCommand<T>(T command) where T : ICommand
+        public async void SendCommand<T>(T command) where T : ICommand
         {
             //if (dicCommandHandlers.ContainsKey(typeof(T)))
             //{
@@ -42,7 +42,7 @@ namespace fx.Domain.Bus
             if (dicCommandHandlers.ContainsKey(typeof(T)))
             {
                 var handler = (ICommandHandler<T>)Activator.CreateInstance(dicCommandHandlers[typeof(T)]);
-                handler.Handle(command);
+               await  handler.HandleAsync(command);
             }
         }
 

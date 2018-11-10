@@ -12,16 +12,18 @@ namespace fx.Infra.Data.SqlServer
     {
         protected readonly CustomerDbContext dbContext = new CustomerDbContext();
 
-        public void Add(Customer entity)
+        public Task Add(Customer entity)
         {
-            throw new NotImplementedException();
+            var entityDto = Mapper.Map<CustomerDto>(entity);
+            dbContext.Add(entity);
+            return dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(string id)
+        public Task Delete(string id)
         {
             var entityDto = dbContext.Find<CustomerDto>(id);
             dbContext.Remove(entityDto);
-            await dbContext.SaveChangesAsync();
+            return dbContext.SaveChangesAsync();
         }
 
         public Customer FindById(int id)

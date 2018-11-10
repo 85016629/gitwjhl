@@ -8,7 +8,7 @@ namespace fx.Domain.core
 {
     public interface IRepository<T, TKey> where T : AggregateRoot<TKey>
     {
-        void Add(T entity);
+        Task Add(T entity);
         int Update(T entity);
         Task<int> UpdateAsync(T entity);
         T FindById(TKey id);

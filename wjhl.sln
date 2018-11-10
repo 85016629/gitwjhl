@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Test.xUnits", "fx.Test.x
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Infra.MessageQueue.RabbitMQ", "fx.Infra.MessageQueue\fx.Infra.MessageQueue.RabbitMQ.csproj", "{A6924186-98FE-4703-9E6E-90F380EDFD7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.Domain.Bus", "fx.Domain.Bus\fx.Domain.Bus.csproj", "{F4D799D1-67B4-465A-8DF5-B680C2780005}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{A6924186-98FE-4703-9E6E-90F380EDFD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6924186-98FE-4703-9E6E-90F380EDFD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6924186-98FE-4703-9E6E-90F380EDFD7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D799D1-67B4-465A-8DF5-B680C2780005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D799D1-67B4-465A-8DF5-B680C2780005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D799D1-67B4-465A-8DF5-B680C2780005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D799D1-67B4-465A-8DF5-B680C2780005}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{1A1C9044-2177-4671-AFAF-49FCA8EF34EA} = {4D162BDC-5FE5-4257-8190-84680605023B}
 		{E91F5721-1C71-47ED-B089-9A0017587ED9} = {4D162BDC-5FE5-4257-8190-84680605023B}
 		{A6924186-98FE-4703-9E6E-90F380EDFD7C} = {BCFF1C93-77D2-462C-8EBB-78C5E5192E59}
+		{F4D799D1-67B4-465A-8DF5-B680C2780005} = {BCFF1C93-77D2-462C-8EBB-78C5E5192E59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF7B9E10-6609-4FED-A5AB-AB3BC5517713}

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.core
 {
-    public interface ICommandHandler<in T> where T : IMessage
+    public interface ICommandHandler<in T> where T : ICommand
     {
         Task HandleAsync(T command);
-        void Handle(T command);
     }
 }

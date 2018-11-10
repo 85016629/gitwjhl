@@ -4,14 +4,14 @@
     using System.Collections.Generic;
     using fx.Domain.core;
 
-    public class Customer : IAggregateRoot
+    public class Customer : AggregateRoot<string>
     {
         private CustomerState _state;
         private string _name;
-        private int _id;
+        private string _id;
 
         public string Name { get => _name; set => _name = value; }
-        public int Id { get => _id; set => _id = value; }
+        public string Id { get => _id; set => _id = value; }
         public DateTime RegisterTime { get; set; }
         public string Mobile1 { get; set; }
         public string Mobile2 { get; set; }

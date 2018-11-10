@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.Customer
 {
-    public class CommandHandler : ICommandHandler<RegisterCustomerCommand>
+    public class CommandExecutor : ICommandHandler<RegisterCustomerCommand>,
+        ICommandHandler<UpdateLastLoginTimeCommand>
     {
-        protected readonly IRepository<Customer> _storage;
+        protected readonly IRepository<Customer, string> _storage;
 
-        public CommandHandler(IRepository<Customer> repository)
+        public CommandExecutor(IRepository<Customer, string> repository)
         {
             _storage = repository;
         }
@@ -27,7 +28,14 @@ namespace fx.Domain.Customer
                 Remarks = command.Remarks
             };
 
-            _storage.SaveChange(customer);
+            _storage.Add(customer);
+        }
+
+
+        public async Task HandleAsync(UpdateLastLoginTimeCommand command)
+        {
+            var user = _storage.FindById(command.UserLoginId);
+
         }
 
         public Task HandleAsync(RegisterCustomerCommand command)

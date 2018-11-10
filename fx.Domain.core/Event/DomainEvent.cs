@@ -6,7 +6,7 @@ namespace fx.Domain.core
     using System.ComponentModel.DataAnnotations;
     using Newtonsoft.Json;
 
-    public class DomainEvent : IEvent
+    public abstract class DomainEvent : IEvent
     {
         private Guid _eventId;
         [Key]

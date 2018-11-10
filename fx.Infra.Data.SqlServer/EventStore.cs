@@ -25,16 +25,7 @@
         /// <param name="event"></param>
         public void SaveEvent(DomainEvent @event)
         {
-            var newEvent = new DomainEvent()
-            {
-                AggregateRootId = @event.AggregateRootId,
-                AggregateRootType = @event.AggregateRootType,
-                EventData = JsonConvert.SerializeObject(@event),
-                TimelineId = @event.TimelineId == null ? Guid.NewGuid() : @event.TimelineId,
-                Timeline = DateTime.Now
-            };
-
-            this.dBContext.DomainEventStorage.Add(newEvent);
+            this.dBContext.DomainEventStorage.Add(@event);
             this.dBContext.SaveChanges();
         }
     }

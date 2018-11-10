@@ -17,10 +17,22 @@ namespace fx.Infra.Data.SqlServer
             throw new NotImplementedException();
         }
 
+        public async Task Delete(string id)
+        {
+            var entityDto = dbContext.Find<CustomerDto>(id);
+            dbContext.Remove(entityDto);
+            await dbContext.SaveChangesAsync();
+        }
+
         public Customer FindById(int id)
         {
             var entityDto = dbContext.Find<CustomerDto>(id);
             return Mapper.Map<Customer>(entityDto);
+        }
+
+        public Customer FindById(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<Customer> FindByIdAsync(int id)
@@ -29,15 +41,15 @@ namespace fx.Infra.Data.SqlServer
             return Mapper.Map<Task<Customer>>(entityDto);
         }
 
-        public Customer QueryByIdAndPwd(string userLoginId, string passwd)
+        public Task<Customer> FindByIdAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer QueryCustomerByIdAndPwd(string userLoginId, string passwd)
         {
             var entityDto = dbContext.FindAsync<CustomerDto>(userLoginId, passwd);
             return Mapper.Map<Customer>(entityDto);
-        }
-
-        public Task<Customer> QueryCustomerByIdAndPwd(string userLoginId, string passwd)
-        {
-            throw new NotImplementedException();
         }
 
         public int Update(Customer entity)

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using fx.Domain.core;
 using fx.Domain.Customer;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,16 +27,12 @@ namespace fx.Infra.Data.SqlServer
             return dbContext.SaveChangesAsync();
         }
 
-        public Customer FindById(int id)
+        public Customer FindById(string id)
         {
             var entityDto = dbContext.Find<CustomerDto>(id);
             return Mapper.Map<Customer>(entityDto);
         }
 
-        public Customer FindById(string id)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<Customer> FindByIdAsync(int id)
         {
@@ -64,6 +61,11 @@ namespace fx.Infra.Data.SqlServer
         {
             dbContext.Entry(entity).State = EntityState.Modified;
             return dbContext.SaveChangesAsync();
+        }
+
+        Task<string> IRepository<Customer, string>.UpdateAsync(Customer entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace fx.Domain.Bus
 
         public static IEventStore<DomainEvent> _eventRepository;
 
-        MemoryBus(IEventStore<DomainEvent> eventStore)
+        public MemoryBus(IEventStore<DomainEvent> eventStore)
         {
             dicCommandHandlers = new Dictionary<Type, Type>();
             dicEventHandlers = new Dictionary<Type, Type>();

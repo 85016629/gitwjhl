@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace fx.api.Authentication.Models
+namespace fx.Authentation.WebApi.Models
 {
     public class LoginViewModel
     {
         public string UserLoginId { get; set; }
-
-        public string userPwd { get; set; }
+        public string UserPwd { get; set; }
 
     }
 }

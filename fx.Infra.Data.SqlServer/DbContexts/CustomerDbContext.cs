@@ -5,7 +5,7 @@
     
     public class CustomerDbContext : DbContext
     {
-        public DbSet<Customer> Customers { get; }
+        public DbSet<CustomerDto> Customers { get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -15,7 +15,7 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>()
+            modelBuilder.Entity<CustomerDto>()
                 .ToTable("Customer");
         }
     }

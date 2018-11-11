@@ -14,16 +14,10 @@ namespace fx.Domain.Customer
         public int Id { get => _id; set => _id = value; }
         public DateTime RegisterTime { get; set; }
         public string Mobile1 { get; set; }
-        public string Mobile2 { get; set; }
-        public string Mobile3 { get; set; }
+
         public string QQ { get; set; }
         public int State { get => _state; set => _state = value; }
         public string LoginId { get; set; }
-        /// <summary>
-        /// 身份证号
-        /// </summary>
-        [Key]
-        public string IDNumber { get; set; }
-        public string Remarks { get; set; }
+
     }
 }

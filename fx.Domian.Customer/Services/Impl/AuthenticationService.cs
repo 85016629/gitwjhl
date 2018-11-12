@@ -2,6 +2,9 @@
 using fx.Domain.Customer;
 using System;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using fx.Domain.Bus;
 
 namespace fx.Domain.Customer
 {
@@ -14,6 +17,7 @@ namespace fx.Domain.Customer
             _repository = repository;
             _bus = bus;
             _bus.RegisterEventHandler<LoginSuccessed, CustomerEventHandler>();
+            _bus.RegisterCommandHandler<UpdateLastLoginTimeCommand, CustomerCommandExecutor>();
         }
 
 
@@ -30,12 +34,13 @@ namespace fx.Domain.Customer
             {
                 throw new Exception("改用户还为注册");
             }
-                
 
             var loginSuccessed = new LoginSuccessed
             {
-                CustomerId = userLoginId,
-                EventId = Guid.NewGuid()
+                LoginId = userLoginId,
+                EventId = Guid.NewGuid(),
+                EventData = JsonConvert.SerializeObject(user),
+                AggregateRootType = user.GetType().Name
             };
             _bus.RaiseEvent(loginSuccessed);
 

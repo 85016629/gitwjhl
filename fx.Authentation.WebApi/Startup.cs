@@ -54,7 +54,6 @@ namespace fx.Authentation.WebApi
                 var xmlPath = Path.Combine(basePath, "fx.Authentation.WebApi.xml");
                 options.IncludeXmlComments(xmlPath);
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +72,8 @@ namespace fx.Authentation.WebApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication API V1");
             });
+
+            
         }
     }
 }

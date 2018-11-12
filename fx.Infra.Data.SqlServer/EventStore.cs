@@ -14,8 +14,7 @@
         {
             dBContext = new EventDbContext();
         }
-
-
+        
         /// <summary>
         /// 保存事件。
         /// </summary>

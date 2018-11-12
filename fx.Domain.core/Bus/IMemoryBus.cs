@@ -9,7 +9,7 @@ namespace fx.Domain.core
     {
         void RegisterCommandHandler<TCommand, TCommandHandler>();
         void RegisterEventHandler<TEvent, TEventHandler>();
-        void SendCommand<T>(T command) where T : ICommand;
+        Task SendCommand<T>(T command) where T : ICommand;
         Task RaiseEvent<T>(T @event) where T : DomainEvent;
     }
 }

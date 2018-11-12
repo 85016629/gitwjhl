@@ -10,7 +10,9 @@ namespace fx.Domain.Bus
         private Dictionary<Type, Type> dicCommandHandlers;
         private Dictionary<Type, Type> dicEventHandlers;
 
-        public static IEventStore<DomainEvent> _eventRepository;
+        private IEventStore<DomainEvent> _eventRepository;
+
+        private IRepository<T, TKey> repository;
 
         public MemoryBus(IEventStore<DomainEvent> eventStore)
         {
@@ -31,7 +33,7 @@ namespace fx.Domain.Bus
                 dicCommandHandlers.Add(typeof(TCommand), typeof(TCommandHandler));
         }
 
-        public async void SendCommand<T>(T command) where T : ICommand
+        public async Task SendCommand<T>(T command) where T : ICommand
         {
             //if (dicCommandHandlers.ContainsKey(typeof(T)))
             //{
@@ -51,7 +53,7 @@ namespace fx.Domain.Bus
             if (dicEventHandlers.ContainsKey(typeof(T)))
             {
                 await Task.Run(() => _eventRepository.SaveEvent(@event));
-                var handler = (IEventHandler<T>)Activator.CreateInstance(dicEventHandlers[typeof(T)]);
+                var handler = (IEventHandler<T>)Activator.CreateInstance(dicEventHandlers[typeof(T)], this);
                 await handler.HandleAsync(@event);
                 
             }

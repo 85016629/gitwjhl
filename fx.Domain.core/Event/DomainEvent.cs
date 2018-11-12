@@ -6,9 +6,10 @@ namespace fx.Domain.core
     using System.ComponentModel.DataAnnotations;
     using Newtonsoft.Json;
 
-    public abstract class DomainEvent : IEvent
+    public class DomainEvent : IEvent
     {
         private Guid _eventId;
+        private DateTime _timeline = DateTime.Now;
 
         [Key]
         public Guid EventId
@@ -22,8 +23,8 @@ namespace fx.Domain.core
                 _eventId = value;
             }
         }
-        
-        public DateTime Timeline { get; set; }
+
+        public DateTime Timeline { get => _timeline; set => _timeline = value; }
         public string EventData { get; set; }
         public string AggregateRootType { get; set; }
         public DomainEvent() { }

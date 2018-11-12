@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.Customer
 {
-    public class CommandExecutor : ICommandHandler<RegisterCustomerCommand>,
+    public class CustomerCommandExecutor : ICommandHandler<RegisterCustomerCommand>,
         ICommandHandler<UpdateLastLoginTimeCommand>
     {
         protected readonly IRepository<Customer, string> _storage;
 
-        public CommandExecutor(IRepository<Customer, string> repository)
+        public CustomerCommandExecutor(ICustomerRepository repository)
         {
             _storage = repository;
         }
@@ -30,8 +30,6 @@ namespace fx.Domain.Customer
             {
                 LoginId = command.LoginId,
                 Name = command.Name,
-                RegisterTime = DateTime.Now,
-                QQ = command.QQ
             };
            await _storage.Add(customer);
         }

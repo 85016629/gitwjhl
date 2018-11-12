@@ -10,7 +10,7 @@ namespace fx.Infra.Data.SqlServer
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=wlhl;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=wjhl;Trusted_Connection=True;");
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -20,6 +20,6 @@ namespace fx.Infra.Data.SqlServer
                 .ToTable("DomainEvent");
         }
 
-        public DbSet<DomainEvent> DomainEventStorage { get; }
+        public DbSet<DomainEvent> DomainEventStorage { get; set; }
     }
 }

@@ -16,7 +16,6 @@ namespace fx.Infra.Data.SqlServer
 
         public Task Add(Customer entity)
         {
-            var entityDto = Mapper.Map<CustomerDto>(entity);
             dbContext.Add(entity);
             return dbContext.SaveChangesAsync();
         }

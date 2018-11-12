@@ -50,9 +50,10 @@ namespace fx.Domain.Bus
         {
             if (dicEventHandlers.ContainsKey(typeof(T)))
             {
+                await Task.Run(() => _eventRepository.SaveEvent(@event));
                 var handler = (IEventHandler<T>)Activator.CreateInstance(dicEventHandlers[typeof(T)]);
                 await handler.HandleAsync(@event);
-                _eventRepository.SaveEvent(@event);
+                
             }
         }
     }

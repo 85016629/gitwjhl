@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using fx.Authentation.WebApi.Extensions;
 using fx.Domain.Bus;
 using fx.Domain.core;
 using fx.Domain.Customer;
@@ -16,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
+using AutoMapper;
 
 namespace fx.Authentation.WebApi
 {
@@ -36,6 +38,7 @@ namespace fx.Authentation.WebApi
             services.AddSingleton<IMemoryBus, MemoryBus>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<IEventStore<DomainEvent>, EventStore>();
+            //services.AddAutoMapperSetup();
 
             services.AddSwaggerGen(options =>
             {

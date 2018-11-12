@@ -5,18 +5,20 @@
     
     public class CustomerDbContext : DbContext
     {
-        public DbSet<CustomerDto> Customers { get; }
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=wlhl;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=wjhl;Trusted_Connection=True;");
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CustomerDto>()
+            modelBuilder.Entity<Customer>()
                 .ToTable("Customer");
         }
+
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }

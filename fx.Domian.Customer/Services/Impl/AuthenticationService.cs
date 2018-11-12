@@ -1,4 +1,5 @@
 ﻿using fx.Domain.core;
+using fx.Domain.Customer;
 using System;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace fx.Domain.Customer
         {
             _repository = repository;
             _bus = bus;
+            _bus.RegisterEventHandler<LoginSuccessed, CustomerEventHandler>();
         }
 
 
@@ -22,19 +24,22 @@ namespace fx.Domain.Customer
 
         public bool Login(string userLoginId, string password)
         {
-            var user = _repository.QueryCustomerByIdAndPwd(userLoginId, password);
+            bool result = true;
+            var user =  _repository.QueryCustomerByIdAndPwd(userLoginId, password);
             if (user == null)
+            {
                 throw new Exception("改用户还为注册");
+            }
+                
 
             var loginSuccessed = new LoginSuccessed
             {
                 CustomerId = userLoginId,
                 EventId = Guid.NewGuid()
             };
-
             _bus.RaiseEvent(loginSuccessed);
 
-            return true;
+            return result;
         }
     }
 }

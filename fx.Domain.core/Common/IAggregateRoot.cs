@@ -8,7 +8,7 @@ namespace fx.Domain.core
 {
     public interface IAggregateRoot
     {
-        Guid UUId { get; set; }
+        //Guid UUId { get; set; }
         //Queue<DomainEvent> UncommittedEvents { get;  }
         //IEnumerable<DomainEvent> GetUncommittedEvents();
         //IList<DomainEvent> OccurredEvents { get; set; }

@@ -9,6 +9,5 @@ namespace fx.Domain.core
     public interface IEventHandler<in T> where T : DomainEvent
     {
         Task HandleAsync(T @event);
-        void Handle(T @event);        
     }
 }

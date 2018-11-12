@@ -15,15 +15,6 @@
             dBContext = new EventDbContext();
         }
 
-        /// <summary>
-        /// 根据聚合Id查询所有事件
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IEnumerable<IEvent> GetEventStreamByAggergateRootId(string id)
-        {
-            return dBContext.DomainEventStorage.Where<DomainEvent>(x => x.AggregateRootId == id).ToList<DomainEvent>();
-        }
 
         /// <summary>
         /// 保存事件。

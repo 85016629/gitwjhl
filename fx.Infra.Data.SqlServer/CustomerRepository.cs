@@ -14,60 +14,40 @@ namespace fx.Infra.Data.SqlServer
     {
         protected readonly CustomerDbContext dbContext = new CustomerDbContext();
 
-        public Task Add(Customer entity)
+        public Customer QueryCustomerByIdAndPwd(string userLoginId, string passwd)
         {
-            dbContext.Add(entity);
-            return dbContext.SaveChangesAsync();
+            return dbContext.Customers.Where(u => u.LoginId == userLoginId && u.Passwd == passwd).FirstOrDefault();
         }
 
-        public Task Delete(string id)
+        public Task<int> AddAsync<T>(T entity)
         {
-            var entityDto = dbContext.Find<CustomerDto>(id);
-            dbContext.Remove(entityDto);
+            var e = entity as Customer;
+
+            dbContext.Customers.Add(e);
             return dbContext.SaveChangesAsync();
         }
 
         public Customer FindById(string id)
         {
-            var entityDto = dbContext.Find<CustomerDto>(id);
-            return Mapper.Map<Customer>(entityDto);
+            //var entityDto = dbContext.Customers.Where(u => u.LoginId == id).FirstOrDefault();
+            var entity = dbContext.Customers.Find(id);
+            return entity;
         }
 
 
-        public Task<Customer> FindByIdAsync(int id)
+        public int Update<T>(T entity)
         {
-            var entityDto = dbContext.Find<CustomerDto>(id);
-            return Mapper.Map<Task<Customer>>(entityDto);
-        }
-
-        public Task<Customer> FindByIdAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public  Customer QueryCustomerByIdAndPwd(string userLoginId, string passwd)
-        {
-            var entityDto = dbContext.Customers.Where(u => u.LoginId == userLoginId && u.Passwd == passwd).FirstOrDefault();
-            if (entityDto == null)
-                return null;
-            return entityDto;
-        }
-
-        public int Update(Customer entity)
-        {
-            dbContext.Entry(entity).State = EntityState.Modified;
+            var e = entity as Customer;
+            dbContext.Entry(e).State = EntityState.Modified;
             return dbContext.SaveChanges();
         }
 
-        public Task<int> UpdateAsync(Customer entity)
+        public void Add<T>(T entity) where T : IAggregateRoot
         {
-            dbContext.Entry(entity).State = EntityState.Modified;
-            return dbContext.SaveChangesAsync();
-        }
+            var e = entity as Customer;
 
-        Task<string> IRepository<Customer, string>.UpdateAsync(Customer entity)
-        {
-            throw new NotImplementedException();
+            dbContext.Customers.Add(e);
+            dbContext.SaveChanges();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace fx.Infra.Data.SqlServer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DomainEvent>()
-                .ToTable("DomainEvent");
+                .ToTable("DomainEvents");
         }
 
         public DbSet<DomainEvent> DomainEventStorage { get; set; }

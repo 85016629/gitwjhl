@@ -9,19 +9,26 @@ namespace fx.Domain.Customer
     public class CustomerCommandExecutor : ICommandHandler<RegisterCustomerCommand>,
         ICommandHandler<UpdateLastLoginTimeCommand>
     {
-        protected readonly IRepository<Customer, string> _storage;
+        protected ICustomerRepository _storage;
+        protected IMemoryBus _bus;
 
-        public CustomerCommandExecutor(ICustomerRepository repository)
+        public CustomerCommandExecutor(ICustomerRepository repository, IMemoryBus bus)
         {
             _storage = repository;
+            _bus = bus;
         }
 
 
-        public async Task HandleAsync(UpdateLastLoginTimeCommand command)
+        public Task HandleAsync(UpdateLastLoginTimeCommand command)
         {
             var user = _storage.FindById(command.UserLoginId);
             user.UpdateLastLoginTime();
-            await _storage.UpdateAsync(user);
+            if (_storage.Update(user) > 0)
+            {
+
+            }
+
+            return Task.CompletedTask;
         }
 
         public async Task HandleAsync(RegisterCustomerCommand command)
@@ -31,7 +38,7 @@ namespace fx.Domain.Customer
                 LoginId = command.LoginId,
                 Name = command.Name,
             };
-           await _storage.Add(customer);
+           _storage.Add(customer);
         }
     }
 }

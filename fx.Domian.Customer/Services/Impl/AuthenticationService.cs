@@ -29,20 +29,27 @@ namespace fx.Domain.Customer
         public bool Login(string userLoginId, string password)
         {
             bool result = true;
-            var user =  _repository.QueryCustomerByIdAndPwd(userLoginId, password);
-            if (user == null)
-            {
-                throw new Exception("改用户还为注册");
-            }
+            try
+            {                
+                var user = _repository.QueryCustomerByIdAndPwd(userLoginId, password);
+                if (user == null)
+                {
+                    throw new Exception("改用户还为注册");
+                }
 
-            var loginSuccessed = new LoginSuccessed
+                var loginSuccessed = new LoginSuccessed
+                {
+                    LoginId = userLoginId,
+                    EventId = Guid.NewGuid(),
+                    EventData = JsonConvert.SerializeObject(user),
+                    AggregateRootType = user.GetType().Name
+                };
+                _bus.RaiseEvent(loginSuccessed);
+            }
+            catch
             {
-                LoginId = userLoginId,
-                EventId = Guid.NewGuid(),
-                EventData = JsonConvert.SerializeObject(user),
-                AggregateRootType = user.GetType().Name
-            };
-            _bus.RaiseEvent(loginSuccessed);
+                throw;
+            }
 
             return result;
         }

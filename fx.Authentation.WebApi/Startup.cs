@@ -34,6 +34,7 @@ namespace fx.Authentation.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton<IRepository, CustomerRepository>();
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
             services.AddSingleton<IMemoryBus, MemoryBus>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
@@ -71,9 +72,7 @@ namespace fx.Authentation.WebApi
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication API V1");
-            });
-
-            
+            });            
         }
     }
 }

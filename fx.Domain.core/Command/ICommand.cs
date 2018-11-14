@@ -1,11 +1,10 @@
-﻿using System;
+﻿using MediatR;
+using System;
 
 namespace fx.Domain.core
 {
-    public interface ICommand : IMessage
+    public interface ICommand : IRequest<object>
     {
-        Guid CommandId { get; set; }
-
-        
+        Guid CommandId { get; set; }        
     }
 }

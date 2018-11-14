@@ -5,7 +5,7 @@ using System.Text;
 
 namespace fx.Domain.Customer
 {
-    public class UpdateLastLoginTimeCommand : ICommand
+    public class UpdateLastLoginTimeCommand : BaseCommand
     {
         private string _userLoginId;
 
@@ -14,6 +14,6 @@ namespace fx.Domain.Customer
             _userLoginId = userLoginId;
         }
         public string UserLoginId { get => _userLoginId; set => _userLoginId = value; }
-        public Guid CommandId { get ; set; }
+        
     }
 }

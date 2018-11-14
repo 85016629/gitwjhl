@@ -18,6 +18,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace fx.Authentation.WebApi
 {
@@ -33,12 +35,19 @@ namespace fx.Authentation.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IRepository, CustomerRepository>();
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
-            services.AddSingleton<IMemoryBus, MemoryBus>();
-            services.AddSingleton<IAuthenticationService, AuthenticationService>();
-            services.AddSingleton<IEventStore<DomainEvent>, EventStore>();
+            services.AddScoped<IMemoryBus, MediatBus>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IEventStore<DomainEvent>, EventStore>();
+
+
+            // Domain Bus (Mediator)
+
             //services.AddAutoMapperSetup();
 
             services.AddSwaggerGen(options =>
@@ -55,6 +64,14 @@ namespace fx.Authentation.WebApi
                 var xmlPath = Path.Combine(basePath, "fx.Authentation.WebApi.xml");
                 options.IncludeXmlComments(xmlPath);
             });
+
+            services.AddMediatR(typeof(Startup));
+
+            services.AddScoped<INotificationHandler<LoginSuccessed>, CustomerEventHandler>();
+            //typeof(IRequestPreProcessor<>), new[] { typeof(GenericRequestPreProcessor<>) }
+            //services.AddScoped<IRequestHandler<UpdateLastLoginTimeCommand>, CustomerCommandExecutor>();
+            services.AddScoped(typeof(IRequestHandler<UpdateLastLoginTimeCommand, object>), typeof(CustomerCommandExecutor));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

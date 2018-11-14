@@ -44,7 +44,7 @@ namespace fx.Domain.Bus
 
             if (dicCommandHandlers.ContainsKey(typeof(T)))
             {
-                var handler = (ICommandHandler<T>)Activator.CreateInstance(dicCommandHandlers[typeof(T)], new object[2] { _repository, this });
+                var handler = (ICommandHandler<T>)Activator.CreateInstance(dicCommandHandlers[typeof(T)], new object[2] { this,_repository });
                await  handler.HandleAsync(command);
             }
         }

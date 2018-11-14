@@ -4,9 +4,10 @@ namespace fx.Domain.core
     using System;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using MediatR;
     using Newtonsoft.Json;
 
-    public class DomainEvent : IEvent
+    public class DomainEvent : IEvent, INotification
     {
         private Guid _eventId;
         private DateTime _timeline = DateTime.Now;

@@ -16,8 +16,8 @@ namespace fx.Domain.Customer
         {
             _repository = repository;
             _bus = bus;
-            _bus.RegisterEventHandler<LoginSuccessed, CustomerEventHandler>();
-            _bus.RegisterCommandHandler<UpdateLastLoginTimeCommand, CustomerCommandExecutor>();
+            //_bus.RegisterEventHandler<LoginSuccessed, CustomerEventHandler>();
+            //_bus.RegisterCommandHandler<UpdateLastLoginTimeCommand, CustomerCommandExecutor>();
         }
 
 

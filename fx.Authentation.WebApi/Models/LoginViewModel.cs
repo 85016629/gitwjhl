@@ -14,7 +14,8 @@ namespace fx.Authentation.WebApi.Models
         /// <summary>
         /// 用户登录Id
         /// </summary>
-        [Display(Description ="用户登录ID")]
+        [Display(Description ="用户登录ID", Name ="用户唯一Id")]
+        
         public string UserLoginId { get; set; }
         public string UserPwd { get; set; }
 

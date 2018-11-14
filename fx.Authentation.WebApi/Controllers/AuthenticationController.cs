@@ -13,6 +13,7 @@ namespace fx.Authentation.WebApi.Controllers
     /// <summary>
     /// 认证相关控制器
     /// </summary>
+    
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
@@ -20,12 +21,11 @@ namespace fx.Authentation.WebApi.Controllers
         private IAuthenticationService _authenticationService;
 
         /// <summary>
-        /// 
+        ///  
         /// </summary>
         /// <param name="authenticationService"></param>
         public AuthenticationController(IAuthenticationService authenticationService)
         {
-            
             _authenticationService = authenticationService;
         }
 

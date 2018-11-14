@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.core
 {
-    public interface IRepository
+    public interface IRepository<T,Tkey> where T : IAggregateRoot
     {
-        void Add<T>(T entity) where T: IAggregateRoot;
-        Task<int> AddAsync<T>(T entity);
-        int Update<T>(T entity);
+        void Add(T entity);
+        Task<int> AddAsync(T entity);
+        int Update(T entity);
+        T FindById(Tkey id);
+        T FindByIds(object[] ids);
+        IQueryable<T> GetAll();
     }
 }

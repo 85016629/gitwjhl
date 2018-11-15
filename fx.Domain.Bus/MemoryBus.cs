@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.Bus
 {
-    public class MemoryBus : IMemoryBus
+    public class MemoryBus 
     {
         private Dictionary<Type, Type> dicCommandHandlers;
         private Dictionary<Type, Type> dicEventHandlers;

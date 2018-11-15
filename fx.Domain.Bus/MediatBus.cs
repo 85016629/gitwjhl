@@ -34,7 +34,7 @@ namespace fx.Domain.Bus
             throw new System.NotImplementedException();
         }
 
-        public Task SendCommand<T>(T command) where T : ICommand
+        public Task<object> SendCommand<T>(T command) where T : ICommand
         {
             return _mediator.Send(command);
         }

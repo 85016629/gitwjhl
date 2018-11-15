@@ -12,14 +12,14 @@ namespace fx.Domain.Bus
 
         private IEventStore<DomainEvent> _eventRepository;
 
-        private IRepository _repository;
 
-        public MemoryBus(IEventStore<DomainEvent> eventStore, IRepository repository)
+
+        public MemoryBus(IEventStore<DomainEvent> eventStore)
         {
             dicCommandHandlers = new Dictionary<Type, Type>();
             dicEventHandlers = new Dictionary<Type, Type>();
             _eventRepository = eventStore;
-            _repository = repository;
+           // _repository = repository;
         }
 
         public  void RegisterEventHandler<TEvent, TEventHandler>()
@@ -44,7 +44,7 @@ namespace fx.Domain.Bus
 
             if (dicCommandHandlers.ContainsKey(typeof(T)))
             {
-                var handler = (ICommandHandler<T>)Activator.CreateInstance(dicCommandHandlers[typeof(T)], new object[2] { this,_repository });
+                var handler = (ICommandHandler<T>)Activator.CreateInstance(dicCommandHandlers[typeof(T)], new object[1] { this });
                await  handler.HandleAsync(command);
             }
         }

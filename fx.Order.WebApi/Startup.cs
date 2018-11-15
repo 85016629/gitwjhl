@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fx.Domain.Bus;
+using fx.Domain.core;
+using fx.Domain.OrderContext;
+using fx.Infra.Data.SqlServer;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +30,15 @@ namespace fx.Order.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddScoped<IMemoryBus, MediatBus>();
+            services.AddScoped<IEventStore<DomainEvent>, EventStore>();
+
+            services.AddMediatR(typeof(Startup));
+            //typeof(IRequestPreProcessor<>), new[] { typeof(GenericRequestPreProcessor<>) }
+            //services.AddScoped<IRequestHandler<UpdateLastLoginTimeCommand>, CustomerCommandExecutor>();
+            services.AddScoped(typeof(IRequestHandler<CreateOrderCommand, object>), typeof(OrderCommandExecutor));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

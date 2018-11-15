@@ -12,12 +12,14 @@ namespace fx.Domain.OrderContext
         IRequestHandler<CreateOrderCommand, object>
     {
         private readonly IMemoryBus Bus;
-        public OrderCommandExecutor(IMemoryBus bus)
+        private readonly IOrderRepository OrderRepository;
+        public OrderCommandExecutor(IMemoryBus bus, IOrderRepository orderRepository)
         {
-            Bus = bus;       
+            Bus = bus;
+            OrderRepository = orderRepository;
         }
 
-        public Task<object> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<object> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var newOrder = new Order
             {
@@ -27,7 +29,9 @@ namespace fx.Domain.OrderContext
                 State = request.State
             };
 
+            var r = await OrderRepository.AddAsync(entity: newOrder);
 
+            return Task.FromResult((object)r);
         }
     }
 }

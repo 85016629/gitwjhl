@@ -1,0 +1,30 @@
+﻿USE [wjhl]
+GO
+
+/****** Object:  Table [dbo].[Order]    Script Date: 2018/11/16 星期五 7:28:36 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Order](
+	[Id] [varchar](50) NOT NULL,
+	[Owner] [nvarchar](50) NOT NULL,
+	[CreateTime] [datetime] NULL,
+	[State] [int] NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

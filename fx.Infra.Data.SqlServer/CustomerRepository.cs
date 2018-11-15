@@ -12,7 +12,7 @@ namespace fx.Infra.Data.SqlServer
 {
     public class CustomerRepository : ICustomerRepository
     {
-        protected readonly CustomerDbContext dbContext = new CustomerDbContext();
+        protected readonly SqlDbContext dbContext = new SqlDbContext();
 
         public Customer QueryCustomerByIdAndPwd(string userLoginId, string passwd)
         {

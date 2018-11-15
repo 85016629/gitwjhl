@@ -19,13 +19,6 @@ namespace fx.Infra.Data.SqlServer
             return dbContext.Customers.Where(u => u.LoginId == userLoginId && u.Passwd == passwd).FirstOrDefault();
         }
 
-        public Task<int> AddAsync<T>(T entity)
-        {
-            var e = entity as Customer;
-
-            dbContext.Customers.Add(e);
-            return dbContext.SaveChangesAsync();
-        }
 
         public Customer FindById(string id)
         {
@@ -35,19 +28,33 @@ namespace fx.Infra.Data.SqlServer
         }
 
 
-        public int Update<T>(T entity)
+        public void Add(Customer entity)
         {
-            var e = entity as Customer;
-            dbContext.Entry(e).State = EntityState.Modified;
+            dbContext.Customers.Add(entity);
+            dbContext.SaveChanges();
+        }
+
+        public Task<int> AddAsync(Customer entity)
+        {
+            dbContext.Customers.Add(entity);
+            return dbContext.SaveChangesAsync();
+        }
+
+        public int Update(Customer entity)
+        {
+            dbContext.Entry(entity).State = EntityState.Modified;
             return dbContext.SaveChanges();
         }
 
-        public void Add<T>(T entity) where T : IAggregateRoot
+        public Customer FindByIds(object[] ids)
         {
-            var e = entity as Customer;
+            var entity = dbContext.Customers.Find(ids);
+            return entity;
+        }
 
-            dbContext.Customers.Add(e);
-            dbContext.SaveChanges();
+        public IQueryable<Customer> GetAll()
+        {
+            return null;
         }
     }
 }

@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\fx.Domain.core\fx.Domain.core.csproj" />
     <ProjectReference Include="..\fx.Domain.OrderContext\fx.Domain.OrderContext.csproj" />
+    <ProjectReference Include="..\fx.Domain.ProductContext\fx.Domain.ProductContext.csproj" />
     <ProjectReference Include="..\fx.Domian.Customer\fx.Domain.Customer.csproj" />
   </ItemGroup>
 

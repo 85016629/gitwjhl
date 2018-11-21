@@ -17,13 +17,11 @@ namespace fx.Domain.Customer
     {
         protected ICustomerRepository _storage;
         protected IMemoryBus _bus;
-        protected IMemoryCache _memoryCache;
 
-        public CustomerCommandExecutor(IMemoryBus bus, ICustomerRepository repository, IMemoryCache memoryCache)
+        public CustomerCommandExecutor(IMemoryBus bus, ICustomerRepository repository)
         {
             _storage = repository ?? throw new ArgumentNullException(nameof(repository));
             _bus = bus ?? throw new ArgumentNullException(nameof(bus));
-            _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
         }
 
         public Task<object> Handle(UpdateLastLoginTimeCommand request, CancellationToken cancellationToken)
@@ -32,7 +30,7 @@ namespace fx.Domain.Customer
             user.UpdateLastLoginTime();
             if (_storage.Update(user) > 0)
             {
-                _memoryCache.WriteInCache(user.LoginId, JsonConvert.SerializeObject(user));
+                //_memoryCache.WriteInCache(user.LoginId, JsonConvert.SerializeObject(user));
                 return Task.FromResult((object)"执行成功");
             }
 

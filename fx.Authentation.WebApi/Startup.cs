@@ -20,6 +20,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Pivotal.Discovery.Client;
 
 namespace fx.Authentation.WebApi
 {
@@ -37,9 +38,8 @@ namespace fx.Authentation.WebApi
         {
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+            services.AddDiscoveryClient(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IRepository, CustomerRepository>();
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IMemoryBus, MediatBus>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -89,7 +89,9 @@ namespace fx.Authentation.WebApi
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication API V1");
-            });            
+            });
+
+            app.UseDiscoveryClient();
         }
     }
 }

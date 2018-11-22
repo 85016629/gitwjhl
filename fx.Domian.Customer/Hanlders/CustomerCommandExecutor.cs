@@ -26,7 +26,7 @@ namespace fx.Domain.Customer
 
         public Task<object> Handle(UpdateLastLoginTimeCommand request, CancellationToken cancellationToken)
         {
-            var user = _storage.FindById(request.UserLoginId);
+            var user = _storage.FindByLoginId(request.UserLoginId);
             user.UpdateLastLoginTime();
             if (_storage.Update(user) > 0)
             {

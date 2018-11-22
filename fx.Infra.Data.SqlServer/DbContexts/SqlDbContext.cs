@@ -19,8 +19,8 @@
                 .ToTable("Customer");
             modelBuilder.Entity<Order>()
                 .ToTable("Order");
-            modelBuilder.Entity<Product>().
-                ToTable("Order");
+            //modelBuilder.Entity<Product>().
+            //    ToTable("Order");
             modelBuilder.Entity<ProductCatalog>()
                 .ToTable("ProductCatalog");
         }

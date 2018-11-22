@@ -6,5 +6,7 @@
     public interface ICustomerRepository : IRepository<Customer, string>
     {
         Customer QueryCustomerByIdAndPwd(string userLoginId, string passwd);
+
+        Customer FindByLoginId(string userLoginId);
     }
 }

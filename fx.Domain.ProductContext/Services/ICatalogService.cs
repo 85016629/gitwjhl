@@ -6,6 +6,7 @@ namespace fx.Domain.ProductContext
 {
     public interface ICatalogService
     {
-
+        IList<ProductCatalog> GetAllProductCatalogs();
+        void AddCatalog(string catalogName);
     }
 }

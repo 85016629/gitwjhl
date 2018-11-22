@@ -13,29 +13,29 @@ namespace fx.Infra.Data.SqlServer
         protected readonly SqlDbContext dbContext = new SqlDbContext();
         public void Add(T entity)
         {
-            dbContext.Add<T>(entity);
+            dbContext.Set<T>().Add(entity);
             dbContext.SaveChanges();
         }
 
         public Task<int> AddAsync(T entity)
         {
-            dbContext.Add<T>(entity);
+            dbContext.Set<T>().Add(entity);
             return dbContext.SaveChangesAsync();
         }
 
         public T FindById(TKey id)
         {
-            return dbContext.Find<T>(id);
+            return dbContext.Set<T>().Find(id);
         }
 
         public T FindByIds(object[] ids)
         {
-            return dbContext.Find<T>(ids);
+            return dbContext.Set<T>().Find(ids);
         }
 
         public IQueryable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return dbContext.Set<T>().AsQueryable();
         }
 
         public int Update(T entity)

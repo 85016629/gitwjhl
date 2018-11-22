@@ -5,15 +5,19 @@ using System.Text;
 
 namespace fx.Domain.ProductContext
 {
-    public class ProductCatalog : AggregateRoot<Guid>
+    public class ProductCatalog : AggregateRoot<int>
     {
-        public int IndexId { get; set; }
+        public ProductCatalog() { }
         public string CatalogName { get; set; }
-        public ProductCatalog ParentCatalog { get; set; }
-        public List<ProductCatalog> ChildrenCatalog { get; set; }
-        public void AddChildCatalog(ProductCatalog item)
+        public int ParentId { get; set; }
+        public void AddChildCatalog(string catalogName, IMemoryBus bus)
         {
-            ChildrenCatalog.Add(item);
+            var ev = new SubCatalogAdded(catalogName)
+            {
+                ParentId = this.Id
+            };
+
+            bus.RaiseEvent(ev);
         }
     }
 }

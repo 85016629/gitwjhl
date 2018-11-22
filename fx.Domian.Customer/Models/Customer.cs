@@ -10,7 +10,6 @@
         private string _name;
 
         public string Name { get => _name; set => _name = value; }
-        [Key]
         public string LoginId { get; set; }
         public DateTime LastLoginTime { get; set; }
         public string Passwd { get; set; }

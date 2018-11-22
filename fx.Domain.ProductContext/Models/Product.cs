@@ -1,6 +1,7 @@
 ﻿using fx.Domain.core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace fx.Domain.ProductContext
@@ -18,6 +19,7 @@ namespace fx.Domain.ProductContext
         /// <summary>
         /// 产品目录。
         /// </summary>
-        public ProductCatalog Catalog { get; set; }
+        [ForeignKey("ProductCatalog")]
+        public Guid CatalogId { get; set; }
     }
 }

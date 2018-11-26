@@ -17,12 +17,8 @@ namespace fx.Domain.ProductContext
 
         public void AddCatalog(string catalogName)
         {
-            var command = new AddParentCatalogCommand
-            {
-                CatalogName = catalogName
-            };
-
-            _bus.SendCommand(command);
+            var createEvent = new ParentCatalogCreated(catalogName);
+            _bus.RaiseEvent(createEvent);
         }
 
         public IList<ProductCatalog> GetAllProductCatalogs()

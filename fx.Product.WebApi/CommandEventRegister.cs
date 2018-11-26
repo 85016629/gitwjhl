@@ -27,6 +27,7 @@ namespace fx.Product.WebApi
         public static void RegisterEvent(this IServiceCollection services)
         {
             services.AddScoped(typeof(INotificationHandler<SubCatalogAdded>), typeof(CatalogEventHandler));
+            services.AddScoped(typeof(INotificationHandler<ParentCatalogCreated>), typeof(CatalogEventHandler));
         }
     }
 }

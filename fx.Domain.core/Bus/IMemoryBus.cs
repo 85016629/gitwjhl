@@ -8,8 +8,6 @@ namespace fx.Domain.core
 {
     public interface IMemoryBus
     {
-        void RegisterCommandHandler<TCommand, TCommandHandler>();
-        void RegisterEventHandler<TEvent, TEventHandler>();
         Task<object> SendCommand<T>(T command) where T : ICommand;
         Task RaiseEvent<T>(T @event) where T : DomainEvent;
     }

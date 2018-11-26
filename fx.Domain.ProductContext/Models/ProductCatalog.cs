@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace fx.Domain.ProductContext
 {
@@ -16,6 +19,13 @@ namespace fx.Domain.ProductContext
             {
                 ParentId = this.Id
             };
+
+            bus.RaiseEvent(ev);
+        }
+
+        public void Create(IMemoryBus bus)
+        {
+            var ev = new ParentCatalogCreated(this.CatalogName);
 
             bus.RaiseEvent(ev);
         }

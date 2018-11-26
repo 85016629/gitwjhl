@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace fx.Domain.ProductContext
 {
     public class CatalogEventHandler : 
-        INotificationHandler<SubCatalogAdded>
+        INotificationHandler<SubCatalogAdded>,
+        INotificationHandler<ParentCatalogCreated>
     {
         private IMemoryBus _bus;
         public CatalogEventHandler(IMemoryBus bus)
@@ -19,6 +20,16 @@ namespace fx.Domain.ProductContext
         public Task Handle(SubCatalogAdded @event, CancellationToken cancellationToken)
         {
             var cmd = new AddSubCatalogCommand(@event.CatalogName, @event.ParentId);
+            _bus.SendCommand(cmd);
+            return Task.CompletedTask;
+        }
+
+        public Task Handle(ParentCatalogCreated notification, CancellationToken cancellationToken)
+        {
+            var cmd = new AddParentCatalogCommand
+            {
+                CatalogName = notification.CatalogName
+            };
             _bus.SendCommand(cmd);
             return Task.CompletedTask;
         }

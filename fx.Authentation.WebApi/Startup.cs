@@ -92,6 +92,7 @@ namespace fx.Authentation.WebApi
             });
 
             app.UseDiscoveryClient();
+
         }
     }
 }

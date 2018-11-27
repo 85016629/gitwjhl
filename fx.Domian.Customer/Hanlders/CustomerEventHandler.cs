@@ -14,7 +14,12 @@ namespace fx.Domain.Customer
         {
             _bus = bus;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="event"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task Handle(LoginSuccessed @event, CancellationToken cancellationToken)
         {
             var updateLoastLogintimeCommand = new UpdateLastLoginTimeCommand(@event.LoginId)

@@ -6,6 +6,7 @@ using fx.Domain.OrderContext;
 using fx.Order.WebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace fx.Order.WebApi.Controllers
 {
@@ -13,6 +14,8 @@ namespace fx.Order.WebApi.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+
         private IOrderService _orderService;
         public OrderController(IOrderService orderService)
         {
@@ -23,6 +26,11 @@ namespace fx.Order.WebApi.Controllers
         [Route("/Orders")]
         public async Task<IActionResult> CreateOrder([FromBody] OrderViewModel order)
         {
+
+            _logger.Info("Test Nlog Info, Owner{0}", order.Owner);
+            _logger.Warn("Test Nlog Warn, Owner{0}", order.Owner);
+            _logger.Error("Test Nlog Error, Owner{0}", order.Owner);
+
             var newOrder = new fx.Domain.OrderContext.Order
             {
                 CreateTime = DateTime.Now,

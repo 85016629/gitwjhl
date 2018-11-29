@@ -10,6 +10,7 @@ using NLog;
 
 namespace fx.Order.WebApi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -27,21 +28,23 @@ namespace fx.Order.WebApi.Controllers
         public async Task<IActionResult> CreateOrder([FromBody] OrderViewModel order)
         {
 
-            _logger.Info("Test Nlog Info, Owner{0}", order.Owner);
-            _logger.Warn("Test Nlog Warn, Owner{0}", order.Owner);
-            _logger.Error("Test Nlog Error, Owner{0}", order.Owner);
+            //_logger.Info("Test Nlog Info, Owner:{0}", order.Owner);
+            //_logger.Error(new ArgumentNullException(nameof(OrderViewModel)).StackTrace);
+            //_logger.Warn("Test Nlog Warn, Owner:{0}", order.Owner);
+            //_logger.Error("Test Nlog Error, Owner:{0}", order.Owner);
+            _logger.Debug(new ArgumentNullException(nameof(OrderViewModel)).StackTrace);
 
-            var newOrder = new fx.Domain.OrderContext.Order
-            {
-                CreateTime = DateTime.Now,
-                Id = "1111111",
-                Owner = order.Owner,
-                State = 0
-            };
+            //var newOrder = new fx.Domain.OrderContext.Order
+            //{
+            //    CreateTime = DateTime.Now,
+            //    Id = "1111111",
+            //    Owner = order.Owner,
+            //    State = 0
+            //};
 
-            var result = await _orderService.CreateOrder(newOrder);
+            //var result = await _orderService.CreateOrder(newOrder);
 
-            return Ok(result);
+            return Ok();
         }
     }
 }

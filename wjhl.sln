@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.core", "fx.Domain
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{BCFF1C93-77D2-462C-8EBB-78C5E5192E59}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "miroservices - webapi", "miroservices - webapi", "{ADD3FF90-5765-4754-A298-B0059580F2C6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services - webapi", "Services - webapi", "{ADD3FF90-5765-4754-A298-B0059580F2C6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.Customer", "fx.Domian.Customer\fx.Domain.Customer.csproj", "{93050740-477A-4E6D-B52B-F6D326B9C49D}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.Bus", "fx.Domain.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Authentation.WebApi", "fx.Authentation.WebApi\fx.Authentation.WebApi.csproj", "{55694C0A-0BB9-4BAD-BCF7-B9D4E060979B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{6B03E131-9807-4DAD-ADB8-2493A0E102E6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bound Context", "Bound Context", "{6B03E131-9807-4DAD-ADB8-2493A0E102E6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Infra.MemoryCache.Redis", "fx.Infra.Data.Redis\fx.Infra.MemoryCache.Redis.csproj", "{1B8412B1-EA44-4250-941F-69342512832D}"
 EndProject
@@ -43,9 +43,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.OrderContext", "f
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.ProductContext", "fx.Domain.ProductContext\fx.Domain.ProductContext.csproj", "{95EDC075-BF8C-4B96-85DB-E389BDB8CA11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.ApiGateway", "fx.ApiGateway\fx.ApiGateway.csproj", "{B0CB4DD0-738A-4051-9A41-03F4D2966941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.ApiGateway", "fx.ApiGateway\fx.ApiGateway.csproj", "{B0CB4DD0-738A-4051-9A41-03F4D2966941}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.Payment.WebApi", "fx.Payment.WebApi\fx.Payment.WebApi.csproj", "{CE2F5058-FE9B-47FC-AC31-F1B9390146B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Payment.WebApi", "fx.Payment.WebApi\fx.Payment.WebApi.csproj", "{CE2F5058-FE9B-47FC-AC31-F1B9390146B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

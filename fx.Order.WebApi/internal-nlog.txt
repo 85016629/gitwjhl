@@ -1,0 +1,3 @@
+2018-11-27 23:31:17.8345 Error NetworkTarget(Name=ownLog-tcp_wrapped): Error when sending. Exception: System.IO.IOException: Error: TimedOut
+2018-11-27 23:31:17.8345 Error NetworkTarget(Name=ownLog-tcp_wrapped): Error when sending. Exception: System.IO.IOException: Error: TimedOut
+2018-11-27 23:31:17.8345 Error NetworkTarget(Name=ownLog-tcp_wrapped): Error when sending. Exception: System.IO.IOException: Error: TimedOut

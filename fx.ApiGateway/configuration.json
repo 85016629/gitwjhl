@@ -1,44 +1,40 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/values",
+      "DownstreamPathTemplate": "api/{url}",
       "DownstreamScheme": "http",
-      "DownstreamHost": "localhost",
-      "DownstreamPort": 8801,
-      "UpstreamPathTemplate": "/api/values",
-      "UpstreamHttpMethod": [ "Get" ],
-      "QoSOptions": {
-        "ExceptionsAllowedBeforeBreaking": 3,
-        "DurationOfBreak": 10,
-        "TimeoutValue": 5000
-      },
-      "HttpHandlerOptions": {
-        "AllowAutoRedirect": false,
-        "UseCookieContainer": false
-      },
-      "AuthenticationOptions": {
-
-      }
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8081
+        }
+      ],
+      "UpstreamPathTemplate": "/order/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "ServiceName": "values",
+      "LoadBalancer": "RoundRobin",
+      "UseServiceDiscovery": true
     },
     {
-      "DownstreamPathTemplate": "/api/product",
+      "DownstreamPathTemplate": "api/{url}",
       "DownstreamScheme": "http",
-      "DownstreamPort": 8802,
-      "DownstreamHost": "localhost",
-      "UpstreamPathTemplate": "/api/product",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8082
+        }
+      ],
+      "UpstreamPathTemplate": "/product/{url}",
       "UpstreamHttpMethod": [ "Get" ],
-      "QoSOptions": {
-        "ExceptionsAllowedBeforeBreaking": 3,
-        "DurationOfBreak": 10,
-        "TimeoutValue": 5000
-      },
-      "AuthenticationOptions": {
-
-      }
+      "ServiceName": "values",
+      "LoadBalancer": "RoundRobin",
+      "UseServiceDiscovery": true
     }
   ],
   "GlobalConfiguration": {
-    "RequestIdKey": "OcRequestId",
-    "AdministrationPath": "/admin"
+    "ServiceDiscoveryProvider": {
+      "Host": "192.168.3.72",
+      "Port": 8500
+    }
   }
 }

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace fx.Product.WebApi.Controllers
+namespace fx.Order.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,7 +15,7 @@ namespace fx.Product.WebApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1 from ProductService", "value2 from ProductService" };
+            return new string[] { "value1 from OrderService", "value2 from OrderService" };
         }
 
         // GET api/values/5

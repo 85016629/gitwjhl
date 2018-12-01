@@ -56,8 +56,8 @@ namespace fx.Product.WebApi
 
             services.AddMediatR(typeof(Startup));
 
-            services.RegisterCommand();
-            services.RegisterEvent();
+            //services.RegisterCommand();
+            //services.RegisterEvent();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

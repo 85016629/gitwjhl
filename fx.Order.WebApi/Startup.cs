@@ -47,10 +47,10 @@ namespace fx.Order.WebApi
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info
+                options.SwaggerDoc("OrderService", new Info
                 {
                     Version = "v1",
-                    Title = "Authentication API"
+                    Title = "订单服务 API"
                 });
 
                 //Determine base path for the application.  
@@ -80,7 +80,7 @@ namespace fx.Order.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API V1");
+                c.SwaggerEndpoint("/swagger/OrderService/swagger.json", "Order API V1");
             });
         }
     }

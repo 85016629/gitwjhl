@@ -1,7 +1,7 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "api/{url}",
+      "DownstreamPathTemplate": "/api/values",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,14 +9,14 @@
           "Port": 8081
         }
       ],
-      "UpstreamPathTemplate": "/order/{url}",
+      "UpstreamPathTemplate": "/order/values",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "ServiceName": "values",
       "LoadBalancer": "RoundRobin",
       "UseServiceDiscovery": true
     },
     {
-      "DownstreamPathTemplate": "api/{url}",
+      "DownstreamPathTemplate": "/api/values",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -24,8 +24,8 @@
           "Port": 8082
         }
       ],
-      "UpstreamPathTemplate": "/product/{url}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/product/values",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "ServiceName": "values",
       "LoadBalancer": "RoundRobin",
       "UseServiceDiscovery": true

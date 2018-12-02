@@ -41,10 +41,10 @@ namespace fx.Product.WebApi
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info
+                options.SwaggerDoc("ProductService", new Info
                 {
                     Version = "v1",
-                    Title = "Authentication API"
+                    Title = "Product API"
                 });
 
                 //Determine base path for the application.  
@@ -71,7 +71,8 @@ namespace fx.Product.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication API V1");
+                c.SwaggerEndpoint("/swagger/ProductService/swagger.json", "Product API V1");
+                c.InjectJavascript("/swagger_translator.js");
             });
 
             app.UseMvc();

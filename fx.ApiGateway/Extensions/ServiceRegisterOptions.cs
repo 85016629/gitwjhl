@@ -8,6 +8,7 @@
         public string ServicePort { get; set; }
         public RegisterOptions Register { get; set; }
 
+
         public class RegisterOptions
         {
             public string HttpEndpoint { get; set; }

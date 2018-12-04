@@ -7,6 +7,7 @@ using fx.Domain.Bus;
 using fx.Domain.core;
 using fx.Domain.OrderContext;
 using fx.Infra.Data.SqlServer;
+using fx.Order.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -59,17 +60,17 @@ namespace fx.Order.WebApi
                 var xmlPath = Path.Combine(basePath, "fx.Order.WebApi.xml");
                 options.IncludeXmlComments(xmlPath);
             });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMvc();
+            }            
 
             app.UseStaticFiles();
 
@@ -80,7 +81,18 @@ namespace fx.Order.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/OrderService/swagger.json", "Order API V1");
+                c.SwaggerEndpoint("OrderService/swagger.json", "Order API V1");
+            });
+
+            app.UseMvc();
+
+            app.RegisterConsul(lifetime, new ServiceEntity
+            {
+                ConsulIP = Configuration["Consul:IP"],
+                ConsulPort = int.Parse(Configuration["Consul:Port"]),
+                IP = Configuration["Service:IP"],
+                Port = int.Parse(Configuration["Service:Port"]),
+                ServiceName = Configuration["Service:Name"]
             });
         }
     }

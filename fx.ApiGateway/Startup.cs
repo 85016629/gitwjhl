@@ -100,22 +100,23 @@ namespace fx.ApiGateway
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMvc();
 
             app.ConsulApp(env, lifetime, options, consul);
 
             app.UseOcelot();
 
-
-            var apis = new List<string> { "OrderApi" };
-            app.UseMvc()
-                .UseSwagger()
-                .UseSwaggerUI(o =>
-               {
-                   apis.ForEach(m =>
-                   {
-                       o.SwaggerEndpoint($"/{m}/v1/swagger.json", m);
-                   });
-               });
+           
+            //var apis = new List<string> { "OrderService" };
+            //app.UseMvc()
+            //    .UseSwagger()
+            //    .UseSwaggerUI(o =>
+            //   {
+            //       apis.ForEach(m =>
+            //       {
+            //           o.SwaggerEndpoint($"/swagger/{m}/swagger.json", m);
+            //       });
+            //   });
 
 
             //app.UseSwagger(c =>

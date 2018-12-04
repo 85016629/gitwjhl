@@ -1,34 +1,46 @@
 {
   "ReRoutes": [
+    //{
+    //  "DownstreamPathTemplate": "/api/values",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 8081
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/order/values",
+    //  "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+    //  "ServiceName": "values",
+    //  "LoadBalancer": "RoundRobin",
+    //  "UseServiceDiscovery": true
+    //},
+    //{
+    //  "DownstreamPathTemplate": "/api/values",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 8082
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/product/values",
+    //  "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+    //  "ServiceName": "values",
+    //  "LoadBalancer": "RoundRobin",
+    //  "UseServiceDiscovery": true
+    //},
     {
-      "DownstreamPathTemplate": "/api/values",
+      "DownstreamPathTemplate": "/swagger/OrderService/swagger.json",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "192.168.3.119",
           "Port": 8081
         }
       ],
-      "UpstreamPathTemplate": "/order/values",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ServiceName": "values",
-      "LoadBalancer": "RoundRobin",
-      "UseServiceDiscovery": true
-    },
-    {
-      "DownstreamPathTemplate": "/api/values",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 8082
-        }
-      ],
-      "UpstreamPathTemplate": "/product/values",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ServiceName": "values",
-      "LoadBalancer": "RoundRobin",
-      "UseServiceDiscovery": true
+      "UpstreamPathTemplate": "/swagger/OrderService/swagger.json",
+      "UpstreamHttpMethod": [ "Get" ]
     }
   ],
   "GlobalConfiguration": {

@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using fx.Authentation.WebApi.Models;
 using fx.Domain.Customer;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using IAuthenticationService = fx.Domain.Customer.IAuthenticationService;
 
 namespace fx.Authentation.WebApi.Controllers
 {
@@ -36,12 +39,24 @@ namespace fx.Authentation.WebApi.Controllers
         /// <returns></returns>
         [Route("/login")]
         [HttpPut]
+        [AllowAnonymous]
         public IActionResult Login([FromBody] LoginViewModel loginViewModel)
         {
             if (!_authenticationService.Login(loginViewModel.UserLoginId, loginViewModel.UserPwd))
-                return Content("登录失败");
-
+                return Content("登录失败");            
+            
             return Ok();
+        }
+
+        /// <summary>
+        /// 退出登录。
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Logout(string logoutId)
+        {
+
+            return await Task.FromResult(Ok(""));
         }
     }
 }

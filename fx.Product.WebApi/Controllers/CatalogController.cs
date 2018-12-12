@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using fx.Domain.ProductContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,7 @@ namespace fx.Product.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Catalogs")]
+        [Authorize]
         public IActionResult CreateNewCatalog(string catalogName)
         {
             _catalogService.AddCatalog(catalogName);

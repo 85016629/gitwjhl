@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Swashbuckle.AspNetCore.Swagger;
+using IdentityServer4.AccessTokenValidation;
 
 namespace fx.ApiGateway
 {
@@ -22,9 +19,6 @@ namespace fx.ApiGateway
     {
         public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
-
-            
-
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(environment.ContentRootPath)
                    .AddJsonFile("appsettings.json", false, reloadOnChange: true)
@@ -32,11 +26,13 @@ namespace fx.ApiGateway
                    .AddEnvironmentVariables();
 
             Configuration = builder.Build();
-
-
         }
 
+        /// <summary>
+        /// 系统配置。
+        /// </summary>
         public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         /// <summary>
@@ -45,9 +41,55 @@ namespace fx.ApiGateway
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // IdentityServer
+            #region IdentityServerAuthenticationOptions => need to refactor
+            Action<IdentityServerAuthenticationOptions> isaOptClient = option =>
+            {
+                option.Authority = Configuration["IdentityService:Uri"];
+                option.ApiName = "clientservice";
+                option.RequireHttpsMetadata = Convert.ToBoolean(Configuration["IdentityService:UseHttps"]);
+                option.SupportedTokens = SupportedTokens.Both;
+                option.ApiSecret = Configuration["IdentityService:ApiSecrets:clientservice"];
+            };
+
+            Action<IdentityServerAuthenticationOptions> isaOptProduct = option =>
+            {
+                option.Authority = Configuration["IdentityService:Uri"];
+                option.ApiName = "productservice";
+                option.RequireHttpsMetadata = Convert.ToBoolean(Configuration["IdentityService:UseHttps"]);
+                option.SupportedTokens = SupportedTokens.Both;
+                option.ApiSecret = Configuration["IdentityService:ApiSecrets:productservice"];
+            };
+
+            services.AddAuthentication()
+                .AddIdentityServerAuthentication("ClientServiceKey", isaOptClient)
+                .AddIdentityServerAuthentication("ProductServiceKey", isaOptProduct);
+
+            #endregion
+            
+            services.AddOcelot(new ConfigurationBuilder()
+                    .AddJsonFile("configuration.json", optional: false, reloadOnChange: true)
+                    .Build());
+
+            #region Consul服务注册
+
+            services.Configure<ServiceRegisterOptions>(Configuration.GetSection("ServiceRegister"));
+            services.AddSingleton<IConsulClient>(p => new ConsulClient(cfg =>
+            {
+                var serviceConfirguation = p.GetRequiredService<IOptions<ServiceRegisterOptions>>().Value;
+                if (!string.IsNullOrEmpty(serviceConfirguation.Register.HttpEndpoint))
+                {
+                    cfg.Address = new Uri(serviceConfirguation.Register.HttpEndpoint);
+                }
+            }));
+
+            #endregion
+
             #region 注入Swagger
-          
-            if(Configuration["Swagger:IsActive"] == bool.TrueString)
+
+            if (Configuration["Swagger:IsActive"] == bool.TrueString)
             {
                 services.AddSwaggerGen(options =>
                 {
@@ -66,28 +108,16 @@ namespace fx.ApiGateway
             }
 
             #endregion
-
-            services.Configure<ServiceRegisterOptions>(Configuration.GetSection("ServiceRegister"));
-            services.AddSingleton<IConsulClient>(p => new ConsulClient( cfg =>
-                {
-                    var serviceConfirguation = p.GetRequiredService<IOptions<ServiceRegisterOptions>>().Value;
-                    if (!string.IsNullOrEmpty(serviceConfirguation.Register.HttpEndpoint))
-                    {
-                        cfg.Address = new Uri(serviceConfirguation.Register.HttpEndpoint);
-                    }
-                }));
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddOcelot(new ConfigurationBuilder()
-                    .AddJsonFile("configuration.json", optional: false, reloadOnChange: true)
-                    .Build());
-
-            #region Consul服务注册
-
-            #endregion
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="lifetime"></param>
+        /// <param name="options"></param>
+        /// <param name="consul"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, IOptions<ServiceRegisterOptions> options, IConsulClient consul)
         {
             //if(Configuration["ServiceRegister:IsActive"] == bool.TrueString)

@@ -11,7 +11,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Swashbuckle.AspNetCore.Swagger;
-using IdentityServer4.AccessTokenValidation;
+using System.Collections.Generic;
 
 namespace fx.ApiGateway
 {
@@ -33,7 +33,6 @@ namespace fx.ApiGateway
         /// </summary>
         public IConfiguration Configuration { get; }
 
-
         // This method gets called by the runtime. Use this method to add services to the container.
         /// <summary>
         /// 
@@ -45,67 +44,82 @@ namespace fx.ApiGateway
 
             // IdentityServer
             #region IdentityServerAuthenticationOptions => need to refactor
-            Action<IdentityServerAuthenticationOptions> isaOptClient = option =>
-            {
-                option.Authority = Configuration["IdentityService:Uri"];
-                option.ApiName = "clientservice";
-                option.RequireHttpsMetadata = Convert.ToBoolean(Configuration["IdentityService:UseHttps"]);
-                option.SupportedTokens = SupportedTokens.Both;
-                option.ApiSecret = Configuration["IdentityService:ApiSecrets:clientservice"];
-            };
+            //Action<IdentityServerAuthenticationOptions> isaOptClient = option =>
+            //{
+            //    option.Authority = Configuration["IdentityService:Uri"];
+            //    option.ApiName = "clientservice";
+            //    option.RequireHttpsMetadata = Convert.ToBoolean(Configuration["IdentityService:UseHttps"]);
+            //    option.SupportedTokens = SupportedTokens.Both;
+            //    option.ApiSecret = Configuration["IdentityService:ApiSecrets:clientservice"];
+            //};
 
-            Action<IdentityServerAuthenticationOptions> isaOptProduct = option =>
-            {
-                option.Authority = Configuration["IdentityService:Uri"];
-                option.ApiName = "productservice";
-                option.RequireHttpsMetadata = Convert.ToBoolean(Configuration["IdentityService:UseHttps"]);
-                option.SupportedTokens = SupportedTokens.Both;
-                option.ApiSecret = Configuration["IdentityService:ApiSecrets:productservice"];
-            };
+            //Action<IdentityServerAuthenticationOptions> isaOptProduct = option =>
+            //{
+            //    option.Authority = Configuration["IdentityService:Uri"];
+            //    option.ApiName = "productservice";
+            //    option.RequireHttpsMetadata = Convert.ToBoolean(Configuration["IdentityService:UseHttps"]);
+            //    option.SupportedTokens = SupportedTokens.Both;
+            //    option.ApiSecret = Configuration["IdentityService:ApiSecrets:productservice"];
+            //};
 
-            services.AddAuthentication()
-                .AddIdentityServerAuthentication("ClientServiceKey", isaOptClient)
-                .AddIdentityServerAuthentication("ProductServiceKey", isaOptProduct);
+            //services.AddAuthentication()
+            //    .AddIdentityServerAuthentication("ClientServiceKey", isaOptClient)
+            //    .AddIdentityServerAuthentication("ProductServiceKey", isaOptProduct);
 
             #endregion
             
-            services.AddOcelot(new ConfigurationBuilder()
-                    .AddJsonFile("configuration.json", optional: false, reloadOnChange: true)
-                    .Build());
+
 
             #region Consul服务注册
 
-            services.Configure<ServiceRegisterOptions>(Configuration.GetSection("ServiceRegister"));
-            services.AddSingleton<IConsulClient>(p => new ConsulClient(cfg =>
-            {
-                var serviceConfirguation = p.GetRequiredService<IOptions<ServiceRegisterOptions>>().Value;
-                if (!string.IsNullOrEmpty(serviceConfirguation.Register.HttpEndpoint))
-                {
-                    cfg.Address = new Uri(serviceConfirguation.Register.HttpEndpoint);
-                }
-            }));
+            //services.Configure<ServiceRegisterOptions>(Configuration.GetSection("ServiceRegister"));
+            //services.AddSingleton<IConsulClient>(p => new ConsulClient(cfg =>
+            //{
+            //    var serviceConfirguation = p.GetRequiredService<IOptions<ServiceRegisterOptions>>().Value;
+            //    if (!string.IsNullOrEmpty(serviceConfirguation.Register.HttpEndpoint))
+            //    {
+            //        cfg.Address = new Uri(serviceConfirguation.Register.HttpEndpoint);
+            //    }
+            //}));
 
             #endregion
 
             #region 注入Swagger
 
-            if (Configuration["Swagger:IsActive"] == bool.TrueString)
-            {
-                services.AddSwaggerGen(options =>
-                {
-                    options.SwaggerDoc(Configuration["Swagger:DefineSwaggerName"], new Info
-                    {
-                        Version = Configuration["Swagger:Version"],
-                        Title = "Gatway API"
-                    });
+            //if (Configuration["Swagger:IsActive"] == bool.TrueString)
+            //{
+            //    services.AddSwaggerGen(options =>
+            //    {
+            //        options.SwaggerDoc("GatewayService", new Info //Configuration["Swagger:DefineSwaggerName"]
+            //        {
+            //            Version = "v1",//Configuration["Swagger:Version"],
+            //            Title = "Gatway API"
+            //        });
 
-                    //Determine base path for the application.  
-                    var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                    //Set the comments path for the swagger json and ui.  
-                    var xmlPath = Path.Combine(basePath, "fx.ApiGateway.xml");
-                    options.IncludeXmlComments(xmlPath);
+            //        //Determine base path for the application.  
+            //        var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+            //        //Set the comments path for the swagger json and ui.  
+            //        var xmlPath = Path.Combine(basePath, "fx.ApiGateway.xml");
+            //        options.IncludeXmlComments(xmlPath);
+            //    });
+            //}
+
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("GatewayService", new Info
+                {
+                    Version = "v1",
+                    Title = "Gateway API"
                 });
-            }
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var xmlPath = Path.Combine(basePath, "fx.ApiGateway.xml");
+                options.IncludeXmlComments(xmlPath);
+            });
+
+            services.AddOcelot(new ConfigurationBuilder()
+                    .AddJsonFile("configuration.json", optional: false, reloadOnChange: true)
+                    .Build());
 
             #endregion
         }
@@ -117,51 +131,39 @@ namespace fx.ApiGateway
         /// <param name="env"></param>
         /// <param name="lifetime"></param>
         /// <param name="options"></param>
-        /// <param name="consul"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, IOptions<ServiceRegisterOptions> options, IConsulClient consul)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, IOptions<ServiceRegisterOptions> options)
         {
-            //if(Configuration["ServiceRegister:IsActive"] == bool.TrueString)
-            //{
-            //    builder
-            //}
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseMvc();
 
-            app.ConsulApp(env, lifetime, options, consul);
+            // app.ConsulApp(env, lifetime, options, consul);
 
+
+
+            var apis = new List<string> { "OrderService", "ProductService" };
+            app.UseMvc()
+                .UseSwagger()
+                .UseSwaggerUI(o =>
+               {
+                   apis.ForEach(m =>
+                   {
+                       o.SwaggerEndpoint($"/{m}/swagger.json", m);
+                   });
+               });
+
+            app.UseCors("default");
             app.UseOcelot();
 
-           
-            //var apis = new List<string> { "OrderService" };
-            //app.UseMvc()
-            //    .UseSwagger()
-            //    .UseSwaggerUI(o =>
-            //   {
-            //       apis.ForEach(m =>
-            //       {
-            //           o.SwaggerEndpoint($"/swagger/{m}/swagger.json", m);
-            //       });
-            //   });
-
-
-            //app.UseSwagger(c =>
-            //{
-            //    c.RouteTemplate = "{documentName}/swagger.json";
-            //});
-
+            //app.UseSwagger();
             //app.UseSwaggerUI(c =>
             //{
-            //    c.ShowExtensions();
-            //    c.EnableValidator(null);
-            //    c.SwaggerEndpoint($"/{Configuration["Swagger:DefineSwaggerName"]}/swagger.json", Configuration["Swagger:DefineSwaggerName"]);
+            //    //c.SwaggerEndpoint($"/{Configuration["Swagger:DefineSwaggerName"]}/swagger.json", Configuration["Swagger:Version"]);
+            //    c.SwaggerEndpoint("GatewayService/swagger.json", "Gateway API V1");
             //});
 
-
+            app.UseMvc();
         }
     }
 }

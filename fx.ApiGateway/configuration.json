@@ -1,52 +1,62 @@
 {
   "ReRoutes": [
-    //{
-    //  "DownstreamPathTemplate": "/api/values",
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": 8081
-    //    }
-    //  ],
-    //  "UpstreamPathTemplate": "/order/values",
-    //  "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-    //  "ServiceName": "values",
-    //  "LoadBalancer": "RoundRobin",
-    //  "UseServiceDiscovery": true
-    //},
-    //{
-    //  "DownstreamPathTemplate": "/api/values",
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": 8082
-    //    }
-    //  ],
-    //  "UpstreamPathTemplate": "/product/values",
-    //  "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-    //  "ServiceName": "values",
-    //  "LoadBalancer": "RoundRobin",
-    //  "UseServiceDiscovery": true
-    //},
     {
       "DownstreamPathTemplate": "/swagger/OrderService/swagger.json",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.3.119",
-          "Port": 8081
+          "Host": "localhost",
+          "Port": 5901
         }
       ],
-      "UpstreamPathTemplate": "/swagger/OrderService/swagger.json",
-      "UpstreamHttpMethod": [ "Get" ]
+      "LoadBalancer": "RoundRobin",
+      "UpstreamPathTemplate": "/OrderService/swagger.json",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/ProductService/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5902
+        }
+      ],
+      "LoadBalancer": "RoundRobin",
+      "UpstreamPathTemplate": "/ProductService/swagger.json",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5901
+        }
+      ],
+      "UpstreamPathTemplate": "/OrderService/{any}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5902
+        }
+      ],
+      "UpstreamPathTemplate": "/ProductService/{any}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ],
+
+
   "GlobalConfiguration": {
-    "ServiceDiscoveryProvider": {
-      "Host": "192.168.3.72",
-      "Port": 8500
-    }
+    //"ServiceDiscoveryProvider": {
+    //  "Host": "192.168.3.72",
+    //  "Port": 8500
   }
+}
 }

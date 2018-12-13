@@ -86,14 +86,14 @@ namespace fx.Order.WebApi
 
             app.UseMvc();
 
-            app.RegisterConsul(lifetime, new ServiceEntity
-            {
-                ConsulIP = Configuration["Consul:IP"],
-                ConsulPort = int.Parse(Configuration["Consul:Port"]),
-                IP = Configuration["Service:IP"],
-                Port = int.Parse(Configuration["Service:Port"]),
-                ServiceName = Configuration["Service:Name"]
-            });
+            //app.RegisterConsul(lifetime, new ServiceEntity
+            //{
+            //    ConsulIP = Configuration["Consul:IP"],
+            //    ConsulPort = int.Parse(Configuration["Consul:Port"]),
+            //    IP = Configuration["Service:IP"],
+            //    Port = int.Parse(Configuration["Service:Port"]),
+            //    ServiceName = Configuration["Service:Name"]
+            //});
         }
     }
 }

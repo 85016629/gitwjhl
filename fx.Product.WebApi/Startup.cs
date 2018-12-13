@@ -68,10 +68,12 @@ namespace fx.Product.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
+            app.UseSwagger(c => {
+               // c.RouteTemplate = "ProductService/swagger.json";
+            });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/ProductService/swagger.json", "Product API V1");
+                c.SwaggerEndpoint("ProductService/swagger.json", "Product API V1");
                 c.InjectJavascript("/swagger_translator.js");
             });
 

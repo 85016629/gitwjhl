@@ -12,6 +12,7 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
+using Ocelot.Provider.Consul;
 
 namespace fx.ApiGateway
 {
@@ -67,9 +68,7 @@ namespace fx.ApiGateway
             //    .AddIdentityServerAuthentication("ProductServiceKey", isaOptProduct);
 
             #endregion
-            
-
-
+                       
             #region Consul服务注册
 
             //services.Configure<ServiceRegisterOptions>(Configuration.GetSection("ServiceRegister"));
@@ -84,42 +83,27 @@ namespace fx.ApiGateway
 
             #endregion
 
-            #region 注入Swagger
+            #region 注入Swagger文档
 
-            //if (Configuration["Swagger:IsActive"] == bool.TrueString)
-            //{
-            //    services.AddSwaggerGen(options =>
-            //    {
-            //        options.SwaggerDoc("GatewayService", new Info //Configuration["Swagger:DefineSwaggerName"]
-            //        {
-            //            Version = "v1",//Configuration["Swagger:Version"],
-            //            Title = "Gatway API"
-            //        });
-
-            //        //Determine base path for the application.  
-            //        var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-            //        //Set the comments path for the swagger json and ui.  
-            //        var xmlPath = Path.Combine(basePath, "fx.ApiGateway.xml");
-            //        options.IncludeXmlComments(xmlPath);
-            //    });
-            //}
-
-
-            services.AddSwaggerGen(options =>
+            if (Configuration["Swagger:IsActive"] == bool.TrueString)
             {
-                options.SwaggerDoc("GatewayService", new Info
+                services.AddSwaggerGen(options =>
                 {
-                    Version = "v1",
-                    Title = "Gateway API"
+                    options.SwaggerDoc("GatewayService", new Info
+                    {
+                        Version = "v1",
+                        Title = "Gateway API"
+                    });
+                    var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                    var xmlPath = Path.Combine(basePath, "fx.ApiGateway.xml");
+                    options.IncludeXmlComments(xmlPath);
                 });
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "fx.ApiGateway.xml");
-                options.IncludeXmlComments(xmlPath);
-            });
+            }
 
             services.AddOcelot(new ConfigurationBuilder()
                     .AddJsonFile("configuration.json", optional: false, reloadOnChange: true)
-                    .Build());
+                    .Build())
+                    .AddConsul();
 
             #endregion
         }
@@ -131,37 +115,39 @@ namespace fx.ApiGateway
         /// <param name="env"></param>
         /// <param name="lifetime"></param>
         /// <param name="options"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, IOptions<ServiceRegisterOptions> options)
+        /// <param name="consul"></param>
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, IOptions<ServiceRegisterOptions> options)//, IConsulClient consul)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            // app.ConsulApp(env, lifetime, options, consul);
+            //app.ConsulApp(env, lifetime, options, consul);
 
 
-
-            var apis = new List<string> { "OrderService", "ProductService" };
-            app.UseMvc()
-                .UseSwagger()
-                .UseSwaggerUI(o =>
-               {
-                   apis.ForEach(m =>
+            if (Configuration["Swagger:IsActive"] == bool.TrueString)
+            {
+                var apis = new List<string> { "OrderService", "ProductService" };
+                app.UseMvc()
+                    .UseSwagger()
+                    .UseSwaggerUI(o =>
                    {
-                       o.SwaggerEndpoint($"/{m}/swagger.json", m);
+                       apis.ForEach(m =>
+                       {
+                           o.SwaggerEndpoint($"/{m}/swagger.json", m);
+                       });
                    });
-               });
-
+            }
             app.UseCors("default");
             app.UseOcelot();
 
-            //app.UseSwagger();
-            //app.UseSwaggerUI(c =>
-            //{
-            //    //c.SwaggerEndpoint($"/{Configuration["Swagger:DefineSwaggerName"]}/swagger.json", Configuration["Swagger:Version"]);
-            //    c.SwaggerEndpoint("GatewayService/swagger.json", "Gateway API V1");
-            //});
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                //c.SwaggerEndpoint($"/{Configuration["Swagger:DefineSwaggerName"]}/swagger.json", Configuration["Swagger:Version"]);
+                c.SwaggerEndpoint("GatewayService/swagger.json", "Gateway API V1");
+            });
 
             app.UseMvc();
         }

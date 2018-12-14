@@ -82,18 +82,18 @@ namespace fx.Order.WebApi
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("OrderService/swagger.json", "Order API V1");
+            });            
+
+            app.RegisterConsul(lifetime, new ServiceEntity
+            {
+                ConsulIP = Configuration["Consul:IP"],
+                ConsulPort = int.Parse(Configuration["Consul:Port"]),
+                IP = Configuration["Service:IP"],
+                Port = int.Parse(Configuration["Service:Port"]),
+                ServiceName = Configuration["Service:Name"]
             });
 
             app.UseMvc();
-
-            //app.RegisterConsul(lifetime, new ServiceEntity
-            //{
-            //    ConsulIP = Configuration["Consul:IP"],
-            //    ConsulPort = int.Parse(Configuration["Consul:Port"]),
-            //    IP = Configuration["Service:IP"],
-            //    Port = int.Parse(Configuration["Service:Port"]),
-            //    ServiceName = Configuration["Service:Name"]
-            //});
         }
     }
 }

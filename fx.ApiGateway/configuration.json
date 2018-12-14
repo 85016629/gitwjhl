@@ -3,12 +3,14 @@
     {
       "DownstreamPathTemplate": "/swagger/OrderService/swagger.json",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5901
-        }
-      ],
+      "UseServiceDiscovery": true,
+      "ServiceName": "OrderService", //服务注册标识
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 5901
+      //  }
+      //],
       "LoadBalancer": "RoundRobin",
       "UpstreamPathTemplate": "/OrderService/swagger.json",
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
@@ -29,14 +31,18 @@
     {
       "DownstreamPathTemplate": "/api/{any}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5901
-        }
-      ],
+      //"DownstreamHostAndPorts": [ //注：这里特别注意：如果使用了Consul服务发现，
+      //  {                                               // 这里就不能配置这个节点了，需要通过服务发现来知道地址
+      //    "Host": "localhost",
+      //    "Port": 5901
+      //  }
+      //],
+      "UseServiceDiscovery": true, //启用服务发现，如果不使用Consul服务发现，则需要将转发的配置写死在配置里面，如上一节点
+      "ReRoutesCaseSensitive": false, //不区分大小写
       "UpstreamPathTemplate": "/OrderService/{any}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "LoadBalancer": "RoundRobin", //使用负载均衡的策略，轮询
+      "ServiceName": "OrderService" //服务注册标识
     },
     {
       "DownstreamPathTemplate": "/api/{any}",
@@ -52,11 +58,12 @@
     }
   ],
 
-
   "GlobalConfiguration": {
-    //"ServiceDiscoveryProvider": {
-    //  "Host": "192.168.3.72",
-    //  "Port": 8500
+    "BaseUrl": "localhost:5000",
+    "ServiceDiscoveryProvider": {
+      "Host": "192.168.201.130",
+      "Port": 8500
+    }
   }
 }
-}
+

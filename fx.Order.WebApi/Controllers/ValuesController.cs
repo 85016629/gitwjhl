@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fx.Order.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("OrderService/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {

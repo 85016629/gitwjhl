@@ -29,7 +29,7 @@
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
     },
     {
-      "DownstreamPathTemplate": "/api/{any}",
+      "DownstreamPathTemplate": "/OrderService/{any}",
       "DownstreamScheme": "http",
       //"DownstreamHostAndPorts": [ //注：这里特别注意：如果使用了Consul服务发现，
       //  {                                               // 这里就不能配置这个节点了，需要通过服务发现来知道地址
@@ -61,7 +61,7 @@
   "GlobalConfiguration": {
     "BaseUrl": "localhost:5000",
     "ServiceDiscoveryProvider": {
-      "Host": "192.168.201.130",
+      "Host": "192.168.253.128",
       "Port": 8500
     }
   }

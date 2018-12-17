@@ -28,14 +28,14 @@ namespace fx.IdentityService
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             #region 配置IdentityServer
 
+            InMemoryConfiguration.Configuration = this.Configuration;
+
             services.AddIdentityServer()
-                .AddDeveloperSigningCredential();
-               // .AddTemporarySigningCredential();
-                //.AddInMemoryIdentityResources(Config.GetIdentityResourceResources())
-                //.AddInMemoryApiResources(Config.GetApiResources())
-                //.AddInMemoryClients(Config.GetClients())
-                //.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
-                //.AddProfileService<ProfileService>();
+                .AddDeveloperSigningCredential()
+                .AddInMemoryClients(InMemoryConfiguration.GetClients())
+                .AddInMemoryApiResources(InMemoryConfiguration.GetApiResources())
+                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()          //添加自定义验证
+                .AddProfileService<ProfileService>();
 
             #endregion
         }
@@ -53,6 +53,9 @@ namespace fx.IdentityService
             }
 
             app.UseIdentityServer();
+            //启用UI
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
 
             app.UseHttpsRedirection();
             app.UseMvc();

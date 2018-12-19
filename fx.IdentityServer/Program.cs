@@ -20,7 +20,7 @@ namespace fx.IdentityService
                 .UseKestrel()
                 .UseUrls("http://localhost:5100")
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+               // .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 

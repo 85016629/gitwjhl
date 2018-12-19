@@ -7,5 +7,7 @@ namespace fx.IdentityService
         public object Id { get; internal set; }
         public string RealName { get; internal set; }
         public string Email { get; internal set; }
+        public string Password { get; set; }
+        public string UserName { get; set; }
     }
 }

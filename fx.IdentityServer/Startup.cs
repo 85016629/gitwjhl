@@ -26,6 +26,10 @@ namespace fx.IdentityService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<ILoginUserService, LoginUserService>();
+            services.AddSingleton<UserReporitory>();
+
             #region 配置IdentityServer
 
             InMemoryConfiguration.Configuration = this.Configuration;
@@ -55,10 +59,10 @@ namespace fx.IdentityService
             app.UseIdentityServer();
             //启用UI
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            //app.UseHttpsRedirection();
+            //app.UseMvc();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.IdentityModel.Tokens;
 
 namespace fx.IdentityService
 {
@@ -34,7 +38,20 @@ namespace fx.IdentityService
 
             InMemoryConfiguration.Configuration = this.Configuration;
 
+            var cert = new X509Certificate2(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "Certificates\\idsrv4.pfx"), "111111");
+            X509SecurityKey key = new X509SecurityKey(cert);
+            SigningCredentials credentials = new SigningCredentials(key, "RS256");
+
             services.AddIdentityServer()
+                //.AddSigningCredential
+                //(
+                //credentials
+                ////new X509Certificate2
+                ////(
+                ////    Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "Certificates\\idsrv4.pfx"),
+                ////    "111111"
+                ////)
+                //)
                 .AddDeveloperSigningCredential()
                 .AddInMemoryClients(InMemoryConfiguration.GetClients())
                 .AddInMemoryApiResources(InMemoryConfiguration.GetApiResources())

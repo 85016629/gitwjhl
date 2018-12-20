@@ -21,6 +21,9 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Pivotal.Discovery.Client;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using IdentityModel;
 
 namespace fx.Authentation.WebApi
 {
@@ -72,6 +75,58 @@ namespace fx.Authentation.WebApi
             //services.AddScoped<IRequestHandler<UpdateLastLoginTimeCommand>, CustomerCommandExecutor>();
             services.AddScoped(typeof(IRequestHandler<UpdateLastLoginTimeCommand, object>), typeof(CustomerCommandExecutor));
 
+            //services.AddMvcCore()
+            //    .AddAuthorization()
+            //    .AddJsonFormatters();
+            //services.AddAuthentication("Bearer")
+            //    .AddIdentityServerAuthentication(options =>
+            //    {
+            //        options.RequireHttpsMetadata = false;
+            //        options.Authority = "http://localhost:4000";
+            //        options.ApiName = "api";
+            //    });
+
+            //#region Jwt授权认证
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(o =>
+            {
+                o.Authority = "http://localhost:5000";
+                o.Audience = "api";
+                o.RequireHttpsMetadata = false;
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = JwtClaimTypes.Name,
+                    RoleClaimType = JwtClaimTypes.Role,
+                    ValidAudience = "api",
+                    ValidateAudience = true
+
+                    //ValidIssuer = "http://localhost:5000",
+                    //ValidAudience = "api",
+                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret1"))
+
+                    /***********************************TokenValidationParameters的参数默认值***********************************/
+                    // RequireSignedTokens = true,
+                    // SaveSigninToken = false,
+                    // ValidateActor = false,
+                    // 将下面两个参数设置为false，可以不验证Issuer和Audience，但是不建议这样做。
+                    // ValidateAudience = true,
+                    // ValidateIssuer = true, 
+                    // ValidateIssuerSigningKey = false,
+                    // 是否要求Token的Claims中必须包含Expires
+                    // RequireExpirationTime = true,
+                    // 允许的服务器时间偏移量
+                    // ClockSkew = TimeSpan.FromSeconds(300),
+                    // 是否验证Token有效期，使用当前时间与Token的Claims中的NotBefore和Expires对比
+                    // ValidateLifetime = true
+                };
+            });
+
+            //#endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,7 +138,7 @@ namespace fx.Authentation.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+           
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -93,6 +148,8 @@ namespace fx.Authentation.WebApi
 
             app.UseDiscoveryClient();
 
+            app.UseAuthentication();
+            app.UseMvc();
         }
     }
 }

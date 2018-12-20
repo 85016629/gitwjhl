@@ -52,7 +52,7 @@ namespace fx.IdentityService
                 ////    "111111"
                 ////)
                 //)
-                .AddDeveloperSigningCredential()
+                .AddDeveloperSigningCredential(false,"tempkey.rsa")
                 .AddInMemoryClients(InMemoryConfiguration.GetClients())
                 .AddInMemoryApiResources(InMemoryConfiguration.GetApiResources())
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()          //添加自定义验证

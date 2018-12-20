@@ -18,8 +18,8 @@ namespace fx.IdentityService
         {
             return new[]
             {
-                new ApiResource("OrderService", "订单服务"),
-                new ApiResource("ProductService", "产品服务")
+                new ApiResource("api", "订单服务"),
+                new ApiResource("profile", "产品服务")
             };
         }
 
@@ -33,17 +33,17 @@ namespace fx.IdentityService
             {
                 new Client
                 {
-                    ClientId = "fx.Order.WebApi",
-                    ClientSecrets = new [] { new Secret("secret1".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = new [] { "OrderService", "ProductService" }
+                    ClientId = "ydapp.client",
+                    ClientSecrets = new [] { new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes = new [] { "profile","api" }
                 },
                 new Client
                 {
-                    ClientId = "fx.Product.WebApi",
+                    ClientId = "webapp.client",
                     ClientSecrets = new [] { new Secret("clowsecret".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = new [] { "OrderService" }
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes = new [] { "api" }
                 }
             };
         }

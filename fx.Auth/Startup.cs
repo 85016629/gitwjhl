@@ -32,14 +32,18 @@ namespace fx.Auth
             })
             .AddJwtBearer(o =>
             {
+                o.Authority = "http://localhost:5000";
+                o.Audience = "api";
+                o.RequireHttpsMetadata = false;
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
                     NameClaimType = JwtClaimTypes.Name,
                     RoleClaimType = JwtClaimTypes.Role,
+                    ValidateAudience = false
 
-                    ValidIssuer = "http://localhost:5000",
-                    ValidAudience = "api",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret1"))
+                    //ValidIssuer = "http://localhost:5000",
+                    //ValidAudience = "api",
+                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret1"))
 
                     /***********************************TokenValidationParameters的参数默认值***********************************/
                     // RequireSignedTokens = true,

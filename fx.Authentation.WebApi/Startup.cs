@@ -20,7 +20,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Pivotal.Discovery.Client;
+//using Pivotal.Discovery.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using IdentityModel;
@@ -41,7 +41,7 @@ namespace fx.Authentation.WebApi
         {
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddDiscoveryClient(Configuration);
+            //services.AddDiscoveryClient(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IMemoryBus, MediatBus>();
@@ -132,21 +132,18 @@ namespace fx.Authentation.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
 
-           
-
+            }           
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication API V1");
             });
 
-            app.UseDiscoveryClient();
+            //app.UseDiscoveryClient();
 
             app.UseAuthentication();
             app.UseMvc();

@@ -9,7 +9,7 @@ namespace fx.Authentation.WebApi.Controllers
 {
     
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "")]
     [ApiController]    
     public class ValuesController : ControllerBase
     {

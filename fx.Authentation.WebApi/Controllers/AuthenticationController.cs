@@ -15,8 +15,7 @@ namespace fx.Authentation.WebApi.Controllers
 {
     /// <summary>
     /// 认证相关控制器
-    /// </summary>
-    
+    /// </summary>    
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase

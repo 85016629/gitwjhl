@@ -4,7 +4,7 @@ using System.Text;
 
 namespace fx.Domain.core
 {
-    public abstract class BaseUser : IAggregateRoot
+    public abstract class BaseUser : AggregateRoot<Guid>
     {
         public BaseUser()
         {

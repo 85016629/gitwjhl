@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace fx.Infra.Data.SqlServer
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository : BaseRepository<Order, string>, IOrderRepository
     {
-        protected readonly SqlDbContext dbContext = new SqlDbContext();
+        protected new readonly SqlDbContext dbContext = new SqlDbContext();
         public void Add(Order entity)
         {
             dbContext.Orders.Add(entity);
@@ -23,22 +23,7 @@ namespace fx.Infra.Data.SqlServer
             return dbContext.SaveChangesAsync();
         }
 
-        public Order FindById(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order FindByIds(object[] ids)
-        {
-            throw new NotImplementedException();
-        }
-
         public IQueryable<Order> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Update(Order entity)
         {
             throw new NotImplementedException();
         }

@@ -23,14 +23,14 @@ namespace fx.Infra.Data.SqlServer
             return dbContext.SaveChangesAsync();
         }
 
-        public T FindById(TKey id)
+        public Task<T> FindByIdAsync(TKey id)
         {
-            return dbContext.Set<T>().Find(id);
+            return dbContext.Set<T>().FindAsync(id);
         }
 
-        public T FindByIds(object[] ids)
+        public Task<T> FindByIds(object[] ids)
         {
-            return dbContext.Set<T>().Find(ids);
+            return dbContext.Set<T>().FindAsync(ids);
         }
 
         public IQueryable<T> GetAll()
@@ -38,10 +38,10 @@ namespace fx.Infra.Data.SqlServer
             return dbContext.Set<T>().AsQueryable();
         }
 
-        public int Update(T entity)
+        Task<int> IRepository<T, TKey>.UpdateAsync(T entity)
         {
             dbContext.Entry(entity).State = EntityState.Modified;
-            return dbContext.SaveChanges();
+            return dbContext.SaveChangesAsync();
         }
     }
 }

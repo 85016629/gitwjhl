@@ -24,11 +24,11 @@ namespace fx.Domain.Customer
             _bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public Task<object> Handle(UpdateLastLoginTimeCommand request, CancellationToken cancellationToken)
+        public async Task<object> Handle(UpdateLastLoginTimeCommand request, CancellationToken cancellationToken)
         {
             var user = _storage.FindByLoginId(request.UserLoginId);
-            user.UpdateLastLoginTime();
-            if (_storage.Update(user) > 0)
+
+            if (await _storage.UpdateAsync(user) > 0)
             {
                 //_memoryCache.WriteInCache(user.LoginId, JsonConvert.SerializeObject(user));
                 return Task.FromResult((object)"执行成功");

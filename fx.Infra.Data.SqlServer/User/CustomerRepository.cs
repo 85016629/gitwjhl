@@ -10,18 +10,18 @@ using System.Linq;
 
 namespace fx.Infra.Data.SqlServer
 {
-    public class CustomerRepository : BaseRepository<Customer, string>, ICustomerRepository
+    public class CustomerRepository : BaseRepository<Customer, Guid>, ICustomerRepository
     {
-        protected readonly SqlDbContext dbContext = new SqlDbContext();
+        protected new readonly SqlDbContext dbContext = new SqlDbContext();
 
         public Customer FindByLoginId(string userLoginId)
         {
-            return dbContext.Customers.Where(u => u.LoginId == userLoginId).FirstOrDefault();
+            return dbContext.Customers.Where(u => u.UserLoginId == userLoginId).FirstOrDefault();
         }
 
         public Customer QueryCustomerByIdAndPwd(string userLoginId, string passwd)
         {
-            return dbContext.Customers.Where(u => u.LoginId == userLoginId && u.Passwd == passwd).FirstOrDefault();
+            return dbContext.Customers.Where(u => u.UserLoginId == userLoginId && u.Password == passwd).FirstOrDefault();
         }
     }
 }

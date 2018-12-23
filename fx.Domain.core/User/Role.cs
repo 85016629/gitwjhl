@@ -4,7 +4,7 @@ using System.Text;
 
 namespace fx.Domain.core
 {
-    public class Role : IAggregateRoot
+    public class Role : AggregateRoot<int>
     {
         public int RoleId { get; set; }
         public string RoleName { get; set; }

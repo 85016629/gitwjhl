@@ -9,13 +9,15 @@ namespace fx.Domain.Customer
     public class CustomerService 
     {
         private readonly ICustomerRepository _repository;
+        private readonly IRoleRepository _roleRepository;
         private readonly IMemoryBus _bus;
         private readonly IMapper _mapper;
-        public CustomerService(ICustomerRepository repository, IMemoryBus bus, IMapper mapper)
+        public CustomerService(ICustomerRepository repository, IRoleRepository roleRepository, IMemoryBus bus, IMapper mapper)
         {
             _repository = repository;
             _bus = bus;
             _mapper = mapper;
+            _roleRepository = roleRepository;
         }
     }
 }

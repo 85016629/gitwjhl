@@ -24,7 +24,7 @@ namespace fx.Authentation.WebApi.Extensions
             //.ForMember(dest => dest.LoginId, src => src.MapFrom(opt => opt.LoginId)));
 
             Mapper.Initialize(x => x.CreateMap<CustomerDto, Customer>()
-            .ForMember(dest => dest.LoginId, src => src.Ignore()));
+            .ForMember(dest => dest.UserLoginId, src => src.Ignore()));
         }
     }
 }

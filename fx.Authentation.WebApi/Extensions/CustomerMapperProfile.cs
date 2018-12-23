@@ -14,8 +14,8 @@ namespace fx.Authentation.WebApi.Extensions
 
             CreateMap<CustomerDto, Customer>();
             CreateMap<CustomerDto, Customer>()
-                .ForMember(dest => dest.LoginId, source => source.MapFrom(src => src.LoginId))
-                .ForMember(dest => dest.Name, source => source.MapFrom(src => src.Name));
+                .ForMember(dest => dest.UserLoginId, source => source.MapFrom(src => src.LoginId))
+                .ForMember(dest => dest.Username, source => source.MapFrom(src => src.Name));
         }
     }
 }

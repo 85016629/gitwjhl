@@ -7,7 +7,7 @@ namespace fx.Domain.core
     using MediatR;
     using Newtonsoft.Json;
 
-    public class DomainEvent : IEvent, INotification
+    public class DomainEvent : IEvent
     {
         private Guid _eventId;
         private DateTime _timeline = DateTime.Now;

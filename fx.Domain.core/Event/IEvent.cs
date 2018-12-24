@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using System;
 
 namespace fx.Domain.core
 {
-    public interface IEvent: IMessage
+    public interface IEvent: IMessage, INotification
     {
         Guid EventId { get; set; }
         DateTime Timeline { get;}

@@ -21,6 +21,9 @@
                 .ToTable("Order");
             modelBuilder.Entity<ProductCatalog>()
                 .ToTable("ProductCatalog");
+
+
+
         }
 
         public virtual DbSet<Customer> Customers { get; set; }

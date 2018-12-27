@@ -6,5 +6,6 @@ namespace fx.Domain.core
 {
     public interface IRoleRepository : IRepository<Role, int>
     {
+
     }
 }

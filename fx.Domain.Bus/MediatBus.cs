@@ -24,16 +24,6 @@ namespace fx.Domain.Bus
             return Task.CompletedTask;
         }
 
-        public void RegisterCommandHandler<TCommand, TCommandHandler>()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void RegisterEventHandler<TEvent, TEventHandler>()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public Task<object> SendCommand<T>(T command) where T : ICommand
         {
             return _mediator.Send(command);

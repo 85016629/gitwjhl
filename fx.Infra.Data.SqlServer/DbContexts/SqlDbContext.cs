@@ -19,14 +19,11 @@
                 .ToTable("Customer");
             modelBuilder.Entity<Order>()
                 .ToTable("Order");
-            //modelBuilder.Entity<Product>().
-            //    ToTable("Order");
             modelBuilder.Entity<ProductCatalog>()
                 .ToTable("ProductCatalog");
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
-
         public virtual DbSet<Order> Orders { get; set; }
     }
 }

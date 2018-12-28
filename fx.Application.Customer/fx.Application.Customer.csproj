@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="AutoMapper\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="EventSourceNormalizers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\fx.Domian.Customer\fx.Domain.Customer.csproj" />
+  </ItemGroup>
+
+</Project>

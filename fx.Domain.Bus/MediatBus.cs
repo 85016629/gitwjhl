@@ -24,7 +24,7 @@ namespace fx.Domain.Bus
             return Task.CompletedTask;
         }
 
-        public Task<object> SendCommand<T>(T command) where T : ICommand
+        public Task<object> SendCommand<T>(T command) where T : BaseCommand
         {
             return _mediator.Send(command);
         }

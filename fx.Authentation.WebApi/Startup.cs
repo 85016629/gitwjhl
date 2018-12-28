@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using IdentityModel;
+using fx.Application.Customer;
 
 namespace fx.Authentation.WebApi
 {

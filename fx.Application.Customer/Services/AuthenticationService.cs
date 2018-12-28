@@ -6,7 +6,7 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using fx.Domain.Bus;
 
-namespace fx.Domain.Customer
+namespace fx.Application.Customer
 {
     public class AuthenticationService : IAuthenticationService
     {

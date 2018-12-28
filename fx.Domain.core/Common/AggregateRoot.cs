@@ -8,19 +8,25 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.core
 {
-    public abstract class AggregateRoot<TKey> : IAggregateRoot, IMemoryBus
+    public abstract class AggregateRoot<TKey> : IAggregateRoot, IDisposable
     {
         [Key]
         public TKey Id { get; set; }
 
-        public Task RaiseEvent<T>(T @event) where T : DomainEvent
+        public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.Collect();
+            this.Dispose();
         }
 
-        public Task<object> SendCommand<T>(T command) where T : ICommand
-        {
-            throw new NotImplementedException();
-        }
+        //public Task RaiseEvent<T>(T @event) where T : DomainEvent
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Task<object> SendCommand<T>(T command) where T : ICommand
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -8,6 +8,6 @@ namespace fx.Domain.core
 {
     public interface IUnitOfWork
     {
-        bool Commit();
+        Task<bool> CommitAaync();
     }
 }

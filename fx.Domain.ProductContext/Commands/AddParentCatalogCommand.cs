@@ -5,7 +5,7 @@ using System.Text;
 
 namespace fx.Domain.ProductContext
 {
-    public class AddParentCatalogCommand : ICommand
+    public class AddParentCatalogCommand : BaseCommand
     {
         public AddParentCatalogCommand()
         {
@@ -14,6 +14,5 @@ namespace fx.Domain.ProductContext
         public string CatalogName { get; set; }
         public int ParentId { get { return 0; } }
 
-        public Guid CommandId { get ; set ; }
     }
 }

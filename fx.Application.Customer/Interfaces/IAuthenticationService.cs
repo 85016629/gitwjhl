@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace fx.Domain.Customer
+namespace fx.Application.Customer
 {
     public interface IAuthenticationService
     {

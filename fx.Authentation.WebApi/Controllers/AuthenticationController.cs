@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using IAuthenticationService = fx.Domain.Customer.IAuthenticationService;
 
 namespace fx.Authentation.WebApi.Controllers
 {
@@ -41,8 +40,8 @@ namespace fx.Authentation.WebApi.Controllers
         [AllowAnonymous]
         public IActionResult Login([FromBody] LoginViewModel loginViewModel)
         {
-            if (!_authenticationService.Login(loginViewModel.UserLoginId, loginViewModel.UserPwd))
-                return Content("登录失败");            
+            //if (!_authenticationService.Login(loginViewModel.UserLoginId, loginViewModel.UserPwd))
+            //    return Content("登录失败");            
             
             return Ok();
         }

@@ -17,7 +17,7 @@ namespace fx.Domain.ProductContext
         {
             var ev = new SubCatalogAdded(catalogName)
             {
-                ParentId = this.Id
+                ParentId = this.UUId
             };
 
             bus.RaiseEvent(ev);

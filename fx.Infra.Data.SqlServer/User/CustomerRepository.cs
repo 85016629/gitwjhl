@@ -16,12 +16,12 @@ namespace fx.Infra.Data.SqlServer
 
         public Customer FindByLoginId(string userLoginId)
         {
-            return dbContext.Customers.Where(u => u.UserLoginId == userLoginId).FirstOrDefault();
+            return dbContext.Customers.Where(u => u.LoginId == userLoginId).FirstOrDefault();
         }
 
         public Customer QueryCustomerByIdAndPwd(string userLoginId, string passwd)
         {
-            return dbContext.Customers.Where(u => u.UserLoginId == userLoginId && u.Password == passwd).FirstOrDefault();
+            return dbContext.Customers.Where(u => u.LoginId == userLoginId && u.Password == passwd).FirstOrDefault();
         }
     }
 }

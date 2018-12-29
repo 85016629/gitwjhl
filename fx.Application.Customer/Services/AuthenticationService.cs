@@ -34,7 +34,7 @@ namespace fx.Application.Customer
                 var user = _repository.QueryCustomerByIdAndPwd(userLoginId, password);
                 if (user == null)
                 {
-                    throw new Exception("改用户还为注册");
+                    throw new Exception("该用户还为注册");
                 }
 
                 var loginSuccessed = new LoginSuccessed

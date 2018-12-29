@@ -11,7 +11,7 @@ namespace fx.Domain.core
     public abstract class AggregateRoot<TKey> : IAggregateRoot, IDisposable
     {
         [Key]
-        public TKey Id { get; set; }
+        public TKey UUId { get; set; }
 
         public void Dispose()
         {

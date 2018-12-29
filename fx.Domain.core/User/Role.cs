@@ -12,5 +12,7 @@ namespace fx.Domain.core
         }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
+        public string RoleDesc { get; set; }
+        public virtual ICollection<UserRoleRelation> UserRoles { get; set; } //一对多
     }
 }

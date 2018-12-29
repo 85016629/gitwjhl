@@ -23,7 +23,7 @@ namespace fx.Domain.OrderContext
         {
             var newOrder = new Order
             {
-                Id = request.Id,
+                UUId = request.Id,
                 CreateTime = request.CreateTime,
                 Owner = request.Owner,
                 State = request.State

@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dtos\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Dtos\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Dtos\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 

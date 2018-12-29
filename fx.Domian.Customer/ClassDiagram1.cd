@@ -3,23 +3,15 @@
   <Class Name="fx.Domain.Customer.RegisterCustomerCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="3.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAMAAAAIAAQgAABAAACQQAAAAAASRAAEEHBAAgAAA=</HashCode>
+      <HashCode>AAAAIAAAAIAAQAAABAAACQQAAAAAASTABAEEBAAAAAA=</HashCode>
       <FileName>Commands\RegisterCustomerCommand.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="fx.Domain.Customer.UpdateLastLoginTimeCommand" Collapsed="true">
     <Position X="5.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\UpdateLastLoginTimeCommand.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="fx.Domain.Customer.CustomerDto" Collapsed="true">
-    <Position X="7" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>IAAAIAAAAAAAAAgAAAAACQQAAAAAAAAAAEEEBAAAAAA=</HashCode>
-      <FileName>Dtos\CustomerDto.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fx.Domain.Customer.LoginSuccessed" Collapsed="true">
@@ -63,7 +55,7 @@
     <Position X="3.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Repository\ICustomerRepository.cs</FileName>
+      <FileName>RepositoryInterface\ICustomerRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="微软雅黑" Size="9" />

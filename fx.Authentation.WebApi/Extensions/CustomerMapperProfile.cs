@@ -12,10 +12,10 @@ namespace fx.Authentation.WebApi.Extensions
         public CustomerMapperProfile()
         {
 
-            CreateMap<CustomerDto, Customer>();
-            CreateMap<CustomerDto, Customer>()
-                .ForMember(dest => dest.UserLoginId, source => source.MapFrom(src => src.LoginId))
-                .ForMember(dest => dest.Username, source => source.MapFrom(src => src.Name));
+            //CreateMap<CustomerDto, Customer>();
+            //CreateMap<CustomerDto, Customer>()
+            //    .ForMember(dest => dest.UserLoginId, source => source.MapFrom(src => src.LoginId))
+            //    .ForMember(dest => dest.Username, source => source.MapFrom(src => src.Name));
         }
     }
 }

@@ -43,15 +43,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Payment.WebApi", "fx.Pay
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.IdentityService", "fx.IdentityServer\fx.IdentityService.csproj", "{3585C123-C08E-4DF9-913B-2361B6C2998F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.Domain.Customer.QueryStack", "fx.Domain.Customer.QueryStack\fx.Domain.Customer.QueryStack.csproj", "{888A210C-2C07-4CEF-B2EA-F759C38E9B04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.Customer.QueryStack", "fx.Domain.Customer.QueryStack\fx.Domain.Customer.QueryStack.csproj", "{888A210C-2C07-4CEF-B2EA-F759C38E9B04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{304F5685-6D37-4438-9228-A3A826CF0E80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.Application.Customer", "fx.Application.Customer\fx.Application.Customer.csproj", "{DB7BE785-F1D1-44CD-8EAC-4A2FFCFB6381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Application.Customer", "fx.Application.Customer\fx.Application.Customer.csproj", "{DB7BE785-F1D1-44CD-8EAC-4A2FFCFB6381}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerTestProj", "CustomerTestProj\CustomerTestProj.csproj", "{26691439-4733-47AE-8BC6-1E10CF59D660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerTestProj", "CustomerTestProj\CustomerTestProj.csproj", "{26691439-4733-47AE-8BC6-1E10CF59D660}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{53689F29-E3C0-4831-BE0C-A5673547F711}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "www", "www", "{B10C7212-D33A-4DD2-8380-EDB81A5DAD3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.IdentityService.Website", "fx.IdentityService.Website\fx.IdentityService.Website.csproj", "{FEA95DC6-C1E8-426B-AD83-F0025A9F005C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wjhl.Website", "wjhl.Website\wjhl.Website.csproj", "{72BE1EC5-2E18-46D7-85F2-78B187026730}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +141,14 @@ Global
 		{26691439-4733-47AE-8BC6-1E10CF59D660}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26691439-4733-47AE-8BC6-1E10CF59D660}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26691439-4733-47AE-8BC6-1E10CF59D660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEA95DC6-C1E8-426B-AD83-F0025A9F005C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA95DC6-C1E8-426B-AD83-F0025A9F005C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEA95DC6-C1E8-426B-AD83-F0025A9F005C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA95DC6-C1E8-426B-AD83-F0025A9F005C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72BE1EC5-2E18-46D7-85F2-78B187026730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72BE1EC5-2E18-46D7-85F2-78B187026730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72BE1EC5-2E18-46D7-85F2-78B187026730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72BE1EC5-2E18-46D7-85F2-78B187026730}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,6 +173,8 @@ Global
 		{888A210C-2C07-4CEF-B2EA-F759C38E9B04} = {6B03E131-9807-4DAD-ADB8-2493A0E102E6}
 		{DB7BE785-F1D1-44CD-8EAC-4A2FFCFB6381} = {304F5685-6D37-4438-9228-A3A826CF0E80}
 		{26691439-4733-47AE-8BC6-1E10CF59D660} = {4D162BDC-5FE5-4257-8190-84680605023B}
+		{FEA95DC6-C1E8-426B-AD83-F0025A9F005C} = {53689F29-E3C0-4831-BE0C-A5673547F711}
+		{72BE1EC5-2E18-46D7-85F2-78B187026730} = {B10C7212-D33A-4DD2-8380-EDB81A5DAD3A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF7B9E10-6609-4FED-A5AB-AB3BC5517713}

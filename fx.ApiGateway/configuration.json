@@ -1,6 +1,39 @@
 {
   "ReRoutes": [
     {
+      "DownstreamPathTemplate": "/swagger/AuthenticationService/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UseServiceDiscovery": true,
+      "ServiceName": "AuthenticationService", //服务注册标识
+      "LoadBalancer": "RoundRobin",
+      "UpstreamPathTemplate": "/AuthenticationService/swagger.json",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/AuthenticationService/{any}",
+      "DownstreamScheme": "http",
+      "UseServiceDiscovery": true, //启用服务发现，如果不使用Consul服务发现，则需要将转发的配置写死在配置里面，如上一节点
+      "ReRoutesCaseSensitive": false, //不区分大小写
+      "UpstreamPathTemplate": "/AuthenticationService/{any}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "LoadBalancer": "RoundRobin", //使用负载均衡的策略，轮询
+      "ServiceName": "AuthenticationService" //服务注册标识
+    },
+    //{
+    //  "DownstreamPathTemplate": "/swagger/ProductService/swagger.json",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 5902
+    //    }
+    //  ],
+    //  "LoadBalancer": "RoundRobin",
+    //  "UpstreamPathTemplate": "/ProductService/swagger.json",
+    //  "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
+    //},
+    {
       "DownstreamPathTemplate": "/swagger/OrderService/swagger.json",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
@@ -15,19 +48,19 @@
       "UpstreamPathTemplate": "/OrderService/swagger.json",
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
     },
-    {
-      "DownstreamPathTemplate": "/swagger/ProductService/swagger.json",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5902
-        }
-      ],
-      "LoadBalancer": "RoundRobin",
-      "UpstreamPathTemplate": "/ProductService/swagger.json",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
-    },
+    //{
+    //  "DownstreamPathTemplate": "/swagger/ProductService/swagger.json",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 5902
+    //    }
+    //  ],
+    //  "LoadBalancer": "RoundRobin",
+    //  "UpstreamPathTemplate": "/ProductService/swagger.json",
+    //  "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
+    //},
     {
       "DownstreamPathTemplate": "/OrderService/{any}",
       "DownstreamScheme": "http",
@@ -43,19 +76,19 @@
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "LoadBalancer": "RoundRobin", //使用负载均衡的策略，轮询
       "ServiceName": "OrderService" //服务注册标识
-    },
-    {
-      "DownstreamPathTemplate": "/api/{any}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5902
-        }
-      ],
-      "UpstreamPathTemplate": "/ProductService/{any}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
     }
+    //{
+    //  "DownstreamPathTemplate": "/api/{any}",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 5902
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/ProductService/{any}",
+    //  "UpstreamHttpMethod": [ "Get", "Post" ]
+    //}
   ],
 
   "GlobalConfiguration": {

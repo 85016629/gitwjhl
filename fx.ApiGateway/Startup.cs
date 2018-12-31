@@ -128,7 +128,7 @@ namespace fx.ApiGateway
 
             if (Configuration["Swagger:IsActive"] == bool.TrueString)
             {
-                var apis = new List<string> { "OrderService", "ProductService" };
+                var apis = new List<string> { "OrderService", "ProductService", "AuthenticationService" };
                 app.UseMvc()
                     .UseSwagger()
                     .UseSwaggerUI(o =>

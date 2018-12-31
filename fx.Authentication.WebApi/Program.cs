@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace fx.Authentation.WebApi
+namespace fx.Authentication.WebApi
 {
     public class Program
     {

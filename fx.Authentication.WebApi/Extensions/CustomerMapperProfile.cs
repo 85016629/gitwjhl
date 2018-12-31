@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace fx.Authentation.WebApi.Extensions
+namespace fx.Authentication.WebApi.Extensions
 {
     public class CustomerMapperProfile : Profile
     {

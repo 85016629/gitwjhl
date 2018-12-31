@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using fx.Authentation.WebApi.Extensions;
+using fx.Authentication.WebApi.Extensions;
 using fx.Domain.Bus;
 using fx.Domain.core;
 using fx.Domain.Customer;
@@ -26,7 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 using IdentityModel;
 using fx.Application.Customer;
 
-namespace fx.Authentation.WebApi
+namespace fx.Authentication.WebApi
 {
     public class Startup
     {
@@ -56,16 +56,16 @@ namespace fx.Authentation.WebApi
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info
+                options.SwaggerDoc("AuthenticationService", new Info
                 {
                     Version = "v1",
-                    Title = "Authentication API"
+                    Title = "认证服务"
                 });
 
                 //Determine base path for the application.  
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                 //Set the comments path for the swagger json and ui.  
-                var xmlPath = Path.Combine(basePath, "fx.Authentation.WebApi.xml");
+                var xmlPath = Path.Combine(basePath, "fx.Authentication.WebApi.xml");
                 options.IncludeXmlComments(xmlPath);
             });
 
@@ -131,7 +131,7 @@ namespace fx.Authentation.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
@@ -141,12 +141,22 @@ namespace fx.Authentation.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication API V1");
+                c.SwaggerEndpoint("AuthenticationService/swagger.json", "Authentication API V1");
             });
 
             //app.UseDiscoveryClient();
 
             app.UseAuthentication();
+
+            app.RegisterConsul(lifetime, new ServiceEntity
+            {
+                ConsulIP = Configuration["Consul:IP"],
+                ConsulPort = int.Parse(Configuration["Consul:Port"]),
+                IP = Configuration["Service:IP"],
+                Port = int.Parse(Configuration["Service:Port"]),
+                ServiceName = Configuration["Service:Name"]
+            });
+
             app.UseMvc();
         }
     }

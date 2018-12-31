@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using fx.Domain.core;
 
-namespace fx.Authentation.WebApi.Controllers
+namespace fx.Authentication.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

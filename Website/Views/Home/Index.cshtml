@@ -14,20 +14,17 @@
 </div>
 <script language="javascript">
     var login = function () {
-        alert('');
-        var userLoginId = $("txtLoginId").val();
-        var password = $("txtPassword").val();
-        }
-
-    $.ajax({
-        type: "post",
-        url: "http://localhost:5000/login",
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        async: true,
-        success: function () {
-
-        }
-    });
+        $.ajax({
+            type: "Post",
+            method : "Post",
+            url: "http://192.168.3.119:5000/AuthenticationService/Authentication/login",
+            data: JSON.stringify('{"serLoginId": "1111", "userPwd": "111"}'),
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            success: function (message) {
+                alert(message)
+            }
+        });
+    };
 </script>
 

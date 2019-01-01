@@ -13,6 +13,7 @@ using Ocelot.Middleware;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
 using Ocelot.Provider.Consul;
+using fx.ApiGateway.Extensions;
 
 namespace fx.ApiGateway
 {
@@ -147,6 +148,15 @@ namespace fx.ApiGateway
             {
                 //c.SwaggerEndpoint($"/{Configuration["Swagger:DefineSwaggerName"]}/swagger.json", Configuration["Swagger:Version"]);
                 c.SwaggerEndpoint("GatewayService/swagger.json", "Gateway API V1");
+            });
+
+            app.RegisterConsul(lifetime, new ServiceEntity
+            {
+                ConsulIP = Configuration["Consul:IP"],
+                ConsulPort = int.Parse(Configuration["Consul:Port"]),
+                IP = Configuration["Service:IP"],
+                Port = int.Parse(Configuration["Service:Port"]),
+                ServiceName = Configuration["Service:Name"]
             });
 
             app.UseMvc();

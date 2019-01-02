@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using fx.Domain.Bus;
 using fx.Domain.core;
 using fx.Domain.OrderContext;
@@ -12,10 +8,10 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using NLog.Extensions.Logging;
 using NLog.Web;
@@ -60,8 +56,31 @@ namespace fx.Order.WebApi
                 var xmlPath = Path.Combine(basePath, "fx.Order.WebApi.xml");
                 options.IncludeXmlComments(xmlPath);
             });
+            #region 注入Cap.RabbitMQ
 
-            
+            services.AddDbContext<CapDbContext>(options=> {
+                //options.UseSqlServer("Server=localhost;database=capmsg;userid=admin;password=111111");
+                options.UseSqlServer(@"Server=.;Database=capmsg;Trusted_Connection=True;");
+            });
+
+            services.AddCap(x =>
+            {
+                x.UseEntityFramework<CapDbContext>();
+                x.UseDashboard();
+                x.UseRabbitMQ(mq =>
+                {
+                    mq.HostName = "localhost";
+                    mq.Password = "guest";
+                    mq.Port = 5672;
+                    mq.ExchangeName = "cap.text.exchangeMsg";
+                });
+                //消息保持多长时间，会根据这个定期的清理数据
+                x.SucceedMessageExpiredAfter = 24 * 3600;
+                //设置失败以后重试的次数
+                x.FailedRetryInterval = 5;
+            });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

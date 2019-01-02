@@ -26,7 +26,7 @@ namespace fx.Domain.OrderContext
                 UUId = request.Id,
                 CreateTime = request.CreateTime,
                 Owner = request.Owner,
-                State = request.State
+                Status = request.State
             };
 
             var r = await OrderRepository.AddAsync(entity: newOrder);

@@ -10,22 +10,6 @@ namespace fx.Infra.Data.SqlServer
 {
     public class OrderRepository : BaseRepository<Order, string>, IOrderRepository
     {
-        protected new readonly SqlDbContext dbContext = new SqlDbContext();
-        public void Add(Order entity)
-        {
-            dbContext.Orders.Add(entity);
-            dbContext.SaveChanges();
-        }
-
-        public Task<int> AddAsync(Order entity)
-        {
-            dbContext.Orders.Add(entity);
-            return dbContext.SaveChangesAsync();
-        }
-
-        public IQueryable<Order> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

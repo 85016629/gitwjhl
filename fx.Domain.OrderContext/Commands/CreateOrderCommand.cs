@@ -9,16 +9,15 @@ namespace fx.Domain.OrderContext
     {
         public string Owner { get; set; }
         public DateTime CreateTime { get; set; }
-        public int State { get; set; }
+        public OrderStatus State { get; set; }
         public string Id { get; set; }
-        public CreateOrderCommand(string id, string owner, DateTime createTime, int state)
+        public CreateOrderCommand(string id, string owner, DateTime createTime, OrderStatus state)
         {
             Id = id;
             Owner = owner;
             CreateTime = createTime;
             State = state;
             CommandId = Guid.NewGuid();
-        }
-        
+        }        
     }
 }

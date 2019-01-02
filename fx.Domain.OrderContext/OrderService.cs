@@ -15,7 +15,7 @@ namespace fx.Domain.OrderContext
         }
         public Task<object> CreateOrder(Order order)
         {
-            var cmd = new CreateOrderCommand(order.UUId, order.Owner, order.CreateTime, order.State);
+            var cmd = new CreateOrderCommand(order.UUId, order.Owner, order.CreateTime, order.Status);
             return Bus.SendCommand(cmd);
         }
     }

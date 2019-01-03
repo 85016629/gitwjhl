@@ -145,7 +145,7 @@ namespace fx.Infra.Utility
         /// <param name="privateKey">私钥</param>  
         /// <param name="input_charset">编码格式</param>  
         /// <returns>签名后字符串</returns>  
-        public static string sign(string content, string privateKey, string input_charset)
+        public static string Sign(string content, string privateKey, string input_charset)
         {
             byte[] Data = Encoding.GetEncoding(input_charset).GetBytes(content);
             RSACryptoServiceProvider rsa = DecodePemPrivateKey(privateKey);
@@ -170,7 +170,7 @@ namespace fx.Infra.Utility
         /// <param name="publicKey">公钥</param>  
         /// <param name="input_charset">编码格式</param>  
         /// <returns>true(通过)，false(不通过)</returns>  
-        public static bool verify(string content, string signedString, string publicKey, string input_charset)
+        public static bool Verify(string content, string signedString, string publicKey, string input_charset)
         {
             bool result = false;
             byte[] signedBase64 = Convert.FromBase64String(signedString);
@@ -190,10 +190,10 @@ namespace fx.Infra.Utility
         /// <param name="publicKey">公钥</param>  
         /// <param name="input_charset">编码格式</param>  
         /// <returns>明文</returns>  
-        public static string encryptData(string resData, string publicKey, string input_charset)
+        public static string EncryptData(string resData, string publicKey, string input_charset)
         {
             byte[] DataToEncrypt = Encoding.GetEncoding(input_charset).GetBytes(resData);
-            string result = encrypt(DataToEncrypt, publicKey, input_charset);
+            string result = Encrypt(DataToEncrypt, publicKey, input_charset);
             return result;
         }
 
@@ -205,7 +205,7 @@ namespace fx.Infra.Utility
         /// <param name="privateKey">私钥</param>  
         /// <param name="input_charset">编码格式</param>  
         /// <returns>明文</returns>  
-        public static string decryptData(string resData, string privateKey, string input_charset)
+        public static string DecryptData(string resData, string privateKey, string input_charset)
         {
             byte[] DataToDecrypt = Convert.FromBase64String(resData);
             string result = "";
@@ -217,29 +217,29 @@ namespace fx.Infra.Utility
 
                     buf[i] = DataToDecrypt[i + 128 * j];
                 }
-                result += decrypt(buf, privateKey, input_charset);
+                result += Decrypt(buf, privateKey, input_charset);
             }
             return result;
         }
 
         #region 内部方法
 
-        private static string encrypt(byte[] data, string publicKey, string input_charset)
+        private static string Encrypt(byte[] data, string publicKey, string input_charset)
         {
-            RSACryptoServiceProvider rsa = DecodePemPublicKey(publicKey);
-            SHA1 sh = new SHA1CryptoServiceProvider();
-            byte[] result = rsa.Encrypt(data, false);
+            var rsa = DecodePemPublicKey(publicKey);
+            var sh = new SHA1CryptoServiceProvider();
+            var result = rsa.Encrypt(data, false);
 
             return Convert.ToBase64String(result);
         }
 
-        private static string decrypt(byte[] data, string privateKey, string input_charset)
+        private static string Decrypt(byte[] data, string privateKey, string input_charset)
         {
             string result = "";
-            RSACryptoServiceProvider rsa = DecodePemPrivateKey(privateKey);
-            SHA1 sh = new SHA1CryptoServiceProvider();
-            byte[] source = rsa.Decrypt(data, false);
-            char[] asciiChars = new char[Encoding.GetEncoding(input_charset).GetCharCount(source, 0, source.Length)];
+            var rsa = DecodePemPrivateKey(privateKey);
+            var sh = new SHA1CryptoServiceProvider();
+            var source = rsa.Decrypt(data, false);
+            var asciiChars = new char[Encoding.GetEncoding(input_charset).GetCharCount(source, 0, source.Length)];
             Encoding.GetEncoding(input_charset).GetChars(source, 0, source.Length, asciiChars, 0);
             result = new string(asciiChars);
             //result = ASCIIEncoding.ASCII.GetString(source);  
@@ -252,7 +252,7 @@ namespace fx.Infra.Utility
             pkcs8publickkey = Convert.FromBase64String(pemstr);
             if (pkcs8publickkey != null)
             {
-                RSACryptoServiceProvider rsa = DecodeRSAPublicKey(pkcs8publickkey);
+                var rsa = DecodeRSAPublicKey(pkcs8publickkey);
                 return rsa;
             }
             else
@@ -265,7 +265,7 @@ namespace fx.Infra.Utility
             pkcs8privatekey = Convert.FromBase64String(pemstr);
             if (pkcs8privatekey != null)
             {
-                RSACryptoServiceProvider rsa = DecodePrivateKeyInfo(pkcs8privatekey);
+                var rsa = DecodePrivateKeyInfo(pkcs8privatekey);
                 return rsa;
             }
             else
@@ -278,11 +278,11 @@ namespace fx.Infra.Utility
         private static RSACryptoServiceProvider DecodePrivateKeyInfo(byte[] pkcs8)
         {
             byte[] SeqOID = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
-            byte[] seq = new byte[15];
+            var seq = new byte[15];
 
-            MemoryStream mem = new MemoryStream(pkcs8);
-            int lenstream = (int)mem.Length;
-            BinaryReader binr = new BinaryReader(mem);    //wrap Memory Stream with BinaryReader for easy reading  
+            var mem = new MemoryStream(pkcs8);
+            var lenstream = (int)mem.Length;
+            var binr = new BinaryReader(mem);    //wrap Memory Stream with BinaryReader for easy reading  
             byte bt = 0;
             ushort twobytes = 0;
 
@@ -321,8 +321,8 @@ namespace fx.Infra.Utility
                     binr.ReadUInt16();
                 //------ at this stage, the remaining sequence should be the RSA private key  
 
-                byte[] rsaprivkey = binr.ReadBytes((int)(lenstream - mem.Position));
-                RSACryptoServiceProvider rsacsp = DecodeRSAPrivateKey(rsaprivkey);
+                var rsaprivkey = binr.ReadBytes((int)(lenstream - mem.Position));
+                var rsacsp = DecodeRSAPrivateKey(rsaprivkey);
                 return rsacsp;
             }
 
@@ -356,8 +356,8 @@ namespace fx.Infra.Utility
             byte[] SeqOID = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
             byte[] seq = new byte[15];
             // ---------  Set up stream to read the asn.1 encoded SubjectPublicKeyInfo blob  ------  
-            MemoryStream mem = new MemoryStream(publickey);
-            BinaryReader binr = new BinaryReader(mem);    //wrap Memory Stream with BinaryReader for easy reading  
+            var mem = new MemoryStream(publickey);
+            var binr = new BinaryReader(mem);    //wrap Memory Stream with BinaryReader for easy reading  
             byte bt = 0;
             ushort twobytes = 0;
 
@@ -429,8 +429,8 @@ namespace fx.Infra.Utility
                 byte[] exponent = binr.ReadBytes(expbytes);
 
                 // ------- create RSACryptoServiceProvider instance and initialize with public key -----  
-                RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
-                RSAParameters RSAKeyInfo = new RSAParameters();
+                var RSA = new RSACryptoServiceProvider();
+                var RSAKeyInfo = new RSAParameters();
                 RSAKeyInfo.Modulus = modulus;
                 RSAKeyInfo.Exponent = exponent;
                 RSA.ImportParameters(RSAKeyInfo);
@@ -450,8 +450,8 @@ namespace fx.Infra.Utility
             byte[] MODULUS, E, D, P, Q, DP, DQ, IQ;
 
             // ---------  Set up stream to decode the asn.1 encoded RSA private key  ------  
-            MemoryStream mem = new MemoryStream(privkey);
-            BinaryReader binr = new BinaryReader(mem);    //wrap Memory Stream with BinaryReader for easy reading  
+            var mem = new MemoryStream(privkey);
+            var binr = new BinaryReader(mem);    //wrap Memory Stream with BinaryReader for easy reading  
             byte bt = 0;
             ushort twobytes = 0;
             int elems = 0;
@@ -501,20 +501,24 @@ namespace fx.Infra.Utility
                 // ------- create RSACryptoServiceProvider instance and initialize with public key -----  
 
 
-                CspParameters cSAParams = new CspParameters();
-                cSAParams.Flags = CspProviderFlags.UseMachineKeyStore;
+                var cSAParams = new CspParameters
+                {
+                    Flags = CspProviderFlags.UseMachineKeyStore
+                };
                 System.Security.Cryptography.RSACryptoServiceProvider provider = new RSACryptoServiceProvider(1024, cSAParams);
 
 
-                RSAParameters RSAparams = new RSAParameters();
-                RSAparams.Modulus = MODULUS;
-                RSAparams.Exponent = E;
-                RSAparams.D = D;
-                RSAparams.P = P;
-                RSAparams.Q = Q;
-                RSAparams.DP = DP;
-                RSAparams.DQ = DQ;
-                RSAparams.InverseQ = IQ;
+                var RSAparams = new RSAParameters
+                {
+                    Modulus = MODULUS,
+                    Exponent = E,
+                    D = D,
+                    P = P,
+                    Q = Q,
+                    DP = DP,
+                    DQ = DQ,
+                    InverseQ = IQ
+                };
                 provider.ImportParameters(RSAparams);
                 return provider;
             }

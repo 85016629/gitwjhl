@@ -25,7 +25,7 @@ namespace fx.Infra.Utility
                 var request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "POST";
                 request.Accept = "text/html, application/xhtml+xml, */*";
-                request.ContentType = "application/x-www-form-urlencoded";                
+                request.ContentType = "application/x-www-form-urlencoded";
 
                 var post = Encoding.UTF8.GetBytes(strParam);
 

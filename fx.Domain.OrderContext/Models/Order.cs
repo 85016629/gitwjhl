@@ -25,6 +25,7 @@ namespace fx.Domain.OrderContext
         public string Owner { get; set; }
         public DateTime CreateTime { get; set; }
         public OrderStatus Status { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 
     public enum OrderStatus : byte

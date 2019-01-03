@@ -89,7 +89,7 @@ namespace fx.Order.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }            
+            }
 
             app.UseStaticFiles();
 

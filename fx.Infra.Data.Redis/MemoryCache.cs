@@ -1,10 +1,14 @@
-﻿using System;
+﻿using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
 
 namespace fx.Infra.MemoryCache.Redis
 {
 
     public class MemoryCache : IMemoryCache
     {
+        private static readonly IDatabase Cache = RedisWriteConn.GetFactionConn_Write.GetDatabase();
+
         private TimeSpan _defaultExpiredTime = new TimeSpan(0, 12, 0, 0);
         private string _prefix;
 
@@ -35,9 +39,9 @@ namespace fx.Infra.MemoryCache.Redis
                 throw new Exception("The Key is Empty");
 
             if (expiredTime != null)
-                RedisWriteHelper.SetStringKey(_prefix, value, (TimeSpan) expiredTime);
+                Cache.StringSet(_prefix, value, (TimeSpan) expiredTime);
 
-            RedisWriteHelper.SetStringKey(_prefix, value, _defaultExpiredTime);
+            Cache.StringSet(_prefix, value, _defaultExpiredTime);
         }
 
         public void WriteInCache(string key, string content, int expiredTime = 0)
@@ -52,10 +56,30 @@ namespace fx.Infra.MemoryCache.Redis
 
         public void Remove(string key)
         {
-            throw new NotImplementedException();
+            RedisWriteHelper.KeyDelete(key);
         }
 
         public bool IsExistsKey(string key)
+        {
+            return Cache.KeyExists(key);
+        }
+
+        public void WriteInCache<T>(string key, T entiry, int expiredTime = 0) where T : new()
+        {
+            
+        }
+
+        public void RenameKey(string key, string newKey)
+        {
+            Cache.KeyRename(key, newKey);
+        }
+
+        public ICollection<T> GetAll<T>(string hashKey) where T : new()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDictionary<string, T> Search<T>(IEnumerable<string> keys)
         {
             throw new NotImplementedException();
         }

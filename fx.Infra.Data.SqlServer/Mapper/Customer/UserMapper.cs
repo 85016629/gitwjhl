@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Collections.Generic;
 
-namespace fx.ef.SqlSever
+namespace fx.Infra.Data.SqlSever
 {
     public class UserMapper : IEntityTypeConfiguration<BaseUser>
     {

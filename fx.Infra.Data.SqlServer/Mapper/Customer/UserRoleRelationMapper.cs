@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace fx.ef.SqlSever
+namespace fx.Infra.Data.SqlSever
 {
     public class UserRoleRelationMapper : IEntityTypeConfiguration<UserRoleRelation>
     {

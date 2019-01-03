@@ -1,7 +1,7 @@
 ﻿using fx.Domain.core;
 using System;
 
-namespace fx.Domain.Customer
+namespace fx.Domain.CustomerContext
 {
     public class RegisterCustomerCommand : BaseCommand
     {

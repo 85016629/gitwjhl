@@ -1,4 +1,4 @@
-﻿namespace fx.Domain.Customer
+﻿namespace fx.Domain.CustomerContext
 {
     using fx.Domain.core;
     using System;

@@ -1,7 +1,7 @@
 ﻿namespace fx.Infra.Data.SqlServer
 {
     using fx.Domain.core;
-    using fx.Domain.Customer;
+    using fx.Domain.CustomerContext;
     using fx.Domain.OrderContext;
     using fx.Domain.ProductContext;
     using fx.Infra.Data.SqlSever;
@@ -29,6 +29,7 @@
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<BaseUser> BaseUsers { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserRoleRelation> UserRoleRelations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }

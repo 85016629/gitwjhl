@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using fx.Domain.core;
-using fx.Domain.Customer;
+using fx.Domain.CustomerContext;
 using System;
 using System.Collections.Generic;
 using System.Text;

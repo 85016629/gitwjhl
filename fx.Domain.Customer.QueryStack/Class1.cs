@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace fx.Domain.Customer.QueryStack
+namespace fx.Domain.CustomerContext.QueryStack
 {
     public class Class1
     {

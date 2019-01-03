@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace fx.Domain.Customer
+namespace fx.Domain.CustomerContext
 {
     public class UpdateLastLoginTimeCommand : BaseCommand
     {

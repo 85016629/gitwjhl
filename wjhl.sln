@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services - webapi", "Services - webapi", "{ADD3FF90-5765-4754-A298-B0059580F2C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.Customer", "fx.Domian.Customer\fx.Domain.Customer.csproj", "{93050740-477A-4E6D-B52B-F6D326B9C49D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.CustomerContext", "fx.Domian.Customer\fx.Domain.CustomerContext.csproj", "{93050740-477A-4E6D-B52B-F6D326B9C49D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Infra.Data.SqlServer", "fx.Infra.Data.SqlServer\fx.Infra.Data.SqlServer.csproj", "{1F754475-C4FE-47A2-A48A-2BE9D81EA1C8}"
 EndProject
@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Payment.WebApi", "fx.Pay
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.IdentityService", "fx.IdentityServer\fx.IdentityService.csproj", "{3585C123-C08E-4DF9-913B-2361B6C2998F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.Customer.QueryStack", "fx.Domain.Customer.QueryStack\fx.Domain.Customer.QueryStack.csproj", "{888A210C-2C07-4CEF-B2EA-F759C38E9B04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.CustomerContext.QueryStack", "fx.Domain.Customer.QueryStack\fx.Domain.CustomerContext.QueryStack.csproj", "{888A210C-2C07-4CEF-B2EA-F759C38E9B04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{304F5685-6D37-4438-9228-A3A826CF0E80}"
 EndProject
@@ -63,7 +63,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{49
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Authentication.WebApi", "fx.Authentication.WebApi\fx.Authentication.WebApi.csproj", "{CE3CA3C0-919B-40B8-BB36-17FF4BEDD62E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.Domain.Payment.CommandStatck", "fx.Domain.Payment.CommandStatck\fx.Domain.Payment.CommandStatck.csproj", "{A1D5229D-5474-4994-B27F-E29AD157FC47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Domain.Payment.CommandStatck", "fx.Domain.Payment.CommandStatck\fx.Domain.Payment.CommandStatck.csproj", "{A1D5229D-5474-4994-B27F-E29AD157FC47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

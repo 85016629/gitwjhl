@@ -10,7 +10,7 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 
-namespace fx.Domain.Customer
+namespace fx.Domain.CustomerContext
 {
     public class CustomerCommandExecutor :
         IRequestHandler<UpdateLastLoginTimeCommand, object>

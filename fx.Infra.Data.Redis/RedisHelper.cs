@@ -3,6 +3,8 @@
     using fx.Infra.MemoryCache;
     using System;
     using StackExchange.Redis;
+    using System.Collections.Generic;
+
     public class RedisDatabase : IMemoryCache
     {
         private RedisStream _redis;
@@ -10,6 +12,11 @@
         public RedisDatabase(IDatabase redisDb)
         {
             database = redisDb;
+        }
+
+        public ICollection<T> GetAll<T>(string hashKey) where T : new()
+        {
+            throw new NotImplementedException();
         }
 
         public bool IsExistsKey(string key)
@@ -27,6 +34,16 @@
             database.HashDelete(key,"");
         }
 
+        public void RenameKey(string key, string newKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDictionary<string, T> Search<T>(IEnumerable<string> keys)
+        {
+            throw new NotImplementedException();
+        }
+
         public void WriteInCache(string key, string content)
         {
             database.StringSet(key, content);
@@ -41,6 +58,11 @@
         public void WriteInCache(string key, string content, int expiredTime)
         {
             database.StringSet(key, content, new TimeSpan(1000 * expiredTime));
+        }
+
+        public void WriteInCache<T>(string key, T entiry, int expiredTime = 0) where T : new()
+        {
+            throw new NotImplementedException();
         }
     }
 }

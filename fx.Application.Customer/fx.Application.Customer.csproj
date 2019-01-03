@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\fx.Domian.Customer\fx.Domain.Customer.csproj" />
+    <ProjectReference Include="..\fx.Domian.Customer\fx.Domain.CustomerContext.csproj" />
   </ItemGroup>
 
 </Project>

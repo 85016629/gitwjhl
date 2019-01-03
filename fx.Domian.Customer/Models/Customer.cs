@@ -1,4 +1,4 @@
-﻿namespace fx.Domain.Customer
+﻿namespace fx.Domain.CustomerContext
 {
     using System;
     using System.Collections.Generic;

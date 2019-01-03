@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace fx.Domain.Customer.Models
+namespace fx.Domain.CustomerContext.Models
 {
     public class CustomerRoleRelation : AggregateRoot<Guid>
     {

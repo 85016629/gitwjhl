@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using fx.Authentication.WebApi.Extensions;
 using fx.Domain.Bus;
 using fx.Domain.core;
-using fx.Domain.Customer;
+using fx.Domain.CustomerContext;
 using fx.Infra.Data.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

@@ -4,7 +4,7 @@ using fx.Domain.Bus;
 using fx.Domain.core;
 using MediatR;
 
-namespace fx.Domain.Customer
+namespace fx.Domain.CustomerContext
 {
     public class CustomerEventHandler :
         INotificationHandler<LoginSuccessed>

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using fx.Domain.Customer;
+using fx.Domain.CustomerContext;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

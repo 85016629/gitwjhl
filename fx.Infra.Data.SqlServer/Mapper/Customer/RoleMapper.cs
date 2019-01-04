@@ -11,7 +11,9 @@ namespace fx.Infra.Data.SqlSever
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.ToTable("Role");
+            builder.ToTable("Roles");
+
+            builder.HasKey(r=>r.RoleId);
 
             builder.Property(t => t.RoleName)
                 .HasColumnName("RoleName")
@@ -22,6 +24,7 @@ namespace fx.Infra.Data.SqlSever
                 .IsRequired()
                 .HasMaxLength(40);
 
+            builder.Ignore(r => r.UUId);
         }
     }
 }

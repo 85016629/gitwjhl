@@ -9,24 +9,39 @@ namespace fx.Infra.Data.SqlServer.User
 {
     public class UserRepository : BaseRepository<BaseUser, Guid>, IUserRepository
     {
-        private SqlDbContext DbContext = new SqlDbContext();
-        public UserRepository(DbContextOptions options)
-        {
+        private readonly static SqlDbContext db = new SqlDbContext();
+        //public UserRepository(DbContextOptions options)
+        //{
 
+        //}
+
+        public void ChangePassword(string userLoginId, string newPassword)
+        {
+            
         }
+
         public BaseUser GetUserByLoginIdAndPassword(string loginId, string password)
         {
-            var user = DbContext.BaseUsers.Where(u => u.LoginId == loginId && u.Password == password).FirstOrDefault();
+            var user = db.BaseUsers
+                .Where(u => u.LoginId == loginId && u.Password == password)
+                .FirstOrDefault();
+
+            var relations = db.UserRoleRelations
+                .Include(r => r.Role)
+                .Where(r => r.UserId == user.UUId)
+                .ToList();
+
+            user.UserRoles = relations;
             return user;
         }
 
         public BaseUser SearchUsersByUUId(Guid id)
         {
-            var user = DbContext.BaseUsers.Where(u => u.UUId == id).FirstOrDefault();
-            var relations = DbContext.UserRoleRelations.Include(r => r.Role)
-                    .Where(r => r.UserId == user.UUId)
-                    .ToList();
-            user.UserRoles = relations;
+            //var user = db.BaseUsers.Where(u => u.UUId == id).FirstOrDefault();
+            //var relations = db.UserRoleRelations.Include(r => r.Role)
+            //        .Where(r => r.UserId == user.LoginId)
+            //        .ToList();
+            //user.UserRoles = relations;
 
             //如果要序列化Json对象，参考下面的代码。
             //JsonConvert.SerializeObject(user, Formatting.None, new JsonSerializerSettings()
@@ -34,7 +49,7 @@ namespace fx.Infra.Data.SqlServer.User
             //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             //})
 
-            return user;
+            return null;
         }
     }
 }

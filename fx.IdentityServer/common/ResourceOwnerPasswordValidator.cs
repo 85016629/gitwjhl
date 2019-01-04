@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace fx.IdentityService
 {
+
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
-        private ILoginUserService loginUserService;
+        private ITestLoginUserService loginUserService;
 
-        public ResourceOwnerPasswordValidator(ILoginUserService _loginUserService)
+        public ResourceOwnerPasswordValidator(ITestLoginUserService _loginUserService)
         {
             this.loginUserService = _loginUserService;
         }

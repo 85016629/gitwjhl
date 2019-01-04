@@ -7,7 +7,9 @@ namespace fx.Application.Customer
 {
     public interface IAuthenticationService : IDisposable
     {
-        bool Login(string userLoginId, string password, out BaseUser user);
+        BaseUser GetUserByLoginIdAndPassword(string userLoginId, string password);
+        void LoginSuccess(string userLoginId); 
+        void ChangePasword(string userLoginId, string newPassword, string oldPassword);
         void LogOut(string userLoginId);
     }
 }

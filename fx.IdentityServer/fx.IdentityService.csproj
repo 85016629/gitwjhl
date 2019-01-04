@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\fx.Application.Customer\fx.Application.Customer.csproj" />
+    <ProjectReference Include="..\fx.Infra.Data.SqlServer\fx.Infra.Data.SqlServer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Certificates\idsrv4.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

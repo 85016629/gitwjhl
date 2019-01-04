@@ -26,13 +26,13 @@ namespace fx.Domain.CustomerContext
 
         public async Task<object> Handle(UpdateLastLoginTimeCommand request, CancellationToken cancellationToken)
         {
-            var user = _storage.FindByLoginId(request.UserLoginId);
+            //var user = null; //_storage.FindByLoginId(request.UserLoginId);
 
-            if (await _storage.UpdateAsync(user) > 0)
-            {
-                //_memoryCache.WriteInCache(user.LoginId, JsonConvert.SerializeObject(user));
-                return Task.FromResult((object)"执行成功");
-            }
+            //if (await _storage.UpdateAsync(user) > 0)
+            //{
+            //    //_memoryCache.WriteInCache(user.LoginId, JsonConvert.SerializeObject(user));
+            //    return Task.FromResult((object)"执行成功");
+            //}
 
             return Task.FromResult((object)"执行失败");
         }    

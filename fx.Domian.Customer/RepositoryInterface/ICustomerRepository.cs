@@ -4,10 +4,8 @@
     using System;
     using System.Threading.Tasks;
 
-    public interface ICustomerRepository : IRepository<Customer, Guid>
+    public interface ICustomerRepository 
     {
-        Customer QueryCustomerByIdAndPwd(string userLoginId, string passwd);
 
-        Customer FindByLoginId(string userLoginId);
     }
 }

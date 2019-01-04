@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace fx.IdentityService
 {
-    public class LoginUserService : ILoginUserService
+    public class LoginUserService : ITestLoginUserService
     {
         IServiceProvider serviceProvider = null;
 
@@ -16,7 +16,7 @@ namespace fx.IdentityService
 
         public bool Authenticate(string userName, string password, out LoginUser loginUser)
         {
-            var userRepository = serviceProvider.GetService(typeof(UserReporitory)) as UserReporitory;
+            var userRepository = serviceProvider.GetService(typeof(TestUserReporitory)) as TestUserReporitory;
 
             loginUser =  userRepository.QueryUser(userName, password);
 

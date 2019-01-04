@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,14 @@ namespace fx.IdentityService
                 {
                     ClientId = "ydapp.client",
                     ClientSecrets = new [] { new Secret("secret".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = new [] { "profile","api" }
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = new [] {
+                        "profile",
+                        "api" ,
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile},
+                    RedirectUris = { "http://localhost:5002/signin-oidc" },                                     //登录成功以后回调的接口，可以写在配置里面
+                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" }  //注销成功以后回调的接口，可以写在配置里面
                 },
                 new Client
                 {

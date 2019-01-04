@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using fx.Application.Customer;
+using fx.Domain.core;
+using fx.Infra.Data.SqlServer.User;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -20,9 +23,10 @@ namespace fx.IdentityService
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddScoped<ILoginUserService, LoginUserService>();
-            services.AddSingleton<UserReporitory>();
-
+            //services.AddScoped<ILoginUserService, LoginUserService>();
+            //services.AddSingleton<UserReporitory>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddSingleton<IUserRepository, UserRepository>();
             #region 配置IdentityServer
 
             InMemoryConfiguration.Configuration = this.Configuration;
@@ -42,8 +46,9 @@ namespace fx.IdentityService
                 ////)
                 //)
                 .AddDeveloperSigningCredential(false,"tempkey.rsa")
-                .AddInMemoryClients(InMemoryConfiguration.GetClients())
-                .AddInMemoryApiResources(InMemoryConfiguration.GetApiResources())
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())                //添加身份认证资源
+                .AddInMemoryClients(InMemoryConfiguration.GetClients())                        //预置允许访问的客户端
+                .AddInMemoryApiResources(InMemoryConfiguration.GetApiResources())  //配置访问的API资源              
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()          //添加自定义验证
                 .AddProfileService<ProfileService>();
 
@@ -61,7 +66,7 @@ namespace fx.IdentityService
             {
                 app.UseHsts();
             }
-
+            //启用IdentifyServer
             app.UseIdentityServer();
             //启用UI
             app.UseStaticFiles();

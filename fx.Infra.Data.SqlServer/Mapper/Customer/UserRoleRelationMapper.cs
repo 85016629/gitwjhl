@@ -11,7 +11,7 @@ namespace fx.Infra.Data.SqlSever
     {
         public void Configure(EntityTypeBuilder<UserRoleRelation> builder)
         {
-            builder.ToTable("UserInRole");
+            builder.ToTable("UserRoleRelations");
 
             builder.HasKey(ur => new { ur.RoleId, ur.UserId });
             builder.Property(r => r.UserId).IsRequired();

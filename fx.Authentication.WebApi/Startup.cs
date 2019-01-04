@@ -44,7 +44,7 @@ namespace fx.Authentication.WebApi
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.AddDiscoveryClient(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<ICustomerRepository, CustomerRepository>();
+            //services.AddSingleton<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IMemoryBus, MediatBus>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IEventStore<DomainEvent>, EventStore>();
@@ -87,16 +87,16 @@ namespace fx.Authentication.WebApi
             //        options.ApiName = "api";
             //    });
 
-            //#region Jwt授权认证
+            #region Jwt授权认证
 
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+            }) 
             .AddJwtBearer(o =>
             {
-                o.Authority = "http://localhost:5000";
+                o.Authority = Configuration["Authorize:ServerUri"];
                 o.Audience = "api";
                 o.RequireHttpsMetadata = false;
                 o.TokenValidationParameters = new TokenValidationParameters
@@ -127,7 +127,7 @@ namespace fx.Authentication.WebApi
                 };
             });
 
-            //#endregion
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

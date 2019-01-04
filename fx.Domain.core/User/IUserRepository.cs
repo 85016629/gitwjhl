@@ -9,5 +9,6 @@ namespace fx.Domain.core
         BaseUser GetUserByLoginIdAndPassword(string loginId, string password);
 
         BaseUser SearchUsersByUUId(Guid id);
+        void ChangePassword(string userLoginId, string newPassword);
     }
 }

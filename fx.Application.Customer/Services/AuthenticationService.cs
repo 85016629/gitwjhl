@@ -11,18 +11,15 @@ namespace fx.Application.Customer
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IUserRepository _repository;
-        private readonly IMemoryBus _bus;
-        public AuthenticationService(IUserRepository repository, IMemoryBus bus)
+        //private readonly IMemoryBus _bus;
+        public AuthenticationService(IUserRepository repository)
         {
             _repository = repository;
-            _bus = bus;
+            //_bus = bus;
         }
 
 
-        public void LogOut(string userLoginId)
-        {
-            throw new System.NotImplementedException();
-        }
+
 
         public bool Login(string userLoginId, string password, out BaseUser user)
         {
@@ -30,7 +27,7 @@ namespace fx.Application.Customer
             try
             {
                 user = _repository.GetUserByLoginIdAndPassword(userLoginId, password);
-                
+
                 if (user == null)
                 {
                     throw new Exception("该用户还为注册");
@@ -46,7 +43,7 @@ namespace fx.Application.Customer
                     }),
                     AggregateRootType = user.GetType().Name
                 };
-                _bus.RaiseEvent(loginSuccessed);
+                //_bus.RaiseEvent(loginSuccessed);
             }
             catch
             {
@@ -57,6 +54,30 @@ namespace fx.Application.Customer
         }
 
         public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangePasword(string userLoginId, string newPassword, string oldPassword)
+        {
+            var user = _repository.GetUserByLoginIdAndPassword(userLoginId, oldPassword);
+            if (user == null)
+                throw new Exception("旧密码认证失败");
+
+            _repository.ChangePassword(userLoginId, newPassword);
+        }
+
+        public BaseUser GetUserByLoginIdAndPassword(string userLoginId, string password)
+        {
+            return _repository.GetUserByLoginIdAndPassword(userLoginId, password);
+        }
+
+        public void LoginSuccess(string userLoginId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LogOut(string userLoginId)
         {
             throw new NotImplementedException();
         }

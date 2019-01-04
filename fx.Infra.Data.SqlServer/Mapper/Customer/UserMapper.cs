@@ -9,10 +9,11 @@ namespace fx.Infra.Data.SqlSever
     {
         public void Configure(EntityTypeBuilder<BaseUser> builder)
         {
-            builder.ToTable("User");
+            builder.ToTable("BaseUsers");
             builder.HasKey(t => t.UUId);
 
             builder.Property(t => t.LoginId).HasColumnName("LoginId");
+            //builder.Property(t => t.UUId).HasColumnName("UUId");            
             builder.Property(t => t.MobilePhone).HasColumnName("MobilePhone");
             builder.Property(t => t.Password).HasColumnName("Password");
             builder.Property(t => t.RegisterTime).HasColumnName("RegisterTime");

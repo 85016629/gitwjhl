@@ -12,7 +12,7 @@
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=.;Database=wjhl;Trusted_Connection=True;");
-            base.OnConfiguring(optionsBuilder);
+            //base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,10 +28,10 @@
             //    .ToTable("ProductCatalog");
         }
 
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<BaseUser> BaseUsers { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<UserRoleRelation> UserRoleRelations { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<BaseUser> BaseUsers { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRoleRelation> UserRoleRelations { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

@@ -4,14 +4,9 @@ using System.Text;
 
 namespace fx.Domain.core
 {
-    public abstract class BaseUser : AggregateRoot<Guid>
+    public class BaseUser : AggregateRoot<Guid>
     {
-        public BaseUser()
-        {
-        }
-
         public string Username { get; set; }
-        public Guid UUId { get; set; }
         public string LoginId { get; set; }
         public string Password { get; set; }
         public string MobilePhone { get; set; }

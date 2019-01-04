@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace fx.IdentityService
 {
-    public class UserReporitory
+    public class TestUserReporitory
     {
         public IEnumerable<LoginUser> Users = new List<LoginUser>()
         {

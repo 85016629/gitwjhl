@@ -67,8 +67,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackMng", "BackMng", "{5C94
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{A47C7235-B204-4F63-ABA6-CC495E22436E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Authentication.WebApi", "fx.Authentication.WebApi\fx.Authentication.WebApi.csproj", "{E59766E3-7547-4130-9C87-542301098E31}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,10 +157,6 @@ Global
 		{3F9FEF01-747B-4DFE-AA3B-AE67B87F867F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F9FEF01-747B-4DFE-AA3B-AE67B87F867F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F9FEF01-747B-4DFE-AA3B-AE67B87F867F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E59766E3-7547-4130-9C87-542301098E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E59766E3-7547-4130-9C87-542301098E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E59766E3-7547-4130-9C87-542301098E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E59766E3-7547-4130-9C87-542301098E31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,7 +188,6 @@ Global
 		{3F9FEF01-747B-4DFE-AA3B-AE67B87F867F} = {A47C7235-B204-4F63-ABA6-CC495E22436E}
 		{5C94B0CA-40DF-45B9-BB71-B78B60BC643C} = {ADD3FF90-5765-4754-A298-B0059580F2C6}
 		{A47C7235-B204-4F63-ABA6-CC495E22436E} = {5C94B0CA-40DF-45B9-BB71-B78B60BC643C}
-		{E59766E3-7547-4130-9C87-542301098E31} = {53689F29-E3C0-4831-BE0C-A5673547F711}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF7B9E10-6609-4FED-A5AB-AB3BC5517713}

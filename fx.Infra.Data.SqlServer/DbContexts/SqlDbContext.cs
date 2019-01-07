@@ -11,7 +11,7 @@
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=wjhl;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=wjhl;Trusted_Connection=True;", b => b.UseRowNumberForPaging());
             //base.OnConfiguring(optionsBuilder);
         }
 

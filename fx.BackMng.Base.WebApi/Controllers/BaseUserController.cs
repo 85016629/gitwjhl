@@ -12,7 +12,7 @@
             _userRepository = userRepository;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [Route("BackManagementSystem/BaseUsers")]
         public IActionResult GetAllUsers(int pageIndex, int pageSize)

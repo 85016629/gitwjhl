@@ -38,7 +38,8 @@ namespace fx.IdentityService
                         //new Claim("Email",string.Empty)
                         new Claim("Id", loginUser.Id.ToString()),
                         new Claim("RealName", loginUser.RealName),
-                        new Claim("Email",loginUser.Email)
+                        new Claim("Email",loginUser.Email),
+                        new Claim("Role", "admin")
                     }
                 );
             }

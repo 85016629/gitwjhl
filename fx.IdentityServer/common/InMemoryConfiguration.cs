@@ -46,7 +46,7 @@ namespace fx.IdentityService
                 {
                     ClientId = "ydapp.client",
                     ClientSecrets = new [] { new Secret("secret".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowedScopes = new [] {
                         "profile",
                         "api" },

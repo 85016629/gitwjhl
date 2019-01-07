@@ -147,6 +147,7 @@ namespace fx.Authentication.WebApi
             //app.UseDiscoveryClient();
 
             app.UseAuthentication();
+            
 
             app.RegisterConsul(lifetime, new ServiceEntity
             {

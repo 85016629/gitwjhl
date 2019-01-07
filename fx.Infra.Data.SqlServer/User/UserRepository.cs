@@ -26,12 +26,14 @@ namespace fx.Infra.Data.SqlServer.User
                 .Where(u => u.LoginId == loginId && u.Password == password)
                 .FirstOrDefault();
 
-            var relations = db.UserRoleRelations
-                .Include(r => r.Role)
-                .Where(r => r.UserId == user.UUId)
-                .ToList();
-
-            user.UserRoles = relations;
+            if (user != null)
+            {
+                var relations = db.UserRoleRelations
+                    .Include(r => r.Role)
+                    .Where(r => r.UserId == user.UUId)
+                    .ToList();
+                user.UserRoles = relations;
+            }
             return user;
         }
 

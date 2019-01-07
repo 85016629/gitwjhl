@@ -11,6 +11,16 @@ namespace fx.IdentityService
     public class InMemoryConfiguration
     {
         public static IConfiguration Configuration { get; set; }
+
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Phone()
+            };
+        }
+
         /// <summary>
         /// Define which APIs will use this IdentityServer
         /// </summary>
@@ -36,12 +46,10 @@ namespace fx.IdentityService
                 {
                     ClientId = "ydapp.client",
                     ClientSecrets = new [] { new Secret("secret".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
                     AllowedScopes = new [] {
                         "profile",
-                        "api" ,
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile},
+                        "api" },
                     RedirectUris = { "http://localhost:5002/signin-oidc" },                                     //登录成功以后回调的接口，可以写在配置里面
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" }  //注销成功以后回调的接口，可以写在配置里面
                 },

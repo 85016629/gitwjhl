@@ -13,7 +13,7 @@ namespace fx.IdentityService
 
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://0.0.0.0:5100")
+                //.UseUrls("http://0.0.0.0:5100")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                // .UseIISIntegration()
                 .UseStartup<Startup>()

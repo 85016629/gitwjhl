@@ -6,8 +6,14 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using fx.Domain.core;
 
-    public class Customer : AggregateRoot<string>
+    public class Customer : BaseUser
     {
-
+        public VipLevel VipLevel { get; set; }
+    }
+    public enum VipLevel : byte
+    {
+        Silver,
+        Gold,
+        Diamond
     }
 }

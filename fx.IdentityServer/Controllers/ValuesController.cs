@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fx.IdentityServer.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase

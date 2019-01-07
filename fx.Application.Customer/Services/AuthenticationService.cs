@@ -17,10 +17,6 @@ namespace fx.Application.Customer
             _repository = repository;
             //_bus = bus;
         }
-
-
-
-
         public bool Login(string userLoginId, string password, out BaseUser user)
         {
             bool result = true;
@@ -55,7 +51,8 @@ namespace fx.Application.Customer
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.Collect();
+            GC.SuppressFinalize(_repository);            
         }
 
         public void ChangePasword(string userLoginId, string newPassword, string oldPassword)

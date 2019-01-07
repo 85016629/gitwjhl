@@ -9,5 +9,6 @@ namespace fx.IdentityService.ViewModels
     {
         public string UserLoginId { get; set; }
         public string Password { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

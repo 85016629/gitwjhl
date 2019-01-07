@@ -14,10 +14,27 @@ namespace fx.Infra.Data.SqlSever
 
             builder.Property(t => t.LoginId).HasColumnName("LoginId");
             //builder.Property(t => t.UUId).HasColumnName("UUId");            
-            builder.Property(t => t.MobilePhone).HasColumnName("MobilePhone");
-            builder.Property(t => t.Password).HasColumnName("Password");
-            builder.Property(t => t.RegisterTime).HasColumnName("RegisterTime");
-            builder.Property(t => t.Username).HasColumnName("Username");
+
+            builder.Property(t => t.MobilePhone)
+                .HasColumnName("MobilePhone");
+
+            builder.Property(t => t.Password)
+                .HasColumnName("Password")
+                .IsRequired()
+                .HasMaxLength(128)
+                .HasColumnType("Varchar");
+
+            builder.Property(t => t.RegisterTime)
+                .HasColumnName("RegisterTime");
+
+            builder.Property(t => t.Username)
+                .HasColumnName("Username")
+                .IsRequired()
+                .HasMaxLength(40)
+                .HasColumnType("Nvarchar");
+
+            builder.Property(t => t.Email)
+                .HasColumnName("Email");
 
             builder.Ignore(c => c.UserRoles);
         }

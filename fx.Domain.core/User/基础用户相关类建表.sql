@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[BaseUsers](
 	[UUId] [uniqueidentifier] ROWGUIDCOL  NOT NULL,
 	[Username] [varchar](50) NULL,
 	[LoginId] [varchar](50) NOT NULL,
+	[Email] [varchar](50) NULL,
 	[Password] [varchar](128) NULL,
 	[RegisterTime] [datetime] NULL,
 	[State] [tinyint] NULL,

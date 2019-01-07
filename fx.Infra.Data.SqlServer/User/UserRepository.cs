@@ -51,5 +51,10 @@ namespace fx.Infra.Data.SqlServer.User
 
             return null;
         }
+
+        public IList<BaseUser> SearchUsersPages(int pageIndex, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

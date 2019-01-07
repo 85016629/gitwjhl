@@ -18,11 +18,6 @@
         {
             _authenticationService = authenticationService;
         }
-        [HttpGet]
-        public IActionResult Authenticate()
-        {
-            return Ok("test");
-        }
 
         [HttpPost]
         public IActionResult Authenticate([FromBody]LoginViewModel loginViewModel)
@@ -43,7 +38,8 @@
                     new Claim(JwtClaimTypes.Id, user.UUId.ToString()),
                     new Claim(JwtClaimTypes.Name, user.Username),
                     //new Claim(JwtClaimTypes.Email, user.Email),
-                    new Claim(JwtClaimTypes.PhoneNumber, user.MobilePhone?.ToString())
+                    new Claim(JwtClaimTypes.PhoneNumber, user.MobilePhone)
+                    //new Claim(JwtClaimTypes.Role,"admin")
                 }),
                 Expires = expiresAt,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

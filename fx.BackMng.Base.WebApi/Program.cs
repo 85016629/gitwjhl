@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace fx.IdentityService.Website
+namespace fx.BackMng.Base.WebApi
 {
     public class Program
     {

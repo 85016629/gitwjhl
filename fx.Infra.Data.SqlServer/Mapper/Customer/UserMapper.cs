@@ -34,8 +34,8 @@ namespace fx.Infra.Data.SqlSever
                 .HasColumnType("Nvarchar");
 
             builder.Property(t => t.Email)
-                .HasColumnName("Email");
-
+                .HasColumnName("Email");            
+                
             builder.Ignore(c => c.UserRoles);
         }
     }

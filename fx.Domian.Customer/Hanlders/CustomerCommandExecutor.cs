@@ -34,7 +34,7 @@ namespace fx.Domain.CustomerContext
             //    return Task.FromResult((object)"执行成功");
             //}
 
-            return Task.FromResult((object)"执行失败");
+            return await Task.FromResult((object)"执行失败");
         }    
     }
 }

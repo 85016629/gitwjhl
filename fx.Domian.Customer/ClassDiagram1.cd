@@ -1,62 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="fx.Domain.Customer.RegisterCustomerCommand" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="3.5" Y="3.25" Width="1.5" />
+  <Class Name="fx.Domain.CustomerContext.RegisterCustomerCommand" Collapsed="true">
+    <Position X="5.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAIAAQAAABAAACQQAAAAAASTABAEEBAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAQQAAAAAAQSABAAEAAAAAAA=</HashCode>
       <FileName>Commands\RegisterCustomerCommand.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="fx.Domain.Customer.UpdateLastLoginTimeCommand" Collapsed="true">
-    <Position X="5.25" Y="3.25" Width="1.5" />
+  <Class Name="fx.Domain.CustomerContext.UpdateLastLoginTimeCommand" Collapsed="true">
+    <Position X="7.5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\UpdateLastLoginTimeCommand.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="fx.Domain.Customer.LoginSuccessed" Collapsed="true">
-    <Position X="7" Y="2.25" Width="1.5" />
+  <Class Name="fx.Domain.CustomerContext.LoginSuccessed" Collapsed="true">
+    <Position X="4" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Events\LoginSuccessed.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="fx.Domain.Customer.CustomerCommandExecutor" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.25" Y="1.25" Width="1.5" />
+  <Class Name="fx.Domain.CustomerContext.CustomerCommandExecutor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAABAAAAAAgAA=</HashCode>
       <FileName>Hanlders\CustomerCommandExecutor.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="fx.Domain.Customer.CustomerEventHandler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="3.5" Y="2.25" Width="1.5" />
+  <Class Name="fx.Domain.CustomerContext.CustomerEventHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAIAABAAAAAAAAA=</HashCode>
       <FileName>Hanlders\CustomerEventHandler.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="fx.Domain.Customer.Customer" Collapsed="true">
-    <Position X="3.5" Y="1.25" Width="1.5" />
+  <Class Name="fx.Domain.CustomerContext.Customer">
+    <Position X="4" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Customer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="fx.Domain.Customer.Models.CustomerRoleRelation" Collapsed="true">
-    <Position X="5.25" Y="2.25" Width="1.5" />
+  <Interface Name="fx.Domain.CustomerContext.ICustomerRepository" Collapsed="true">
+    <Position X="4" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAIAAAAAAAAAEAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\CustomerRoleRelation.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Interface Name="fx.Domain.Customer.ICustomerRepository" Collapsed="true">
-    <Position X="3.5" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAACAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RepositoryInterface\ICustomerRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Enum Name="fx.Domain.CustomerContext.VipLevel" Collapsed="true">
+    <Position X="4" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAE=</HashCode>
+      <FileName>Models\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="微软雅黑" Size="9" />
 </ClassDiagram>

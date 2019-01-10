@@ -57,8 +57,8 @@ namespace fx.Infra.Data.SqlServer.User
         public IList<BaseUser> SearchUsersPages(int pageIndex, int pageSize)
         {
             var users = db.BaseUsers
-                .Take(pageIndex * pageSize)
-                .Skip(pageSize)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)                
                 .ToList();
 
             return users;

@@ -19,6 +19,7 @@
         {
             modelBuilder.ApplyConfiguration(new RoleMapper());
             modelBuilder.ApplyConfiguration(new UserMapper());
+            modelBuilder.ApplyConfiguration(new CustomerMapper());
             modelBuilder.ApplyConfiguration(new UserRoleRelationMapper());
             //modelBuilder.Entity<Customer>()
             //    .ToTable("Customer");

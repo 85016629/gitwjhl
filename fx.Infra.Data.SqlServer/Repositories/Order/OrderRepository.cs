@@ -10,6 +10,17 @@ namespace fx.Infra.Data.SqlServer
 {
     public class OrderRepository : BaseRepository<Order, string>, IOrderRepository
     {
-        
+        private readonly SqlDbContext db = new SqlDbContext();
+        public async Task CreateOrder(Order order)
+        {
+            foreach(var item in order.OrderItems)
+            {
+                db.OrderItems.Add(item);
+            }
+
+            db.Orders.Add(order);
+
+            await db.SaveChangesAsync();
+        }
     }
 }

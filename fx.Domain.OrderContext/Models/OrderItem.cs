@@ -6,6 +6,8 @@ namespace fx.Domain.OrderContext
 {
     public class OrderItem
     {
+        public int OrderItemId { get; set; }
+        public string OrderId { get; set; }
         /// <summary>
         /// 产品编号。
         /// </summary>

@@ -3,11 +3,9 @@
     using fx.Domain.core;
     using fx.Domain.CustomerContext;
     using fx.Domain.OrderContext;
-    using fx.Domain.ProductContext;
-    using fx.Infra.Data.SqlServer.Mapper;
     using fx.Infra.Data.SqlSever;
     using Microsoft.EntityFrameworkCore;
-    
+
     public class SqlDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -20,6 +18,7 @@
         {
             modelBuilder.ApplyConfiguration(new RoleMapper());
             modelBuilder.ApplyConfiguration(new UserMapper());
+            modelBuilder.ApplyConfiguration(new CustomerMapper());
             modelBuilder.ApplyConfiguration(new UserRoleRelationMapper());
             modelBuilder.ApplyConfiguration(new CustomerMapper());
             //modelBuilder.Entity<Customer>()
@@ -35,5 +34,6 @@
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRoleRelation> UserRoleRelations { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }

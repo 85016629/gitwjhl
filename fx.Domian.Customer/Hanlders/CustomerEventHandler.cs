@@ -20,19 +20,19 @@ namespace fx.Domain.CustomerContext
         /// <param name="event"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task Handle(LoginSuccessed @event, CancellationToken cancellationToken)
+        public async Task Handle(LoginSuccessed @event, CancellationToken cancellationToken)
         {
             var updateLoastLogintimeCommand = new UpdateLastLoginTimeCommand(@event.LoginId)
             {
                 CommandId = new System.Guid(),
             };
 
-            return _bus.SendCommand(updateLoastLogintimeCommand);
+            await _bus.SendCommand(updateLoastLogintimeCommand);
         }
 
-        public async Task HandleAsync(LoginSuccessed @event)
+        public Task HandleAsync(LoginSuccessed @event)
         {
-
+            return Task.CompletedTask;
         }
     }
 }

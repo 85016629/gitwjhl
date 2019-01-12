@@ -8,7 +8,7 @@
     public class RedisDatabase : IMemoryCache
     {
         private RedisStream _redis;
-        private StackExchange.Redis.IDatabase database;
+        private IDatabase database;
         public RedisDatabase(IDatabase redisDb)
         {
             database = redisDb;

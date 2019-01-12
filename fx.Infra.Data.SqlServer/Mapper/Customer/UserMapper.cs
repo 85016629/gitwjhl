@@ -9,7 +9,7 @@ namespace fx.Infra.Data.SqlSever
     {
         public void Configure(EntityTypeBuilder<BaseUser> builder)
         {
-            builder.ToTable("BaseUsers");
+            builder.ToTable("Users");
             builder.HasKey(t => t.UUId);
 
             builder.Property(t => t.LoginId).HasColumnName("LoginId");

@@ -4,7 +4,7 @@
     using System;
     using System.Threading.Tasks;
 
-    public interface ICustomerRepository 
+    public interface ICustomerRepository :  IRepository<Customer, Guid>
     {
 
     }

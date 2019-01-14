@@ -11,15 +11,15 @@ namespace fx.Infra.Data.SqlServer
 {
     public class CustomerMapper : IEntityTypeConfiguration<Customer>
     {
+        public CustomerMapper()
+        {
+            
+        }
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
 
-            builder.ToTable("Customers");
-
-            builder.Property(p => p.VipLevel)
-                .HasColumnName("VipLevel");
-
             builder.HasBaseType(typeof(BaseUser));
+
         }
     }
 }

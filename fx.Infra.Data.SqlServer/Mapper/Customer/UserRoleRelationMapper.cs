@@ -13,13 +13,14 @@ namespace fx.Infra.Data.SqlSever
         {
             builder.ToTable("UserRoleRelations");
 
+            
             builder.HasKey(ur => new { ur.RoleId, ur.UserId });
             builder.Property(r => r.UserId).IsRequired();
             builder.Property(r => r.RoleId).IsRequired();
 
             //一个用户，对应多个角色
             builder.HasOne(r => r.User)
-                .WithMany(p=>p.UserRoles)
+                .WithMany(p => p.UserRoles)                
                 .HasForeignKey(r => r.UserId)
                 .IsRequired();
                

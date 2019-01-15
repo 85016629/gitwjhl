@@ -65,7 +65,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.BackMng.Base.WebApi", "f
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackMng", "BackMng", "{5C94B0CA-40DF-45B9-BB71-B78B60BC643C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.Application.Order", "fx.Application.Order\fx.Application.Order.csproj", "{AEB63270-A077-48D5-84B2-CD3C28B8DCAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fx.Application.Order", "fx.Application.Order\fx.Application.Order.csproj", "{AEB63270-A077-48D5-84B2-CD3C28B8DCAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fx.Infra.Data.MongoDb", "fx.Infra.Data.MongDb\fx.Infra.Data.MongoDb.csproj", "{14A5F41B-ABBB-48F9-AF0F-50523E7E6998}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +163,10 @@ Global
 		{AEB63270-A077-48D5-84B2-CD3C28B8DCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEB63270-A077-48D5-84B2-CD3C28B8DCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEB63270-A077-48D5-84B2-CD3C28B8DCAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A5F41B-ABBB-48F9-AF0F-50523E7E6998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A5F41B-ABBB-48F9-AF0F-50523E7E6998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A5F41B-ABBB-48F9-AF0F-50523E7E6998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A5F41B-ABBB-48F9-AF0F-50523E7E6998}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,6 +198,7 @@ Global
 		{3F9FEF01-747B-4DFE-AA3B-AE67B87F867F} = {5C94B0CA-40DF-45B9-BB71-B78B60BC643C}
 		{5C94B0CA-40DF-45B9-BB71-B78B60BC643C} = {ADD3FF90-5765-4754-A298-B0059580F2C6}
 		{AEB63270-A077-48D5-84B2-CD3C28B8DCAE} = {304F5685-6D37-4438-9228-A3A826CF0E80}
+		{14A5F41B-ABBB-48F9-AF0F-50523E7E6998} = {BCFF1C93-77D2-462C-8EBB-78C5E5192E59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF7B9E10-6609-4FED-A5AB-AB3BC5517713}

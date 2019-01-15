@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using fx.Application.Order.Interfaces;
+using fx.Application.Order.Services;
 using fx.Domain.Bus;
 using fx.Domain.core;
 using fx.Domain.OrderContext;
@@ -19,19 +21,33 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace fx.Order.WebApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<IOrderService, OrderService>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddScoped<IMemoryBus, MediatBus>();
@@ -84,6 +100,13 @@ namespace fx.Order.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="loggerFactory"></param>
+        /// <param name="lifetime"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
@@ -94,7 +117,9 @@ namespace fx.Order.WebApi
             app.UseStaticFiles();
 
             loggerFactory.AddNLog();
+#pragma warning disable CS0618 // 类型或成员已过时
             app.AddNLogWeb();
+#pragma warning restore CS0618 // 类型或成员已过时
             env.ConfigureNLog("nlog.config");
 
             app.UseSwagger();

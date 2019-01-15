@@ -8,7 +8,8 @@ namespace fx.Domain.core
 {
     public interface IEventStore<in T> where T : DomainEvent
     {
-        void SaveEvent(T @event);
+        int SaveEvent(T @event);
 
+        ICollection<DomainEvent> GetAllAggregateDomainEvents(string aggregateId);
     }
 }

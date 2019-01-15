@@ -1,5 +1,6 @@
 ﻿using fx.Domain.core;
 using MediatR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,7 +32,17 @@ namespace fx.Domain.OrderContext
 
             var r = await OrderRepository.AddAsync(entity: newOrder);
 
-            return Task.FromResult((object)r);
+            var orderCreatedEvent = new OrderCreated()
+            {
+                AggregateRootType = nameof(Order),
+                EventData = JsonConvert.SerializeObject(newOrder),
+                Owner = newOrder.Owner,
+                OrderId = newOrder.OrderId
+            };
+
+            await Bus.RaiseEvent(orderCreatedEvent);
+
+            return Task.FromResult((object)newOrder);
         }
     }
 }

@@ -32,12 +32,11 @@ namespace fx.Application.Customer
                 var loginSuccessed = new LoginSuccessed
                 {
                     LoginId = userLoginId,
-                    EventId = Guid.NewGuid(),
                     EventData = JsonConvert.SerializeObject(user, Formatting.None, new JsonSerializerSettings()
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     }),
-                    AggregateRootType = user.GetType().Name
+                    AggregateRootType = nameof(BaseUser)
                 };
                 //_bus.RaiseEvent(loginSuccessed);
             }

@@ -14,7 +14,12 @@
         {
             dBContext = new EventDbContext();
         }
-        
+
+        public ICollection<DomainEvent> GetAllAggregateDomainEvents(string aggregateId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 保存事件。
         /// </summary>

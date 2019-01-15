@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fx.Application.Order.Interfaces;
 using fx.Domain.OrderContext;
 using fx.Order.WebApi.Models;
 using Microsoft.AspNetCore.Http;
@@ -11,20 +12,29 @@ using NLog;
 namespace fx.Order.WebApi.Controllers
 {
     
-    [Route("api/[controller]")]
+    [Route("OderService/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
         private IOrderService _orderService;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="orderService"></param>
         public OrderController(IOrderService orderService)
         {
             _orderService = orderService ?? throw new ArgumentNullException(nameof(IOrderService));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [HttpPost]
-        [Route("/Orders")]
+        [Route("~/Orders")]
         public async Task<IActionResult> CreateOrder([FromBody] OrderViewModel order)
         {
 

@@ -17,18 +17,21 @@ namespace fx.Domain.core
         {
             get
             {
-                return Guid.Empty.Equals(_eventId) ? Guid.NewGuid() : _eventId;
+                return _eventId;
             }
-            set
+            private set
             {
                 _eventId = value;
             }
         }
 
-        public DateTime Timeline { get => _timeline; set => _timeline = value; }
+        public DateTime Timeline { get => _timeline; private set => _timeline = value; }
         public string EventData { get; set; }
         public string AggregateRootType { get; set; }
-        public DomainEvent() { }
-
+        public DomainEvent()
+        {
+            _timeline = DateTime.UtcNow;
+            _eventId = Guid.NewGuid();
+        }
     }
 }

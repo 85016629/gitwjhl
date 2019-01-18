@@ -22,12 +22,19 @@ namespace fx.Domain.OrderContext
 
         public async Task<object> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+
+            //这里可以放入检查库存的事件
+            //if(!CheckProductStock()){
+            //  如果库存用完
+            //  发生StockIsOverd事件
+            //}
+
             var newOrder = new Order
             {
-                UUId = request.Id,
-                CreateTime = request.CreateTime,
+                UUId = Guid.NewGuid().ToString(),
+                CreateTime = DateTime.Now,
                 Owner = request.Owner,
-                Status = request.State
+                Status = OrderStatus.Processing
             };
 
             var r = await OrderRepository.AddAsync(entity: newOrder);

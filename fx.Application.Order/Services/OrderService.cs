@@ -3,6 +3,7 @@
 namespace fx.Application.Order.Services
 {
     using fx.Application.Order.Interfaces;
+    using fx.Application.Order.ViewModels;
     using fx.Domain.core;
     using fx.Domain.OrderContext;
     using System.Threading.Tasks;
@@ -14,9 +15,13 @@ namespace fx.Application.Order.Services
             Bus = bus;
         }
 
-        public async Task<object> CreateOrder(Order order)
+        public async Task<object> CreateOrder(OrderViewModel order)
         {
-            var cmd = new CreateOrderCommand(order.UUId, order.Owner, order.CreateTime, order.Status);
+            var cmd = new CreateOrderCommand()
+            {
+                Owner = order.Owner,
+                Items = order.Items
+            }; 
             return await Bus.SendCommand(cmd);
         }
     }

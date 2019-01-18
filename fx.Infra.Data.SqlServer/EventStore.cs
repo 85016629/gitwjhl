@@ -24,10 +24,10 @@
         /// 保存事件。
         /// </summary>
         /// <param name="event"></param>
-        public void SaveEvent(DomainEvent @event)
+        public int SaveEvent(DomainEvent @event)
         {
             this.dBContext.DomainEventStorage.Add(@event);
-            this.dBContext.SaveChanges();
+           return  this.dBContext.SaveChanges();
         }
     }
 }

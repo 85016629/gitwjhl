@@ -15,14 +15,15 @@ namespace fx.Application.Order.Services
             Bus = bus;
         }
 
-        public async Task<object> CreateOrder(OrderViewModel order)
+        public async Task<Order> CreateOrder(OrderViewModel vmOrder)
         {
             var cmd = new CreateOrderCommand()
             {
-                Owner = order.Owner,
-                Items = order.Items
-            }; 
-            return await Bus.SendCommand(cmd);
+                Owner = vmOrder.Owner,
+                Items = vmOrder.Items
+            };
+            var order = await Bus.SendCommand(cmd) as Order;
+            return order;
         }
     }
 }

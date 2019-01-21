@@ -9,6 +9,6 @@ namespace fx.Application.Order.Interfaces
 {
     public interface IOrderService
     {
-        Task<object> CreateOrder(OrderViewModel order);
+        Task<fx.Domain.OrderContext.Order> CreateOrder(OrderViewModel order);
     }
 }

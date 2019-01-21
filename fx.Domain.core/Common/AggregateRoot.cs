@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.core
 {
-    public abstract class AggregateRoot<TKey> : IAggregateRoot, IDisposable
+    public class AggregateRoot<TKey> : IAggregateRoot, IDisposable
     {
+        public AggregateRoot()
+        {
+
+        }
         public TKey UUId { get; set; }
 
         public void Dispose()

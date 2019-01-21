@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetCore.CAP;
 using fx.Application.Order.Interfaces;
+using fx.Application.Order.ViewModels;
 using fx.Domain.OrderContext;
-using fx.Order.WebApi.Models;
+//using fx.Order.WebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
@@ -12,20 +14,26 @@ using NLog;
 namespace fx.Order.WebApi.Controllers
 {
     
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("OderService/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+        private readonly ICapPublisher _publisher;
 
         private IOrderService _orderService;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="orderService"></param>
-        public OrderController(IOrderService orderService)
+        /// <param name="publisher"></param>
+        public OrderController(IOrderService orderService, ICapPublisher publisher)
         {
             _orderService = orderService ?? throw new ArgumentNullException(nameof(IOrderService));
+            _publisher = publisher ?? throw new ArgumentNullException(nameof(ICapPublisher));
         }
 
         /// <summary>
@@ -52,9 +60,9 @@ namespace fx.Order.WebApi.Controllers
             //    State = 0
             //};
 
-            //var result = await _orderService.CreateOrder(newOrder);
+            var result = await _orderService.CreateOrder(order);
 
-            return Ok();
+            return Ok(result);
         }
     }
 }

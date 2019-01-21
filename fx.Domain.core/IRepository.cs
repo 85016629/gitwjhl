@@ -10,9 +10,13 @@ namespace fx.Domain.core
     {
         void Add(T entity);
         Task<int> AddAsync(T entity);
+        int Update(T entity);
         Task<int> UpdateAsync(T entity);
         Task<T> FindByIdAsync(Tkey id);
-        Task<T> FindByIds(object[] ids);
-        IQueryable<T> GetAll();
+        Task<T> FindByIdsAsync(object[] ids);
+        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAllAsync();
+        int Delete(Tkey id);
+        Task<int> DeleteAsync(Tkey id);
     }
 }

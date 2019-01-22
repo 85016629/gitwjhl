@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using fx.Domain.OrderContext;
-
-namespace fx.Application.Order.Interfaces
+﻿namespace fx.Application.Order.Interfaces
 {
+    using System.Threading.Tasks;
+    using fx.Domain.OrderContext;
+
     public interface IOrderService
     {
-        Task<object> CreateOrder(fx.Domain.OrderContext.Order order);
+        Task<object> CreateOrder(Order order);
+        Task CancelOrder(string orderId);
     }
 }

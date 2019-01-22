@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DotNetCore.CAP;
 using fx.Application.Order.Interfaces;
 using fx.Application.Order.ViewModels;
 using fx.Domain.OrderContext;
+using Microsoft.AspNetCore.Authorization;
 //using fx.Order.WebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +24,7 @@ namespace fx.Order.WebApi.Controllers
     public class OrderController : ControllerBase
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
-        private readonly ICapPublisher _publisher;
+        //private readonly ICapPublisher _publisher;
 
         private IOrderService _orderService;
         /// <summary>
@@ -30,10 +32,10 @@ namespace fx.Order.WebApi.Controllers
         /// </summary>
         /// <param name="orderService"></param>
         /// <param name="publisher"></param>
-        public OrderController(IOrderService orderService, ICapPublisher publisher)
+        public OrderController(IOrderService orderService)
         {
             _orderService = orderService ?? throw new ArgumentNullException(nameof(IOrderService));
-            _publisher = publisher ?? throw new ArgumentNullException(nameof(ICapPublisher));
+           // _publisher = publisher ?? throw new ArgumentNullException(nameof(ICapPublisher));
         }
 
         /// <summary>
@@ -63,6 +65,45 @@ namespace fx.Order.WebApi.Controllers
             var result = await _orderService.CreateOrder(order);
 
             return Ok(result);
+        }
+
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <param name="file">图片</param>
+        [HttpPost("UploadImage")]
+        public IActionResult UploadImage(IFormFile file)
+        {
+            try
+            {
+                var extension = Path.GetExtension(file.FileName);
+                var guid = Guid.NewGuid().ToString();
+                var fullPath = $@"{Environment.CurrentDirectory}\upload\{guid + extension}";
+
+                var stream = new FileStream(fullPath, FileMode.Create);
+                file.CopyTo(stream);
+
+                var imgPath = $@"\upload\{guid + extension}";
+                
+                stream.Close();
+                stream.Dispose();
+                return Ok(string.Format("{0},{1}", "上传成功", imgPath));
+            }
+            catch (Exception ex)
+            {
+                return Ok(string.Format("{0},{1}", "失败", ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet("TestAuthorize")]
+        public IActionResult TestAuthorize()
+        {
+            return Ok("测试成功！");
         }
     }
 }

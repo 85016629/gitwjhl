@@ -1,3 +1,13 @@
 2018-11-27 23:31:17.8345 Error NetworkTarget(Name=ownLog-tcp_wrapped): Error when sending. Exception: System.IO.IOException: Error: TimedOut
 2018-11-27 23:31:17.8345 Error NetworkTarget(Name=ownLog-tcp_wrapped): Error when sending. Exception: System.IO.IOException: Error: TimedOut
 2018-11-27 23:31:17.8345 Error NetworkTarget(Name=ownLog-tcp_wrapped): Error when sending. Exception: System.IO.IOException: Error: TimedOut
+2019-01-22 11:00:05.2000 Error Error with flush. Exception: NLog.NLogRuntimeException: Asynchronous exception has occurred. ---> System.TimeoutException: Timeout.
+   --- End of inner exception stack trace ---
+   at NLog.Common.AsyncHelpers.RunSynchronously(AsynchronousAction action)
+   at NLog.LogFactory.Flush(TimeSpan timeout)
+2019-01-22 11:00:30.9060 Error NetworkTarget(Name=ownLog-tcp_wrapped): Error when sending. Exception: System.IO.IOException: Error: TimedOut
+2019-01-22 11:00:30.9060 Error NetworkTarget(Name=ownLog-tcp_wrapped): Error when sending. Exception: System.IO.IOException: Error: TimedOut
+2019-01-22 11:01:30.6130 Error Error with flush. Exception: NLog.NLogRuntimeException: Asynchronous exception has occurred. ---> System.TimeoutException: Timeout.
+   --- End of inner exception stack trace ---
+   at NLog.Common.AsyncHelpers.RunSynchronously(AsynchronousAction action)
+   at NLog.LogFactory.Flush(TimeSpan timeout)

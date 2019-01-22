@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -128,13 +129,19 @@ namespace fx.Infra.Data.Dapper
             {
                 try
                 {
-
                     return await conn.InsertAsync<T>(model, transaction, commandTimeout);
                 }
-
                 catch (Exception ex)
                 {
                     return 0;
+                }
+                finally
+                {
+                    if (conn.State != ConnectionState.Closed)
+                    {
+                        conn.Close();
+                        conn.Dispose();
+                    }
                 }
             }
         }
@@ -176,7 +183,6 @@ namespace fx.Infra.Data.Dapper
             {
                 try
                 {
-
                     bool b = await conn.DeleteAsync<T>(model, transaction, commandTimeout);
                     if (b) { return model; }
                     else { return null; }

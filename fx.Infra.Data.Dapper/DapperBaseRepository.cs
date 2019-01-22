@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace fx.Infra.Data.Dapper
 {
-    public class DapperBaseRepository<T, TKey> : IRepository<T, TKey> where T : AggregateRoot<TKey>
+    public class DapperBaseRepository<T, TKey> : IRepository<T, TKey>, IDapperComplexPageQuery<T> where T : AggregateRoot<TKey>
     {
         public async void Add(T entity)
         {
@@ -18,9 +19,9 @@ namespace fx.Infra.Data.Dapper
 
         public async Task<int> AddAsync(T entity)
         {
-            return await DbContext.InsertAsync<T,TKey>(entity);
+            return await DbContext.InsertAsync<T, TKey>(entity);
         }
-
+         
         public int Delete(TKey id)
         {
             throw new NotImplementedException();
@@ -33,7 +34,7 @@ namespace fx.Infra.Data.Dapper
 
         public async Task<T> FindByIdAsync(TKey id)
         {
-            return await DbContext.GetAsync<T,TKey>(id);
+            return await DbContext.GetAsync<T, TKey>(id);
         }
 
         public Task<T> FindByIdsAsync(object[] ids)
@@ -41,7 +42,7 @@ namespace fx.Infra.Data.Dapper
             throw new NotImplementedException();
         }
 
-        public  IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             return DbContext.GetAll<T, TKey>();
         }
@@ -59,6 +60,15 @@ namespace fx.Infra.Data.Dapper
         public async Task<int> UpdateAsync(T entity)
         {
             return await DbContext.UpdateAsync<T, TKey>(entity);
+        }
+        public IEnumerable<T> Search(int pageIndex, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> Search(int pageIndex, int pageSize, Expression condition)
+        {
+            throw new NotImplementedException();
         }
     }
 }

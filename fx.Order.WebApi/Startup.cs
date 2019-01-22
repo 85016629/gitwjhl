@@ -66,6 +66,16 @@ namespace fx.Order.WebApi
                     Title = "订单服务 API"
                 });
 
+                #region Jwt 授权
+                options.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Bearer 授权 \"Authorization:     Bearer+空格+token\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                #endregion
+
                 //Determine base path for the application.  
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                 //Set the comments path for the swagger json and ui.  
@@ -73,16 +83,15 @@ namespace fx.Order.WebApi
                 options.IncludeXmlComments(xmlPath);
             });
             #region 注入Cap.RabbitMQ
-
-            services.AddDbContext<CapDbContext>(options=> {
-                //options.UseSqlServer("Server=localhost;database=capmsg;userid=admin;password=111111");
-                options.UseSqlServer(@"Server=.;Database=capmsg;Trusted_Connection=True;");
-            });
+            /*
+            services.AddDbContext<CapDbContext>();
 
             services.AddCap(x =>
             {
                 x.UseEntityFramework<CapDbContext>();
                 x.UseDashboard();
+                x.Version = "v1";   // 设置版本号，默认值 
+                x.UseSqlServer(@"Server=.;Database=capmsg;Trusted_Connection=True;");
                 x.UseRabbitMQ(mq =>
                 {
                     mq.HostName = "localhost";
@@ -95,7 +104,9 @@ namespace fx.Order.WebApi
                 //设置失败以后重试的次数
                 x.FailedRetryInterval = 5;
             });
-
+            */
+            //services.AddTransient<ISubscriberService,SubscriberService>();
+            
             #endregion
         }
 
@@ -128,14 +139,18 @@ namespace fx.Order.WebApi
                 c.SwaggerEndpoint("OrderService/swagger.json", "Order API V1");
             });            
 
-            app.RegisterConsul(lifetime, new ServiceEntity
+            //注册服务发现
+            if(Configuration["Consul:HasUseConsul"] == bool.TrueString)
             {
-                ConsulIP = Configuration["Consul:IP"],
-                ConsulPort = int.Parse(Configuration["Consul:Port"]),
-                IP = Configuration["Service:IP"],
-                Port = int.Parse(Configuration["Service:Port"]),
-                ServiceName = Configuration["Service:Name"]
-            });
+                app.RegisterConsul(lifetime, new ServiceEntity
+                {
+                    ConsulIP = Configuration["Consul:IP"],
+                    ConsulPort = int.Parse(Configuration["Consul:Port"]),
+                    IP = Configuration["Service:IP"],
+                    Port = int.Parse(Configuration["Service:Port"]),
+                    ServiceName = Configuration["Service:Name"]
+                });
+            }
 
             app.UseMvc();
         }

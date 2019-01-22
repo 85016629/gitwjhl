@@ -1,5 +1,6 @@
 ﻿using fx.Domain.core;
 using MediatR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,17 +22,34 @@ namespace fx.Domain.OrderContext
 
         public async Task<object> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+
+            //这里可以放入检查库存的事件
+            //if(!CheckProductStock()){
+            //  如果库存用完
+            //  发生StockIsOverd事件
+            //}
+
             var newOrder = new Order
             {
-                UUId = request.Id,
-                CreateTime = request.CreateTime,
+                UUId = Guid.NewGuid().ToString(),
+                CreateTime = DateTime.Now,
                 Owner = request.Owner,
-                Status = request.State
+                Status = OrderStatus.Processing
             };
 
             var r = await OrderRepository.AddAsync(entity: newOrder);
 
-            return Task.FromResult((object)r);
+            var orderCreatedEvent = new OrderCreated()
+            {
+                AggregateRootType = nameof(Order),
+                EventData = JsonConvert.SerializeObject(newOrder),
+                Owner = newOrder.Owner,
+                OrderId = newOrder.OrderId
+            };
+
+            await Bus.RaiseEvent(orderCreatedEvent);
+
+            return Task.FromResult((object)newOrder);
         }
     }
 }

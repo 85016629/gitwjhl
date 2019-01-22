@@ -1,11 +1,17 @@
-﻿namespace fx.Application.Order.Interfaces
+
+
+namespace fx.Application.Order.Interfaces
 {
     using System.Threading.Tasks;
+    using fx.Application.Order.ViewModels;
     using fx.Domain.OrderContext;
 
     public interface IOrderService
     {
-        Task<object> CreateOrder(Order order);
+
         Task CancelOrder(string orderId);
+
+        Task<fx.Domain.OrderContext.Order> CreateOrder(OrderViewModel order);
+
     }
 }

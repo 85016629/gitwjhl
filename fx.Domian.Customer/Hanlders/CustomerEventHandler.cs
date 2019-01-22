@@ -29,10 +29,5 @@ namespace fx.Domain.CustomerContext
 
             await _bus.SendCommand(updateLoastLogintimeCommand);
         }
-
-        public Task HandleAsync(LoginSuccessed @event)
-        {
-            return Task.CompletedTask;
-        }
     }
 }

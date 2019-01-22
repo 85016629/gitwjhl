@@ -5,7 +5,7 @@ namespace fx.Domain.core
 {
     public interface IEvent: IMessage, INotification
     {
-        Guid EventId { get; set; }
-        DateTime Timeline { get;}
+        Guid EventId { get;  }
+        DateTime Timeline { get;  }
     }
 }

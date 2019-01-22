@@ -2,6 +2,7 @@
 using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace fx.IdentityService
 {
@@ -11,19 +12,31 @@ namespace fx.IdentityService
         {
             Console.Title = "IdentityServer";
 
+            //var config = new ConfigurationBuilder()
+            //    .AddEnvironmentVariables()
+            //    .Build();
+
             var host = new WebHostBuilder()
                 .UseKestrel()
-                //.UseUrls("http://0.0.0.0:5100")
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json",
+                                optional: true, reloadOnChange: true);
+                    config.AddEnvironmentVariables();
+                })
                 .UseContentRoot(Directory.GetCurrentDirectory())
-               // .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 
-            CreateWebHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args)
+                .Build()                
+                .Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>();            
     }
 }

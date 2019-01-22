@@ -27,10 +27,19 @@ namespace fx.IdentityService
         /// <returns></returns>
         public static IEnumerable<ApiResource> GetApiResources()
         {
+            //var items = new List<ApiResourceConfig>();
+            //Configuration.GetSection("ApiResources").Bind(items);
+            //var ars = new List<ApiResource>();
+            //foreach (var item in items)
+            //{
+            //    ars.Add(new ApiResource(item.Name, item.DisplayName));
+            //}
+            //return ars.ToArray();
+
             return new[]
             {
-                new ApiResource("api", "订单服务"),
-                new ApiResource("profile", "产品服务")
+                new ApiResource("OrderService",""),
+                new ApiResource("ProductService","")
             };
         }
 
@@ -48,8 +57,8 @@ namespace fx.IdentityService
                     ClientSecrets = new [] { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowedScopes = new [] {
-                        "profile",
-                        "api" },
+                        "OrderService",
+                        "ProductService" },
                     RedirectUris = { "http://localhost:5002/signin-oidc" },                                     //登录成功以后回调的接口，可以写在配置里面
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" }  //注销成功以后回调的接口，可以写在配置里面
                 },
@@ -62,5 +71,11 @@ namespace fx.IdentityService
                 }
             };
         }
+    }
+
+    internal class ApiResourceConfig
+    {
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
     }
 }

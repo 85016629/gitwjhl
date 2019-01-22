@@ -9,12 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\OrderViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Consul" Version="0.7.2.6" />
-    <PackageReference Include="DotNetCore.CAP" Version="2.4.1" />
+    <PackageReference Include="DotNetCore.CAP" Version="2.4.2" />
     <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="2.4.1" />
     <PackageReference Include="DotNetCore.CAP.SqlServer" Version="2.4.1" />
     <PackageReference Include="MediatR" Version="6.0.0" />
@@ -29,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\fx.Application.Order\fx.Application.Order.csproj" />
     <ProjectReference Include="..\fx.Domain.Bus\fx.Domain.Bus.csproj" />
     <ProjectReference Include="..\fx.Domain.core\fx.Domain.core.csproj" />
     <ProjectReference Include="..\fx.Domain.OrderContext\fx.Domain.OrderContext.csproj" />

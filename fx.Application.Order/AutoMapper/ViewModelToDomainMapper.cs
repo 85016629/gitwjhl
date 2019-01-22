@@ -12,6 +12,7 @@ namespace fx.Application.Order.AutoMapper
         public ViewModelToDomainMapper()
         {
             CreateMap<CreateOrderCommand, OrderViewModel>();
+
         }
     }
 }

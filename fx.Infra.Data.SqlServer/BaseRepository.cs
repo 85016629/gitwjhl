@@ -17,31 +17,56 @@ namespace fx.Infra.Data.SqlServer
             dbContext.SaveChanges();
         }
 
-        public Task<int> AddAsync(T entity)
+        public async Task<int> AddAsync(T entity)
         {
             dbContext.Set<T>().Add(entity);
-            return dbContext.SaveChangesAsync();
+            return await dbContext.SaveChangesAsync();
         }
 
-        public Task<T> FindByIdAsync(TKey id)
+        public int Delete(TKey id)
         {
-            return dbContext.Set<T>().FindAsync(id);
+            var entity = dbContext.Set<T>().Find(id);
+            dbContext.Set<T>().Remove(entity);
+            return dbContext.SaveChanges();
         }
 
-        public Task<T> FindByIds(object[] ids)
+        public async Task<int> DeleteAsync(TKey id)
+        {
+            var entity = await dbContext.Set<T>().FindAsync(id);
+            dbContext.Set<T>().Remove(entity);
+            return await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<T> FindByIdAsync(TKey id)
+        {
+            return await dbContext.Set<T>().FindAsync(id);
+        }
+
+        public Task<T> FindByIdsAsync(object[] ids)
         {
             return dbContext.Set<T>().FindAsync(ids);
         }
 
-        public IQueryable<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             return dbContext.Set<T>().AsQueryable();
         }
 
-        Task<int> IRepository<T, TKey>.UpdateAsync(T entity)
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await dbContext.Set<T>().ToListAsync<T>();
+        }
+
+        public int Update(T entity)
         {
             dbContext.Entry(entity).State = EntityState.Modified;
-            return dbContext.SaveChangesAsync();
+            return dbContext.SaveChanges();
+        }
+
+        public async Task<int> UpdateAsync(T entity)
+        {
+            dbContext.Entry(entity).State = EntityState.Modified;
+            return await dbContext.SaveChangesAsync();
         }
     }
 }

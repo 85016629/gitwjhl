@@ -22,6 +22,7 @@ namespace fx.IdentityService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddScoped<ITestLoginUserService, LoginUserService>();
@@ -71,6 +72,7 @@ namespace fx.IdentityService
                 
                 .AddProfileService<ProfileService>();
 
+            
             #endregion
         }
 
@@ -85,14 +87,23 @@ namespace fx.IdentityService
             {
                 app.UseHsts();
             }
+            app.UseCors(option =>
+            {
+                option.AllowCredentials();
+                option.AllowAnyOrigin();
+                option.AllowAnyHeader();
+                option.AllowAnyMethod();
+            });
             //启用IdentifyServer
             app.UseIdentityServer();
             //启用UI
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();            
+            app.UseMvcWithDefaultRoute();
 
             //app.UseHttpsRedirection();
-            app.UseMvc();
+
+
+            app.UseMvc();        
         }
     }
 }

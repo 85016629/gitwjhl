@@ -114,7 +114,7 @@
                 return Redirect(login.ReturnUrl);
             }
 
-            return Ok(HttpContext.Request.Headers["Token"]);
+            return Ok("登录成功");
         }
     }
 }

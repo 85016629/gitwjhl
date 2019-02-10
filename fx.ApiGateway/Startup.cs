@@ -42,7 +42,7 @@ namespace fx.ApiGateway
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             // IdentityServer
             #region IdentityServerAuthenticationOptions => need to refactor
@@ -150,14 +150,17 @@ namespace fx.ApiGateway
                 c.SwaggerEndpoint("GatewayService/swagger.json", "Gateway API V1");
             });
 
-            app.RegisterConsul(lifetime, new ServiceEntity
+            if(Configuration["Consul:IsActive"] == bool.TrueString)
             {
-                ConsulIP = Configuration["Consul:IP"],
-                ConsulPort = int.Parse(Configuration["Consul:Port"]),
-                IP = Configuration["Service:IP"],
-                Port = int.Parse(Configuration["Service:Port"]),
-                ServiceName = Configuration["Service:Name"]
-            });
+                app.RegisterConsul(lifetime, new ServiceEntity
+                {
+                    ConsulIP = Configuration["Consul:IP"],
+                    ConsulPort = int.Parse(Configuration["Consul:Port"]),
+                    IP = Configuration["Service:IP"],
+                    Port = int.Parse(Configuration["Service:Port"]),
+                    ServiceName = Configuration["Service:Name"]
+                });
+            }
 
             app.UseMvc();
         }

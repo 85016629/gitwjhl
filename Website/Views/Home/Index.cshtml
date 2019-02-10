@@ -16,10 +16,16 @@
     var login = function () {
         $.ajax({
             type: "Post",
-            method : "Post",
-            url: "http://192.168.3.119:5000/AuthenticationService/Authentication/login",
-            data: JSON.stringify('{"serLoginId": "1111", "userPwd": "111"}'),
+            url: "http://192.168.3.119:5000/Authentication/login",
+            data: JSON.stringify({
+                UserLoginId: "string",
+                Password:"string"
+            }),
             contentType: "application/json; charset=utf-8",
+            xhrFields: {
+                withCredentials: false
+            },
+            crossDomain: true,
             async: true,
             success: function (message) {
                 alert(message)

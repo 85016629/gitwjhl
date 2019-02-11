@@ -4,9 +4,16 @@ namespace fx.Infra.Data.SqlServer
 {
     public class CapDbContext: DbContext
     {
-        public CapDbContext(DbContextOptions options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            optionsBuilder.UseSqlServer(@"Server=.;Database=capmsg;Trusted_Connection=True;");
+            base.OnConfiguring(optionsBuilder);
         }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<DomainEvent>()
+        //        .ToTable("DomainEvents");
+        //}
     }
 }

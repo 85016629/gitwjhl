@@ -1,12 +1,13 @@
-﻿using System;
+﻿using fx.Domain.ProductContext;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace fx.Domain.ProductContext
+namespace fx.Application.Product
 {
     public interface ICatalogService
     {
-        IList<ProductCatalog> GetAllProductCatalogs();
+        IEnumerable<ProductCatalog> GetAllProductCatalogs();
         void AddCatalog(string catalogName);
     }
 }

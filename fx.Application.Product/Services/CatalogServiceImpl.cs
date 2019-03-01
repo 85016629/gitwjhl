@@ -1,9 +1,10 @@
 ﻿using fx.Domain.core;
+using fx.Domain.ProductContext;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace fx.Domain.ProductContext
+namespace fx.Application.Product
 {
     public class CatalogServiceImpl : ICatalogService
     {
@@ -21,9 +22,9 @@ namespace fx.Domain.ProductContext
             _bus.RaiseEvent(createEvent);
         }
 
-        public IList<ProductCatalog> GetAllProductCatalogs()
+        public IEnumerable<ProductCatalog> GetAllProductCatalogs()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
     }
 }

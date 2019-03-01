@@ -1,4 +1,5 @@
 ﻿using fx.Domain.OrderContext;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,47 @@ namespace fx.Infra.Data.SqlServer
             db.Orders.Add(order);
 
             await db.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// 分页示例。
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="totalRecords"></param>
+        /// <returns></returns>
+        public IList<Order> QueryOrdersByPage(int pageIndex, int pageSize, out int totalRecords)
+        {
+            var result = db.Orders
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            totalRecords = db.Orders.Count();
+            return result;
+        }
+
+        /// <summary>
+        /// Like查询示例。
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="owner"></param>
+        /// <param name="totalRecords"></param>
+        /// <returns></returns>
+        public IList<Order> SearchOrdersByPage(int pageIndex, int pageSize, string owner,  out int totalRecords)
+        {
+            var result = db.Orders
+                .Where(c => EF.Functions.Like(c.Owner, "%t%"))                
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            //var result = db.Orders.FromSql("").ToList();
+
+            totalRecords = db.Orders
+                .Count(c => EF.Functions.Like(c.Owner, "%t%"));
+
+            return result;
         }
     }
 }

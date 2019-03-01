@@ -83,7 +83,7 @@ namespace fx.Order.WebApi
                 options.IncludeXmlComments(xmlPath);
             });
             #region 注入Cap.RabbitMQ
-            /*
+
             services.AddDbContext<CapDbContext>();
 
             services.AddCap(x =>
@@ -91,7 +91,7 @@ namespace fx.Order.WebApi
                 x.UseEntityFramework<CapDbContext>();
                 x.UseDashboard();
                 x.Version = "v1";   // 设置版本号，默认值 
-                x.UseSqlServer(@"Server=.;Database=capmsg;Trusted_Connection=True;");
+                //x.UseSqlServer(@"Server=.;Database=capmsg;Trusted_Connection=True;");
                 x.UseRabbitMQ(mq =>
                 {
                     mq.HostName = "localhost";
@@ -104,9 +104,9 @@ namespace fx.Order.WebApi
                 //设置失败以后重试的次数
                 x.FailedRetryInterval = 5;
             });
-            */
-            //services.AddTransient<ISubscriberService,SubscriberService>();
             
+            //services.AddTransient<ISubscriberService,SubscriberService>();
+
             #endregion
         }
 

@@ -17,6 +17,7 @@ using fx.Domain.ProductContext;
 using fx.Domain.core;
 using fx.Domain.Bus;
 using fx.Infra.Data.SqlServer;
+using fx.Application.Product;
 
 namespace fx.Product.WebApi
 {

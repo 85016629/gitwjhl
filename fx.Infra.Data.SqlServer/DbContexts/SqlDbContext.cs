@@ -3,6 +3,8 @@
     using fx.Domain.core;
     using fx.Domain.CustomerContext;
     using fx.Domain.OrderContext;
+    using fx.Domain.ProductContext;
+    using fx.Infra.Data.SqlServer.Mapper.Product;
     using fx.Infra.Data.SqlSever;
     using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,7 @@
             modelBuilder.ApplyConfiguration(new CustomerMapper());
             modelBuilder.ApplyConfiguration(new UserRoleRelationMapper());
             modelBuilder.ApplyConfiguration(new CustomerMapper());
+            modelBuilder.ApplyConfiguration(new CatalogMapper());
             //modelBuilder.Entity<Customer>()
             //    .ToTable("Customer");
             //modelBuilder.Entity<Order>()
@@ -35,5 +38,6 @@
         public DbSet<Permission> UserRoleRelations { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ProductCatalog> ProductCatalogs { get; set; }
     }
 }

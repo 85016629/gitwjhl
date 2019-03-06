@@ -12,6 +12,9 @@
     密码：<input type="password" value="" id="txtPassword" /><br />
     <button type="button" onclick="login()">登录</button>
 </div>
+<div class="container" id="app" v-cloak>
+    <a href="#" onclick="">显示所有的产品目录</a>    
+</div>
 <script language="javascript">
     var login = function () {
         $.ajax({
@@ -21,6 +24,22 @@
                 UserLoginId: "string",
                 Password:"string"
             }),
+            contentType: "application/json; charset=utf-8",
+            xhrFields: {
+                withCredentials: false
+            },
+            crossDomain: true,
+            async: true,
+            success: function (message) {
+                alert(message)
+            }
+        });
+    };
+
+    var showCatalog = function () {
+        $.ajax({
+            type: "Get",
+            url: "http://192.168.3.119:5000/ProductService/",
             contentType: "application/json; charset=utf-8",
             xhrFields: {
                 withCredentials: false

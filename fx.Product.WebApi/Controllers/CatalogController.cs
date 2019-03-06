@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fx.Application.Product;
 using fx.Domain.ProductContext;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,18 @@ namespace fx.Product.WebApi.Controllers
         {
             _catalogService.AddCatalog(catalogName);
             return Ok();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Catalogs")]
+        public IActionResult GetAllCatalogs()
+        {
+            var catalogs = _catalogService.GetAllProductCatalogs();
+            return Ok(catalogs);
         }
     }
 }

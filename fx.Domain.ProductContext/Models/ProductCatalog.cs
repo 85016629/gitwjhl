@@ -11,13 +11,14 @@ namespace fx.Domain.ProductContext
     public class ProductCatalog : AggregateRoot<int>
     {
         public ProductCatalog() { }
+        public int ProductCatalogId { get; set; }
         public string CatalogName { get; set; }
         public int ParentId { get; set; }
         public void AddChildCatalog(string catalogName, IMemoryBus bus)
         {
             var ev = new SubCatalogAdded(catalogName)
             {
-                ParentId = this.UUId
+                ParentId = this.ProductCatalogId
             };
 
             bus.RaiseEvent(ev);

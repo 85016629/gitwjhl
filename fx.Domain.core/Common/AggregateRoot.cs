@@ -14,7 +14,7 @@ namespace fx.Domain.core
         {
 
         }
-        public TKey UUId { get; set; }
+        public Guid UUId { get; set; }
 
         public void Dispose()
         {

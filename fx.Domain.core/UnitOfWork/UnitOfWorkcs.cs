@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace fx.Domain.core
 {
-    public class UnitOfWorkcs : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         protected DbContext context;
-        public UnitOfWorkcs(DbContext db)
+        public UnitOfWork(DbContext db)
         {
             context = db;
         }

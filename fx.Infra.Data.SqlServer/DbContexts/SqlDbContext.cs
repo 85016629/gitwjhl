@@ -32,7 +32,7 @@
         public DbSet<Customer> Customers { get; set; }
         public DbSet<BaseUser> BaseUsers { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRoleRelation> UserRoleRelations { get; set; }
+        public DbSet<Permission> UserRoleRelations { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
     }

@@ -10,9 +10,7 @@ namespace fx.Domain.core
         public Role(string roleName)
         {
             RoleName = roleName;
-        }
-
-        
+        }        
 
         public int RoleId { get; set; }
         public string RoleName { get; set; }

@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="AutoMapper\" />
     <Folder Include="EventSourceNormalizers\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

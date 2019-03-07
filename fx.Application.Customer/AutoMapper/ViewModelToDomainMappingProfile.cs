@@ -9,7 +9,7 @@ namespace Equinox.Application.AutoMapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<RegisterViewModel, RegisterCustomerCommand>()
-                .ConstructUsing(c => new RegisterCustomerCommand(c.Name));
+                .ConstructUsing(c => new RegisterCustomerCommand(c.Username));
         }
     }
 }

@@ -104,7 +104,7 @@ namespace fx.Order.WebApi
                 //设置失败以后重试的次数
                 x.FailedRetryInterval = 5;
             });
-            
+
             //services.AddTransient<ISubscriberService,SubscriberService>();
 
             #endregion

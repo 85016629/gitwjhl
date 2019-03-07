@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using fx.Application.Customer.ViewModels;
 using fx.Domain.core;
 using fx.Domain.CustomerContext;
 using System;
@@ -23,7 +24,14 @@ namespace fx.Application.Customer
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.Collect();
+        }
+
+        public void Register(RegisterViewModel registerViewModel)
+        {
+            var registerCustomerCommand = _mapper.Map<RegisterCustomerCommand>(registerViewModel);
+
+            _bus.SendCommand(registerCustomerCommand);
         }
     }
 }

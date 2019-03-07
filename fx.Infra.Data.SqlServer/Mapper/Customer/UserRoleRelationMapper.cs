@@ -7,9 +7,9 @@ using System.Text;
 
 namespace fx.Infra.Data.SqlSever
 {
-    public class UserRoleRelationMapper : IEntityTypeConfiguration<Permission>
+    public class UserRoleRelationMapper : IEntityTypeConfiguration<UserRoleRelation>
     {
-        public void Configure(EntityTypeBuilder<Permission> builder)
+        public void Configure(EntityTypeBuilder<UserRoleRelation> builder)
         {
             builder.ToTable("UserRoleRelations");
 

@@ -31,7 +31,7 @@ namespace fx.Domain.OrderContext
 
             var newOrder = new Order
             {
-                UUId = Guid.NewGuid(),
+                UUId = Guid.NewGuid().ToString(),
                 CreateTime = DateTime.Now,
                 Owner = request.Owner,
                 Status = OrderStatus.Processing

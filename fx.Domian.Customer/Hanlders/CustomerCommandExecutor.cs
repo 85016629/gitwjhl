@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
+using AutoMapper;
 
 namespace fx.Domain.CustomerContext
 {
     public class CustomerCommandExecutor :
-        IRequestHandler<UpdateLastLoginTimeCommand, object>
+        IRequestHandler<UpdateLastLoginTimeCommand, object>,
+        IRequestHandler<RegisterCustomerCommand, object>
     {
         protected ICustomerRepository _storage;
         protected IMemoryBus _bus;
@@ -31,10 +33,16 @@ namespace fx.Domain.CustomerContext
             //if (await _storage.UpdateAsync(user) > 0)
             //{
             //    //_memoryCache.WriteInCache(user.LoginId, JsonConvert.SerializeObject(user));
-            //    return Task.FromResult((object)"执行成功");
+            //    return Task.FromResult((object)"执行成功");+
             //}
 
             return await Task.FromResult((object)"执行失败");
-        }    
+        }
+
+        public async Task<object> Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)
+        {            
+            var customer = Mapper.Map<Customer>(request);
+            return Task.FromResult((object)await _storage.AddAsync(customer));
+        }
     }
 }

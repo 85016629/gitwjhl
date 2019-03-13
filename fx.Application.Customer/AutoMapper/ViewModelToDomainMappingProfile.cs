@@ -10,6 +10,7 @@ namespace Equinox.Application.AutoMapper
         {
             CreateMap<RegisterViewModel, RegisterCustomerCommand>()
                 .ConstructUsing(c => new RegisterCustomerCommand(c.Username));
+
         }
     }
 }

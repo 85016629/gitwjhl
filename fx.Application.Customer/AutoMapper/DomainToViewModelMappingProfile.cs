@@ -8,7 +8,12 @@ namespace Equinox.Application.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<Customer, RegisterViewModel>();
+            CreateMap<RegisterViewModel, RegisterCustomerCommand>();
+
+            CreateMap<RegisterCustomerCommand, Customer>()
+                .ForMember(des => des.LoginId, opt => opt.MapFrom(src => src.LoginId))
+                .ForMember(des => des.Username, opt => opt.MapFrom(src => src.Name))
+                .ForMember(des => des.MobilePhone, opt => opt.MapFrom(src => src.Mobile));
         }
     }
 }

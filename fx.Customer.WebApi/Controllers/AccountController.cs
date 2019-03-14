@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fx.Application.Customer;
 using fx.Application.Customer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace fx.Customer.WebApi.Controllers
 {
+    
     /// <summary>
     /// 
     /// </summary>
     [Route("api/[controller]")]
     public class AccountController : Controller
     {
-        public AccountController()
+        private readonly ICustomerService _customerService;
+        /// <summary>
+        /// 控制器构造函数
+        /// </summary>
+        public AccountController(ICustomerService customerService)
         {
-
+            _customerService = customerService ?? throw new ArgumentNullException(nameof(CustomerService));
         }
         /// <summary>
         /// 注册用户
@@ -25,6 +31,7 @@ namespace fx.Customer.WebApi.Controllers
         [HttpPost("Register")]
         public IActionResult Register([FromBody] RegisterViewModel registerViewModel)
         {
+            _customerService.Register(registerViewModel);
             return Ok();
         }
 

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace fx.Application.Customer.ViewModels
 {
+    /// <summary>
+    /// 用户注册视图模型。
+    /// </summary>
     public class RegisterViewModel
     {
         public string Username { get; set; }

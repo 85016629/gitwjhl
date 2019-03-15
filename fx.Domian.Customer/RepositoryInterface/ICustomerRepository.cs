@@ -6,6 +6,6 @@
 
     public interface ICustomerRepository :  IRepository<Customer, Guid>
     {
-
+        Customer Login(string loginId, string password);
     }
 }

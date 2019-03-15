@@ -10,12 +10,14 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using AutoMapper;
+using fx.Domain.CustomerContext.Commands;
 
 namespace fx.Domain.CustomerContext
 {
     public class CustomerCommandExecutor :
         IRequestHandler<UpdateLastLoginTimeCommand, object>,
-        IRequestHandler<RegisterCustomerCommand, object>
+        IRequestHandler<RegisterCustomerCommand, object>,
+        IRequestHandler<LoginCommand, object>
     {
         protected ICustomerRepository _storage;
         protected IMemoryBus _bus;
@@ -43,6 +45,12 @@ namespace fx.Domain.CustomerContext
         {            
             var customer = Mapper.Map<Customer>(request);
             return Task.FromResult((object)await _storage.AddAsync(customer));
+        }
+
+        public Task<object> Handle(LoginCommand request, CancellationToken cancellationToken)
+        {
+            var customer = _storage.Login(request.LoginId, request.Password);
+            return Task.FromResult((object)customer);
         }
     }
 }

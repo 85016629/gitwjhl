@@ -40,8 +40,14 @@ namespace fx.Domain.CustomerContext
         }
 
         public async Task<object> Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)
-        {            
-            var customer = Mapper.Map<Customer>(request);
+        {
+            var customer = new Customer()
+            {
+                MobilePhone = request.Mobile,
+                RegisterTime = DateTime.Now,
+                Username = request.Name,
+                LoginId = request.LoginId
+            };
             return Task.FromResult((object)await _storage.AddAsync(customer));
         }
     }

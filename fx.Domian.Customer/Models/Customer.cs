@@ -16,7 +16,7 @@
         public VipLevel VipLevel { get; set; }
     }
 
-    public enum VipLevel : byte
+    public enum VipLevel 
     {
         Silver,
         Gold,

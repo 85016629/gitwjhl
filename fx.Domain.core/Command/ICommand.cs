@@ -5,6 +5,6 @@ namespace fx.Domain.core
 {
     public interface ICommand : IRequest<object>, IMessage
     {
-        Guid CommandId { get; set; }        
+        Guid CommandId { get; set; }
     }
 }

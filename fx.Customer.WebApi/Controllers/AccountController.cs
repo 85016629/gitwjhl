@@ -40,9 +40,13 @@ namespace fx.Customer.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("Login")]        
-        public IActionResult Login()
+        public async Task<IActionResult> Login([FromBody] LoginViewModel loginViewModel)
         {
-            return Ok();
+            var customer = await _customerService.Login(loginViewModel);
+            if (customer == null && string.IsNullOrEmpty(loginViewModel.ReturnUrl))
+                return Unauthorized();
+
+            return Ok(customer);
         }
         /// <summary>
         /// 用户退出登录。

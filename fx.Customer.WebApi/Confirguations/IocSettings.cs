@@ -2,6 +2,7 @@
 using fx.Domain.Bus;
 using fx.Domain.core;
 using fx.Domain.CustomerContext;
+using fx.Domain.CustomerContext.Commands;
 using fx.Infra.Data.SqlServer;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,7 @@ namespace fx.Customer.WebApi.Confirguations
             //typeof(IRequestPreProcessor<>), new[] { typeof(GenericRequestPreProcessor<>) }
             //services.AddScoped<IRequestHandler<UpdateLastLoginTimeCommand>, CustomerCommandExecutor>();
             services.AddScoped(typeof(IRequestHandler<RegisterCustomerCommand, object>), typeof(CustomerCommandExecutor));
+            services.AddScoped(typeof(IRequestHandler<LoginCommand, object>), typeof(CustomerCommandExecutor));
         }
     }
 }

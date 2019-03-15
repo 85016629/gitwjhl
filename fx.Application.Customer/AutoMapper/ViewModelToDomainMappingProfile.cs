@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using fx.Application.Customer.ViewModels;
 using fx.Domain.CustomerContext;
+using fx.Domain.CustomerContext.Commands;
 
 namespace Equinox.Application.AutoMapper
 {
@@ -11,6 +12,8 @@ namespace Equinox.Application.AutoMapper
             CreateMap<RegisterViewModel, RegisterCustomerCommand>()
                 .ConstructUsing(c => new RegisterCustomerCommand(c.Username));
 
+            CreateMap<LoginViewModel, LoginCommand>()
+                .ConstructUsing(c => new LoginCommand(c.LoginId, c.Password));
         }
     }
 }

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace fx.Application.Customer.ViewModels
 {
+    /// <summary>
+    /// 登录视图模型
+    /// </summary>
     public class LoginViewModel
     {
         /// <summary>

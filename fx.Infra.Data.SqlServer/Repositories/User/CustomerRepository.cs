@@ -14,5 +14,11 @@ namespace fx.Infra.Data.SqlServer
                 .Where(c => c.LoginId == loginId && c.Password == password)
                 .FirstOrDefault();
         }
+
+        public bool ResetPassword(string loginId, string newPasswd)
+        {
+            var customer = dbContext.Customers.Where(c => c.LoginId == loginId).FirstOrDefault();
+            return Update(customer) > 0;
+        }
     }
 }

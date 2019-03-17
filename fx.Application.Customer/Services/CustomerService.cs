@@ -38,8 +38,12 @@ namespace fx.Application.Customer
         public void Register(RegisterViewModel registerViewModel)
         {
             var registerCustomerCommand = _mapper.Map<RegisterCustomerCommand>(registerViewModel);
-
             _bus.SendCommand(registerCustomerCommand);
+        }
+
+        public bool ResetPassword(ResetPasswordViewModel resetPasswordViewModel)
+        {
+            return _repository.ResetPassword(resetPasswordViewModel.LoginId, resetPasswordViewModel.NewPassword);
         }
     }
 }

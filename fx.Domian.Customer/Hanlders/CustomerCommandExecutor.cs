@@ -17,7 +17,8 @@ namespace fx.Domain.CustomerContext
     public class CustomerCommandExecutor :
         IRequestHandler<UpdateLastLoginTimeCommand, object>,
         IRequestHandler<RegisterCustomerCommand, object>,
-        IRequestHandler<LoginCommand, object>
+        IRequestHandler<LoginCommand, object>,
+        IRequestHandler<ResetPasswordCommand, object>
     {
         protected ICustomerRepository _storage;
         protected IMemoryBus _bus;
@@ -57,6 +58,11 @@ namespace fx.Domain.CustomerContext
         {
             var customer = _storage.Login(request.LoginId, request.Password);
             return Task.FromResult((object)customer);
+        }
+
+        public Task<object> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            return Task.FromResult((object)_storage.ResetPassword(request.LoginId, request.NewPasswd));
         }
     }
 }

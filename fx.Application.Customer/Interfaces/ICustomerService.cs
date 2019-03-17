@@ -11,5 +11,11 @@ namespace fx.Application.Customer
         void Register(RegisterViewModel registerViewModel);
 
         Task<fx.Domain.CustomerContext.Customer> Login(LoginViewModel loginViewModel);
+        /// <summary>
+        /// 重置密码。
+        /// </summary>
+        /// <param name="resetPasswordViewModel"></param>
+        /// <returns></returns>
+        bool ResetPassword(ResetPasswordViewModel resetPasswordViewModel);
     }
 }

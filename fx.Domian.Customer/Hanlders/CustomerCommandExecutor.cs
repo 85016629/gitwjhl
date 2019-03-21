@@ -64,7 +64,7 @@ namespace fx.Domain.CustomerContext
         {
             var customer = _storage.Login(request.LoginId, request.OldPasswd);
             if (customer == null)
-                throw new AppBusinessException("BP0001", "当前客户密码错误！");
+                throw new AppBusinessException("CST.ERR.001", "当前客户密码错误！");
 
             return Task.FromResult((object)_storage.ResetPassword(request.LoginId, request.NewPasswd));
         }

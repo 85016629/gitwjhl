@@ -62,8 +62,10 @@ namespace fx.Domain.CustomerContext
 
         public Task<object> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
-            if (_storage.Login(request.LoginId, request.OldPasswd) == null)
-                throw new Exception("用户名旧密码错误！");
+
+            var customer = _storage.Login(request.LoginId, request.OldPasswd);
+            if (customer == null)
+                throw new AppBusinessException("CST.ERR.001", "当前客户密码错误！");
 
             return Task.FromResult((object)_storage.ResetPassword(request.LoginId, request.NewPasswd));
         }

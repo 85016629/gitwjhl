@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using fx.Domain.Common.Enums.Customer;
     using fx.Domain.core;
 
     /// <summary>
@@ -15,6 +16,4 @@
     {
         public VipLevel VipLevel { get; set; }
     }
-
-
 }

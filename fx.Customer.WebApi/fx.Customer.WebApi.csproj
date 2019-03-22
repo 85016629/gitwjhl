@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\fx.Application.Customer\fx.Application.Customer.csproj" />
+    <ProjectReference Include="..\fx.Domain.Customer.QueryStack\fx.Domain.CustomerContext.QueryStack.csproj" />
     <ProjectReference Include="..\fx.Domian.Customer\fx.Domain.CustomerContext.csproj" />
     <ProjectReference Include="..\fx.Infra.Data.SqlServer\fx.Infra.Data.SqlServer.csproj" />
   </ItemGroup>

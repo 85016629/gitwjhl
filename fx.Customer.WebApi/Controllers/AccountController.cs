@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using fx.Application.Customer;
 using fx.Application.Customer.ViewModels;
+using fx.Domain.CustomerContext.QueryStack;
+using fx.Domain.CustomerContext.QueryStack.Models;
+using fx.Domain.CustomerContext.QueryStack.Repositoris;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -17,12 +20,14 @@ namespace fx.Customer.WebApi.Controllers
     public class AccountController : Controller
     {
         private readonly ICustomerService _customerService;
+        private readonly ICustomerQueryRepository _customerQueryRepository;
         /// <summary>
         /// 控制器构造函数
         /// </summary>
-        public AccountController(ICustomerService customerService)
+        public AccountController(ICustomerService customerService, ICustomerQueryRepository customerQueryRepository)
         {
             _customerService = customerService ?? throw new ArgumentNullException(nameof(CustomerService));
+            _customerQueryRepository = customerQueryRepository ?? throw new ArgumentNullException(nameof(CustomerQueryRepository));
         }
         /// <summary>
         /// 注册用户
@@ -65,6 +70,27 @@ namespace fx.Customer.WebApi.Controllers
         public IActionResult ResetPassword()
         {
             return Ok();
+        }
+
+        /// <summary>
+        /// 所有的客户数据。
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        [HttpGet("Customers")]
+        public IActionResult GetAllCustomer(int pageIndex, int pageSize)
+        {
+            int totalRecords = 0;
+            var customers = _customerQueryRepository.GetAllCustomers(pageIndex, pageSize, out totalRecords);
+
+            var pageList = new PageResultList<CustomerDto>
+            {
+                TotalRecords = totalRecords,
+                ResultList = customers.ToList()
+            };
+
+            return Ok(pageList);
         }
     }
 }

@@ -4,8 +4,6 @@ using fx.Domain.core;
 using fx.Domain.CustomerContext;
 using fx.Domain.CustomerContext.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace fx.Application.Customer

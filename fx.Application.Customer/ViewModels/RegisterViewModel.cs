@@ -10,14 +10,16 @@ namespace fx.Application.Customer.ViewModels
     /// </summary>
     public class RegisterViewModel
     {
+        [Display(Description ="用户名")]
         public string Username { get; set; }
         [Required(ErrorMessage ="用户名不能为空")]
         [MinLength(6)]
-        [MaxLength(20)]
+        [MaxLength(20)]        
         public string LoginId { get; set; }
         [Required(ErrorMessage ="密码不能为空")]
         [MinLength(8)]
         [MaxLength(20)]
+        [Display(Description ="用户密码")]
         public string Password { get; set; }
 
         [DataType(DataType.PhoneNumber)]

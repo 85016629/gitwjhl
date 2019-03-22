@@ -3,6 +3,7 @@ using fx.Domain.Bus;
 using fx.Domain.core;
 using fx.Domain.CustomerContext;
 using fx.Domain.CustomerContext.Commands;
+using fx.Domain.CustomerContext.QueryStack.Repositoris;
 using fx.Infra.Data.SqlServer;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ namespace fx.Customer.WebApi.Confirguations
         {
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerQueryRepository, CustomerQueryRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
 
             services.AddScoped<IMemoryBus, MediatBus>();

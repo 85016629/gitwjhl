@@ -1,18 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\fx.Domain.core\fx.Domain.core.csproj" />
+    <ProjectReference Include="..\fx.Domain.Customer.QueryStack\fx.Domain.CustomerContext.QueryStack.csproj" />
     <ProjectReference Include="..\fx.Domain.OrderContext\fx.Domain.OrderContext.csproj" />
     <ProjectReference Include="..\fx.Domain.ProductContext\fx.Domain.ProductContext.csproj" />
     <ProjectReference Include="..\fx.Domian.Customer\fx.Domain.CustomerContext.csproj" />

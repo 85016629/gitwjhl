@@ -16,10 +16,5 @@
         public VipLevel VipLevel { get; set; }
     }
 
-    public enum VipLevel 
-    {
-        Silver,
-        Gold,
-        Diamond
-    }
+
 }

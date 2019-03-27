@@ -10,7 +10,7 @@ namespace fx.Application.Customer
     {
         void Register(RegisterViewModel registerViewModel);
 
-        Task<fx.Domain.CustomerContext.Customer> Login(LoginViewModel loginViewModel);
+        Task<Domain.CustomerContext.Customer> Login(LoginViewModel loginViewModel);
         /// <summary>
         /// 重置密码。
         /// </summary>

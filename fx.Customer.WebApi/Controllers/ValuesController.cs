@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fx.Customer.WebApi.Configrations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fx.Customer.WebApi.Controllers
@@ -11,10 +12,12 @@ namespace fx.Customer.WebApi.Controllers
     public class ValuesController : ControllerBase
     {
         // GET api/values
+        [MyExceptionFilter]
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            throw new Exception();
+            //return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
